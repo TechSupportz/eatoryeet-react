@@ -13,3 +13,4 @@ function getAllRestaurants(req, res){
 }
 
 module.exports = { getAllRestaurants }
+
