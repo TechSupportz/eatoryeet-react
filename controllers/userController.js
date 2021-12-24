@@ -49,4 +49,39 @@ function userLogin(req, res) {
 	})
 }
 
-module.exports = { getAllUsers, addUser, userLogin }
+function updateUser(req, res) {
+	const user = new User(
+		parseInt(req.params.id),
+		req.body.username,
+		req.body.password,
+		req.body.email,
+		req.body.first_name,
+		req.body.last_name,
+		req.body.gender,
+		req.body.phone_number,
+		req.body.address,
+		req.body.profilePic
+	)
+
+	userDB.updateUser(user, (err, result) =>{
+		if (err){
+			res.json(err)
+		} else {
+			res.json(result)
+		}
+	})
+}
+
+function deleteUser(req, res) {
+	const userId = parseInt(req.params.id)
+
+	userDB.deleteUser(userId, (err, result) => {
+		if (err){
+			res.json(err)
+		} else {
+			res.json(result)
+		}
+	})
+}
+
+module.exports = { getAllUsers, addUser, userLogin, updateUser, deleteUser }

@@ -12,8 +12,8 @@ app.route("/restaurants").get(restaurantController.getAllRestaurants)
 app.route("/users").get(userController.getAllUsers)
 app.route("/register").post(userController.addUser)
 app.route("/login").post(userController.userLogin)
+app.route("/update/:id").put(userController.updateUser)
+app.route("/delete/:id").delete(userController.deleteUser)
 
 
 app.listen(8080, () => console.log("web server running @ http://localhost:8080"))
-
-
