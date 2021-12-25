@@ -5,12 +5,13 @@ const restaurantDB = new RestaurantDB()
 function getAllRestaurants(req, res){
 	restaurantDB.getAllRestaurants((err, results) => {
 		if(err){
-			res.status(500).send(err)
+			res.status(500).json(err)
 		}else{
-			res.status(200).send(results)
+			res.status(200).json(results)
 		}
 	})
 }
 
 module.exports = { getAllRestaurants }
+
 

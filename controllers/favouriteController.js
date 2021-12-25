@@ -5,7 +5,7 @@ const favouriteDB = new FavouriteDB()
 
 function getAllFavourites(req, res) {
 	favouriteDB.getAllFavourites((err, results) => {
-		err ? res.status(500).send(err) : res.status(200).send(results)
+		err ? res.status(500).json(err) : res.status(200).json(results)
 	})
 }
 
@@ -13,7 +13,7 @@ function getUserFavourites(req, res) {
 	const userId = parseInt(req.params.id)
 
 	favouriteDB.getUserFavourites(userId, (err, results) => {
-		err ? res.status(500).send(err) : res.status(200).send(results)
+		err ? res.status(500).json(err) : res.status(200).json(results)
 	})
 }
 
@@ -21,7 +21,7 @@ function getTotalRestaurantFavourites(req, res) {
 	const restaurantId = parseInt(req.params.id)
 
 	favouriteDB.getTotalRestaurantFavourites(restaurantId, (err, results) => {
-		err ? res.status(500).send(err) : res.status(200).send(results)
+		err ? res.status(500).json(err) : res.status(200).json(results)
 	})
 }
 
