@@ -2,6 +2,7 @@ const express = require("express")
 const restaurantController = require("./controllers/restaurantController")
 const userController = require("./controllers/userController")
 const favouriteController = require("./controllers/favouriteController")
+const categoryController = require("./controllers/categoryController")
 
 const app = express()
 
@@ -21,6 +22,8 @@ app.route("/favourites/user/:id").get(favouriteController.getUserFavourites)
 app.route("/favourites/restaurant/:id").get(favouriteController.getTotalRestaurantFavourites)
 app.route("/favourites").post(favouriteController.addFavourite)
 app.route("/favourites/:id").delete(favouriteController.deleteFavourite)
+
+app.route("/category/:id").get(categoryController.getRestaurantCategories)
 
 
 app.listen(8080, () => console.log("web server running @ http://localhost:8080"))
