@@ -28,7 +28,7 @@ class UserDB {
 	}
 
 	userLogin(username, password, callback) {
-		const query = "SELECT * FROM eatoryeet.users WHERE username = ?  AND password = ?"
+		const query = "SELECT * FROM eatoryeet.users WHERE username = ? AND password = ?"
 		db.query(query, [username, password], callback)
 	}
 
