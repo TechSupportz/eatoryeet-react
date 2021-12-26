@@ -4,6 +4,7 @@ const userController = require("./controllers/userController")
 const favouriteController = require("./controllers/favouriteController")
 const categoryController = require("./controllers/categoryController")
 const reviewController = require("./controllers/reviewController")
+const hoursController = require("./controllers/hoursController")
 
 const app = express()
 
@@ -18,6 +19,8 @@ app.route("/register").post(userController.addUser)
 app.route("/login").get(userController.userLogin)
 
 app.route("/restaurants").get(restaurantController.getAllRestaurants)
+
+app.route("/hours/restaurant/:id").get(hoursController.getHoursByRestaurant)
 
 app.route("/category/:id").get(categoryController.getRestaurantCategories)
 

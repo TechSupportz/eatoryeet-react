@@ -1,3 +1,10 @@
 const db = require("../dbConnections")
 
-//use that day query thing to get the day of the week
+class HoursDB{
+	getHoursByRestaurant(restaurantId, callback){
+		const query = "SELECT * FROM eatoryeet.opening_hours WHERE restaurant_id = ?"
+		db.query(query, [restaurantId], callback)
+	}
+}
+
+module.exports = HoursDB
