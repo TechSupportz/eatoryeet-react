@@ -42,7 +42,11 @@ function userLogin(req, res) {
 		if (err){
 			res.json(err)
 		} else {
-			bcrypt.compareSync(password, result[0].password) ? res.json(result) : res.json({ message: "Incorrect username or password" })
+			if (result.length > 0) {
+			bcrypt.compareSync(password, result[0].password) ? res.json(result) : res.json({ message: "Incorrect Password" })
+			} else {
+				res.json({ message: "Incorrect Username or Password" })
+			}
 		}
 	})
 }
@@ -51,7 +55,7 @@ function updateUser(req, res) {
 	const user = new User(
 		parseInt(req.params.id),
 		req.body.username,
-		req.body.password,
+		bcrypt.hashSync(req.body.password, 10),
 		req.body.email,
 		req.body.first_name,
 		req.body.last_name,
