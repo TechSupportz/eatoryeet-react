@@ -1,5 +1,7 @@
 const User = require("../models/User")
 const UserDB = require("../models/UserDB")
+const bcrypt = require("bcrypt")
+
 
 const userDB = new UserDB()
 
@@ -17,7 +19,7 @@ function addUser(req, res) {
 	const user = new User(
 		null,
 		req.body.username,
-		req.body.password,
+		bcrypt.hashSync(req.body.password, 10),
 		req.body.email,
 		req.body.first_name,
 		req.body.last_name,
@@ -36,15 +38,11 @@ function userLogin(req, res) {
 	const username = req.body.username
 	const password = req.body.password
 
-	userDB.userLogin(username, password, (err, result) => {
+	userDB.userLogin(username, (err, result) => {
 		if (err){
 			res.json(err)
-		} 
-
-		if (result.length > 0){
-			res.json(result)
 		} else {
-			res.json({ message: "Invalid username or password" })
+			bcrypt.compareSync(password, result[0].password) ? res.json(result) : res.json({ message: "Incorrect username or password" })
 		}
 	})
 }

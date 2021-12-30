@@ -18,7 +18,7 @@ app.route("/users").get(userController.getAllUsers)
 app.route("/user/:id").put(userController.updateUser)
 app.route("/user/:id").delete(userController.deleteUser)
 app.route("/register").post(userController.addUser)
-app.route("/login").get(userController.userLogin)
+app.route("/login").post(userController.userLogin)
 
 app.route("/restaurants").get(restaurantController.getAllRestaurants)
 
