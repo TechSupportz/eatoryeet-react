@@ -6,6 +6,11 @@ class UserDB {
 		db.query(query, callback)
 	}
 
+	getUserById(userId, callback) {
+		const query = "SELECT * FROM eatoryeet.users WHERE id = ?"
+		db.query(query, [userId], callback)
+	}
+
 	addUser(user, callback) {
 		const query =
 			"INSERT INTO eatoryeet.users (username, password, email, first_name, last_name, gender, phone_number, address, profile_pic) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);"

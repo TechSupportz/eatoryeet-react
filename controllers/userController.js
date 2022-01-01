@@ -15,6 +15,18 @@ function getAllUsers(req, res) {
 	})
 }
 
+function getUserById(req, res) {
+	const userId = parseInt(req.params.id)
+
+	userDB.getUserById(userId, (err, result) => {
+		if (err){
+			res.status(500).json(err)
+		} else {
+			res.status(200).json(result)
+		}
+	})
+}
+
 function addUser(req, res) {
 	const user = new User(
 		null,
@@ -86,4 +98,4 @@ function deleteUser(req, res) {
 	})
 }
 
-module.exports = { getAllUsers, addUser, userLogin, updateUser, deleteUser }
+module.exports = { getAllUsers, getUserById ,addUser, userLogin, updateUser, deleteUser }
