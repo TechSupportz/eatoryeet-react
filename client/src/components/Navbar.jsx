@@ -16,7 +16,7 @@ import {
 	Stack,
 } from "@mui/material"
 import MenuIcon from "@mui/icons-material/Menu"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useLocation } from "react-router-dom"
 
 const pages = [
 	{
@@ -51,6 +51,23 @@ const Navbar = () => {
 	const [anchorElNav, setAnchorElNav] = React.useState(null)
 	const [anchorElUser, setAnchorElUser] = React.useState(null)
 	const navigate = useNavigate()
+	const location = useLocation()
+	let currentPath = location.pathname.split("/")[1]
+
+	switch (currentPath) {
+		case "":
+			currentPath = "Home"
+			break
+		case "about":
+			currentPath = "About us"
+			break
+		case "favourite":
+			currentPath = "Favourites"
+			break
+		default:
+			currentPath = ""
+	}
+	
 
 	const handleOpenNavMenu = (event) => {
 		setAnchorElNav(event.currentTarget)
@@ -141,17 +158,22 @@ const Navbar = () => {
 									<Button
 										className="nav-link"
 										disableRipple
-										style={{ textTransform: "none", backgroundColor: "transparent" }}
-										variant="text"
+										style={{
+											textTransform: "none",
+											backgroundColor: "transparent",
+											transition: "font-weight 0.15s jump-start"
+											
+										}}
+										variant={currentPath === pageTitle ? "textBold" : "text"}
 										size="large"
 										key={pageTitle}
 										onClick={() => handleCloseNavMenu(pageUrl)}
 										sx={{
 											my: 2,
 											color: "black",
-											display: "block",
+											
 											fontSize: "1.2rem",
-											backgroundColor: "transparent",
+											backgroundColor: "transparent"
 										}}
 									>
 										{pageTitle}

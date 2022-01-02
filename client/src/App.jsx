@@ -20,11 +20,24 @@ const App = () => {
 			fontWeightSemiBold: 600,
 			fontWeightBold: 700,
 		},
+		components: {
+			MuiButton: {
+				variants: [
+					{
+						props: { variant: "textBold" },
+						style: {
+							fontWeight: 700,
+							padding: "8px 11px"
+						},
+					},
+				],
+			},
+		},
 	})
 
 	return (
 		<ThemeProvider theme={THEME}>
-			<Navbar/>
+			<Navbar />
 			<Routes>
 				<Route path="/" element={<Home />} />
 				<Route path="/about" element={<About />} />
