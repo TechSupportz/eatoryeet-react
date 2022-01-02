@@ -1,10 +1,11 @@
+import { Box } from '@mui/material'
 import React from 'react'
 
 const Register = () => {
 	return (
-		<div>
+		<Box ml={5} mr={5}>
 			<h1>Register</h1>
-		</div>
+		</Box>
 	)
 }
 
