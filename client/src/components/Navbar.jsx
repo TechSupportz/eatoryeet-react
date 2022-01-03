@@ -17,19 +17,20 @@ import {
 } from "@mui/material"
 import MenuIcon from "@mui/icons-material/Menu"
 import { useNavigate, useLocation } from "react-router-dom"
+import { useState } from "react"
 
 const pages = [
 	{
 		pageTitle: "Home",
-		pageUrl: "/",
+		pageUrl: "",
 	},
 	{
 		pageTitle: "About us",
-		pageUrl: "/about",
+		pageUrl: "about",
 	},
 	{
 		pageTitle: "Favourites",
-		pageUrl: "/favourite",
+		pageUrl: "favourite",
 	},
 ]
 const settings = ["Profile", "Logout"]
@@ -48,26 +49,11 @@ function HideOnScroll(props) {
 }
 
 const Navbar = () => {
-	const [anchorElNav, setAnchorElNav] = React.useState(null)
-	const [anchorElUser, setAnchorElUser] = React.useState(null)
+	const [anchorElNav, setAnchorElNav] = useState(null)
+	const [anchorElUser, setAnchorElUser] = useState(null)
 	const navigate = useNavigate()
 	const location = useLocation()
 	let currentPath = location.pathname.split("/")[1]
-
-	switch (currentPath) {
-		case "":
-			currentPath = "Home"
-			break
-		case "about":
-			currentPath = "About us"
-			break
-		case "favourite":
-			currentPath = "Favourites"
-			break
-		default:
-			currentPath = ""
-	}
-	
 
 	const handleOpenNavMenu = (event) => {
 		setAnchorElNav(event.currentTarget)
@@ -77,7 +63,7 @@ const Navbar = () => {
 	}
 
 	const handleCloseNavMenu = (pageUrl) => {
-		navigate(pageUrl)
+		navigate(`/${pageUrl}`)
 		setAnchorElNav(null)
 	}
 
@@ -131,7 +117,10 @@ const Navbar = () => {
 									const { pageTitle, pageUrl } = page
 
 									return (
-										<MenuItem key={pageTitle} onClick={() => handleCloseNavMenu(pageUrl)}>
+										<MenuItem
+											key={pageTitle}
+											onClick={() => handleCloseNavMenu(pageUrl)}
+										>
 											<Typography textAlign="center">{pageTitle}</Typography>
 										</MenuItem>
 									)
@@ -146,7 +135,7 @@ const Navbar = () => {
 							<img width={150} height={80} src="/assets/Logo.svg" alt="logo" />
 						</Box>
 						<Stack
-							direction={"row"}
+							direction="row"
 							spacing={4}
 							ml={5}
 							sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}
@@ -161,19 +150,17 @@ const Navbar = () => {
 										style={{
 											textTransform: "none",
 											backgroundColor: "transparent",
-											transition: "font-weight 0.15s jump-start"
-											
+											transition: "font-weight 0.15s ease-out",
 										}}
-										variant={currentPath === pageTitle ? "textBold" : "text"}
+										variant={currentPath === pageUrl ? "textBold" : "text"}
 										size="large"
 										key={pageTitle}
 										onClick={() => handleCloseNavMenu(pageUrl)}
 										sx={{
 											my: 2,
 											color: "black",
-											
 											fontSize: "1.2rem",
-											backgroundColor: "transparent"
+											backgroundColor: "transparent",
 										}}
 									>
 										{pageTitle}
