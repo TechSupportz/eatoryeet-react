@@ -33,7 +33,7 @@ class UserDB {
 	}
 
 	userLogin(username, callback) {
-		const query = "SELECT * FROM eatoryeet.users WHERE username = ?"
+		const query = "SELECT username, password FROM eatoryeet.users WHERE username = ?"
 		db.query(query, [username], callback)
 	}
 

@@ -6,11 +6,7 @@ const userDB = new UserDB()
 
 function getAllUsers(req, res) {
 	userDB.getAllUsers((err, results) => {
-		if (err) {
-			res.status(500).json(err)
-		} else {
-			res.status(200).json(results)
-		}
+		err ? res.status(500).json(err) : res.status(200).json(results)
 	})
 }
 
@@ -18,11 +14,11 @@ function getUserById(req, res) {
 	const userId = parseInt(req.params.id)
 
 	userDB.getUserById(userId, (err, result) => {
-		if (err) {
-			res.status(500).json(err)
-		} else {
-			res.status(200).json(result)
-		}
+		err
+			? res.status(500).json(err)
+			: result.length === 0
+			? res.status(404).json({ message: "User not found" })
+			: res.status(200).json(result)
 	})
 }
 
