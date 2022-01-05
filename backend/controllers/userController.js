@@ -2,7 +2,6 @@ const User = require("../models/User")
 const UserDB = require("../models/UserDB")
 const bcrypt = require("bcrypt")
 
-
 const userDB = new UserDB()
 
 function getAllUsers(req, res) {
@@ -19,7 +18,7 @@ function getUserById(req, res) {
 	const userId = parseInt(req.params.id)
 
 	userDB.getUserById(userId, (err, result) => {
-		if (err){
+		if (err) {
 			res.status(500).json(err)
 		} else {
 			res.status(200).json(result)
@@ -51,11 +50,13 @@ function userLogin(req, res) {
 	const password = req.body.password
 
 	userDB.userLogin(username, (err, result) => {
-		if (err){
+		if (err) {
 			res.json(err)
 		} else {
 			if (result.length > 0) {
-			bcrypt.compareSync(password, result[0].password) ? res.json(result) : res.json({ message: "Incorrect Password" })
+				bcrypt.compareSync(password, result[0].password)
+					? res.json(result)
+					: res.json({ message: "Incorrect Password" })
 			} else {
 				res.json({ message: "Incorrect Username or Password" })
 			}
@@ -77,8 +78,8 @@ function updateUser(req, res) {
 		req.body.profilePic
 	)
 
-	userDB.updateUser(user, (err, result) =>{
-		if (err){
+	userDB.updateUser(user, (err, result) => {
+		if (err) {
 			res.json(err)
 		} else {
 			res.json(result)
@@ -90,7 +91,7 @@ function deleteUser(req, res) {
 	const userId = parseInt(req.params.id)
 
 	userDB.deleteUser(userId, (err, result) => {
-		if (err){
+		if (err) {
 			res.json(err)
 		} else {
 			res.json(result)
@@ -98,4 +99,4 @@ function deleteUser(req, res) {
 	})
 }
 
-module.exports = { getAllUsers, getUserById ,addUser, userLogin, updateUser, deleteUser }
+module.exports = { getAllUsers, getUserById, addUser, userLogin, updateUser, deleteUser }

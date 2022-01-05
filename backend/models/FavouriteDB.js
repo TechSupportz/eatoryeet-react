@@ -18,7 +18,7 @@ class FavouriteDB {
 
 	addFavourite(favourite, callback) {
 		const query = "INSERT INTO eatoryeet.favourites (user_id, restaurant_id) VALUES (?, ?);"
-		db.query(query, [favourite.getUserId(), favourite.getRestaurantId()], callback)
+		db.query(query, [favourite.userId, favourite.restaurantId], callback)
 	}
 
 	deleteFavourite(favouriteId, callback) {

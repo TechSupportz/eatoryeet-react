@@ -18,15 +18,15 @@ class UserDB {
 		db.query(
 			query,
 			[
-				user.getUsername(),
-				user.getPassword(),
-				user.getEmail(),
-				user.getFirstName(),
-				user.getLastName(),
-				user.getGender(),
-				user.getPhoneNumber(),
-				user.getAddress(),
-				user.getProfilePic(),
+				user.username,
+				user.password,
+				user.email,
+				user.firstName,
+				user.lastName,
+				user.gender,
+				user.phoneNumber,
+				user.address,
+				user.profilePic,
 			],
 			callback
 		)
@@ -43,16 +43,16 @@ class UserDB {
 		return db.query(
 			query,
 			[
-				user.getUsername(),
-				user.getPassword(),
-				user.getEmail(),
-				user.getFirstName(),
-				user.getLastName(),
-				user.getGender(),
-				user.getPhoneNumber(),
-				user.getAddress(),
-				user.getProfilePic(),
-				user.getId()
+				user.username,
+				user.password,
+				user.email,
+				user.firstName,
+				user.lastName,
+				user.gender,
+				user.phoneNumber,
+				user.address,
+				user.profilePic,
+				user.id
 			],
 			callback
 		)
