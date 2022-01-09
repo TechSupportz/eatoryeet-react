@@ -18,7 +18,6 @@ app.use(cors())
 
 app.use("/static", express.static("uploads"))
 
-app.route("/user").get(userController.getAllUsers)
 app.route("/user/:id").get(userController.getUserById)
 app.route("/user/update/:id").put(userController.updateUser)
 app.route("/user/delete/:id").delete(userController.deleteUser)
@@ -32,13 +31,11 @@ app.route("/hours/:id").get(hoursController.getHoursByRestaurant)
 
 app.route("/category/:id").get(categoryController.getRestaurantCategories)
 
-app.route("/favourite").get(favouriteController.getAllFavourites)
 app.route("/favourite/user/:id").get(favouriteController.getUserFavourites)
 app.route("/favourite/restaurant/:id").get(favouriteController.getTotalRestaurantFavourites)
 app.route("/favourite/add").post(favouriteController.addFavourite)
 app.route("/favourite/delete/:id").delete(favouriteController.deleteFavourite)
 
-app.route("/review").get(reviewController.getAllReviews)
 app.route("/review/:id").get(reviewController.getReviewById)
 app.route("/review/restaurant/:id").get(reviewController.getReviewsByRestaurant)
 app.route("/review/add").post(reviewController.addReview)

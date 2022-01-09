@@ -1,11 +1,6 @@
 const db = require("../dbConnections")
 
 class FavouriteDB {
-	getAllFavourites(callback) {
-		const query = "SELECT * FROM eatoryeet.favourites"
-		db.query(query, callback)
-	}
-
 	getUserFavourites(userId, callback) {
 		const query = "SELECT * FROM eatoryeet.favourites WHERE user_id = ?"
 		db.query(query, [userId], callback)
@@ -17,7 +12,7 @@ class FavouriteDB {
 	}
 
 	addFavourite(favourite, callback) {
-		const query = "INSERT INTO eatoryeet.favourites (user_id, restaurant_id) VALUES (?, ?);"
+		const query = "INSERT INTO eatoryeet.favourites (user_id, restaurant_id) VALUES (?, ?)"
 		db.query(query, [favourite.userId, favourite.restaurantId], callback)
 	}
 

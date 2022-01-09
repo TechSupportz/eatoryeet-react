@@ -3,12 +3,6 @@ const FavouriteDB = require("../models/FavouriteDB")
 
 const favouriteDB = new FavouriteDB()
 
-function getAllFavourites(req, res) {
-	favouriteDB.getAllFavourites((err, results) => {
-		err ? res.status(500).json(err) : res.status(200).json(results)
-	})
-}
-
 function getUserFavourites(req, res) {
 	const userId = parseInt(req.params.id)
 
@@ -21,7 +15,7 @@ function getTotalRestaurantFavourites(req, res) {
 	const restaurantId = parseInt(req.params.id)
 
 	favouriteDB.getTotalRestaurantFavourites(restaurantId, (err, results) => {
-		err ? res.status(500).json(err) : res.status(200).json(results)
+		err ? res.status(500).json(err) : res.status(200).json(results[0])
 	})
 }
 
@@ -45,4 +39,4 @@ function deleteFavourite(req, res) {
 	})
 }
 
-module.exports = { getAllFavourites, getUserFavourites, getTotalRestaurantFavourites, addFavourite, deleteFavourite }
+module.exports = { getUserFavourites, getTotalRestaurantFavourites, addFavourite, deleteFavourite }

@@ -3,16 +3,6 @@ const ReviewDB = require("../models/ReviewDB")
 
 const reviewDB = new ReviewDB()
 
-function getAllReviews(req, res) {
-	reviewDB.getAllReviews((err, results) => {
-		if (err) {
-			res.status(500).json(err)
-		} else {
-			res.status(200).json(results)
-		}
-	})
-}
-
 function getReviewById(req, res) {
 	const reviewId = req.params.id
 
@@ -21,7 +11,7 @@ function getReviewById(req, res) {
 			? res.json(err)
 			: result.length === 0
 			? res.status(404).json({ message: "Review not found" })
-			: res.status(200).json(result)
+			: res.status(200).json(result[0])
 	})
 }
 
@@ -34,6 +24,7 @@ function getReviewsByRestaurant(req, res) {
 }
 
 function addReview(req, res) {
+	const date = new Date()
 
 	const review = new Review(
 		null,
@@ -41,7 +32,8 @@ function addReview(req, res) {
 		req.body.user_id,
 		req.body.title,
 		req.body.detail,
-		req.body.rating
+		req.body.rating,
+		date.toISOString().slice(0, 10)
 	)
 
 	reviewDB.addReview(review, (err, result) => {
@@ -50,6 +42,7 @@ function addReview(req, res) {
 }
 
 function updateReview(req, res) {
+	const date = new Date()
 
 	const review = new Review(
 		parseInt(req.params.id),
@@ -57,7 +50,8 @@ function updateReview(req, res) {
 		req.body.user_id,
 		req.body.title,
 		req.body.detail,
-		req.body.rating
+		req.body.rating,
+		date.toISOString().slice(0, 10)
 	)
 
 	reviewDB.updateReview(review, (err, result) => {
@@ -74,7 +68,6 @@ function deleteReview(req, res) {
 }
 
 module.exports = {
-	getAllReviews,
 	getReviewById,
 	getReviewsByRestaurant,
 	addReview,

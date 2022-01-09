@@ -1,10 +1,6 @@
 const db = require("../dbConnections")
 
 class UserDB {
-	getAllUsers(callback) {
-		const query = "SELECT * FROM eatoryeet.users"
-		db.query(query, callback)
-	}
 
 	getUserById(userId, callback) {
 		const query = "SELECT * FROM eatoryeet.users WHERE id = ?"
@@ -39,7 +35,7 @@ class UserDB {
 
 	updateUser(user, callback) {
 		const query =
-			"UPDATE eatoryeet.users SET username = ?, password = ?, email = ?, first_name = ?, last_name = ?, gender = ?, phone_number = ?, address = ?, profile_pic = ? WHERE id = ?;"
+			"UPDATE eatoryeet.users SET username = ?, password = ?, email = ?, first_name = ?, last_name = ?, gender = ?, phone_number = ?, address = ?, profile_pic = ? WHERE id = ?"
 		return db.query(
 			query,
 			[

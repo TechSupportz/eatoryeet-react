@@ -6,12 +6,6 @@ const path = require("path")
 
 const userDB = new UserDB()
 
-function getAllUsers(req, res) {
-	userDB.getAllUsers((err, results) => {
-		err ? res.status(500).json(err) : res.status(200).json(results)
-	})
-}
-
 function getUserById(req, res) {
 	const userId = parseInt(req.params.id)
 
@@ -20,7 +14,7 @@ function getUserById(req, res) {
 			? res.status(500).json(err)
 			: result.length === 0
 			? res.status(404).json({ message: "User not found" })
-			: res.status(200).json(result)
+			: res.status(200).json(result[0])
 	})
 }
 
@@ -124,4 +118,4 @@ function deleteUser(req, res) {
 	})
 }
 
-module.exports = { getAllUsers, getUserById, addUser, userLogin, updateUser, deleteUser }
+module.exports = { getUserById, addUser, userLogin, updateUser, deleteUser }
