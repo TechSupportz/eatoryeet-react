@@ -13,7 +13,7 @@ class UserDB {
 
 	addUser(user, callback) {
 		const query =
-			"INSERT INTO eatoryeet.users (username, password, email, first_name, last_name, gender, phone_number, address, profile_pic) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);"
+			"INSERT INTO eatoryeet.users (username, password, email, first_name, last_name, gender, phone_number, address, profile_pic) VALUES (?, ?, ?, ?, ?, ?, ?, ?, '/static/Default.png');"
 
 		db.query(
 			query,
@@ -26,7 +26,7 @@ class UserDB {
 				user.gender,
 				user.phoneNumber,
 				user.address,
-				user.profilePic,
+				user.profilePic
 			],
 			callback
 		)

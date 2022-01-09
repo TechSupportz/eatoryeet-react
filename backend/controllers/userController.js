@@ -1,6 +1,8 @@
 const User = require("../models/User")
 const UserDB = require("../models/UserDB")
 const bcrypt = require("bcrypt")
+const fs = require("fs")
+const path = require("path")
 
 const userDB = new UserDB()
 
@@ -32,8 +34,7 @@ function addUser(req, res) {
 		req.body.last_name,
 		req.body.gender,
 		req.body.phone_number,
-		req.body.address,
-		req.body.profilePic
+		req.body.address
 	)
 
 	userDB.addUser(user, (err, result) => {
@@ -51,7 +52,7 @@ function userLogin(req, res) {
 		} else {
 			if (result.length > 0) {
 				bcrypt.compareSync(password, result[0].password)
-					? res.json(result)
+					? res.json({ message: `Welcome ${result[0].username}` })
 					: res.json({ message: "Incorrect Password" })
 			} else {
 				res.json({ message: "Incorrect Username or Password" })
@@ -61,6 +62,34 @@ function userLogin(req, res) {
 }
 
 function updateUser(req, res) {
+	let profilePic
+	let uploadPath
+	let staticPath
+
+	if (!req.files || Object.keys(req.files).length === 0) {
+		staticPath = req.body.profile_pic
+	} else {
+		profilePic = req.files.profile_pic
+		uploadPath = path.join(__dirname, "../uploads" + profilePic.name)
+
+		profilePic.mv(uploadPath, (err) => {
+			if (err) {
+				return res.status(500).send(err)
+			} else {
+				uploadPath = fs.renameSync(
+					uploadPath,
+					path.join(
+						__dirname,
+						"../uploads",
+						`${req.params.id}${path.extname(profilePic.name)}`
+					)
+				)
+			}
+		})
+
+		staticPath = `/static/${req.params.id}${path.extname(profilePic.name)}`
+	}
+
 	const user = new User(
 		parseInt(req.params.id),
 		req.body.username,
@@ -71,7 +100,7 @@ function updateUser(req, res) {
 		req.body.gender,
 		req.body.phone_number,
 		req.body.address,
-		req.body.profilePic
+		staticPath
 	)
 
 	userDB.updateUser(user, (err, result) => {

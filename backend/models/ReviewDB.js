@@ -21,13 +21,7 @@ class ReviewDB {
 			"INSERT INTO eatoryeet.reviews (restaurant_id, user_id, title, detail, rating, date_posted, is_edited) VALUES (?, ?, ?, ?, ?, CURDATE(), 0);"
 		db.query(
 			query,
-			[
-				review.restaurantId,
-				review.userId,
-				review.title,
-				review.detail,
-				review.rating
-			],
+			[review.restaurantId, review.userId, review.title, review.detail, review.rating],
 			callback
 		)
 	}
@@ -43,7 +37,7 @@ class ReviewDB {
 				review.title,
 				review.detail,
 				review.rating,
-				review.id
+				review.id,
 			],
 			callback
 		)

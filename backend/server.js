@@ -1,5 +1,6 @@
 const express = require("express")
 const cors = require("cors")
+const fileUpload = require("express-fileupload")
 
 const restaurantController = require("./controllers/restaurantController")
 const userController = require("./controllers/userController")
@@ -12,7 +13,10 @@ const app = express()
 
 app.use(express.static("./public"))
 app.use(express.json()) 
+app.use(fileUpload())
 app.use(cors())
+
+app.use("/static", express.static("uploads"))
 
 app.route("/user").get(userController.getAllUsers)
 app.route("/user/:id").get(userController.getUserById)
