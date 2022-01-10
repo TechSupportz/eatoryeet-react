@@ -1,17 +1,15 @@
-import { Card, CardMedia, Paper } from "@mui/material"
+import { Card, CardContent, CardMedia, Paper, Typography } from "@mui/material"
 import React from "react"
 
 const Carousel = () => {
 	return (
-		<Card
-			variant="gradientOverlayWhite"
-			sx={{ width: "100%", maxHeight: 500, borderRadius: "15px" }}
-		>
+		<Card sx={{ width: "100%", borderRadius: "15px", backgroundColor: "black"}}>
 			<CardMedia
+				variant="gradientOverlayWhite"
 				component="img"
 				image="https://mayvers.com.au/wp-content/uploads/2017/09/test-image.jpg"
 				alt=""
-				sx={{ borderRadius: "15px" }}
+				sx={{ maxHeight: 500, borderRadius: "15px" }}
 			/>
 		</Card>
 	)

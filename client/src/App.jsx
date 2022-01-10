@@ -32,13 +32,13 @@ const App = () => {
 					},
 				],
 			},
-			MuiCard: {
+			MuiCardMedia: {
 				variants: [
 					{
 						props: { variant: "gradientOverlayWhite" },
 						style: {
 							maskImage:
-								"linear-gradient(to top, rgba(0,0,0,0) 0%, rgba(0,0,0,0.8) 50%)",
+								"linear-gradient(to top, rgba(0,0,0,0.45) 15%, rgba(0,0,0,1) 70%)",
 						},
 					},
 				],
