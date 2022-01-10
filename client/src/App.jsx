@@ -27,7 +27,18 @@ const App = () => {
 						props: { variant: "textBold" },
 						style: {
 							fontWeight: 700,
-							padding: "8px 11px"
+							padding: "8px 11px",
+						},
+					},
+				],
+			},
+			MuiCard: {
+				variants: [
+					{
+						props: { variant: "gradientOverlayWhite" },
+						style: {
+							maskImage:
+								"linear-gradient(to top, rgba(0,0,0,0) 0%, rgba(0,0,0,0.8) 50%)",
 						},
 					},
 				],
