@@ -109,6 +109,22 @@ function updateUser(req, res) {
 function deleteUser(req, res) {
 	const userId = parseInt(req.params.id)
 
+	let filePath = `./uploads/${userId}.jpg`
+
+	fs.access(filePath, fs.constants.F_OK | fs.constants.W_OK, (err) => {
+		if (err) {
+			console.error(`${filePath} ${err.code === "ENOENT" ? "does not exist" : "is read-only"}`)
+		} else {
+			fs.unlink(filePath, (err) => {
+				if (err) {
+					console.error(err)
+				} else {
+					console.log(`${filePath} was deleted`)
+				}
+			})
+		}
+	})
+
 	userDB.deleteUser(userId, (err, result) => {
 		if (err) {
 			res.json(err)
