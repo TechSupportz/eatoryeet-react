@@ -2,7 +2,7 @@ import { Card, CardContent, CardMedia, Paper, Typography } from "@mui/material"
 import { fontSize } from "@mui/system"
 import React from "react"
 
-const Carousel = () => {
+const Featured = () => {
 	return (
 		<Card
 			sx={{
@@ -31,4 +31,4 @@ const Carousel = () => {
 	)
 }
 
-export default Carousel
+export default Featured
