@@ -3,7 +3,7 @@ import Featured from "../components/Featured"
 
 const Home = () => {
 	return (
-		<Box mx={{ xs: "2.5%", sm: "5%" }}>
+		<Box mx={{xs: "2.5%", md: "5%"}}>
 			<Featured />
 		</Box>
 	)

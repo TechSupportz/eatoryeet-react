@@ -1,5 +1,4 @@
-import { Card, CardContent, CardMedia, Paper, Typography } from "@mui/material"
-import { fontSize } from "@mui/system"
+import { Card, CardMedia, Typography } from "@mui/material"
 import React from "react"
 
 const Featured = () => {
@@ -23,7 +22,7 @@ const Featured = () => {
 
 			<Typography
 				variant="overlay"
-				sx={{ fontSize: {xs: "5vw", sm: "3vw"}}}
+				sx={{ fontSize: {xs: "5vw", md: "3.5vw"} }}
 			>
 				Restaurant Name
 			</Typography>
