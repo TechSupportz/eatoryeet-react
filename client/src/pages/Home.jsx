@@ -3,7 +3,7 @@ import Carousel from "../components/Carousel"
 
 const Home = () => {
 	return (
-		<Box ml={5} mr={5}>
+		<Box mx={{ xs: "2.5%", sm: "5%" }}>
 			<Carousel />
 		</Box>
 	)

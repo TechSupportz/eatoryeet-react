@@ -9,6 +9,7 @@ import Register from "./pages/Register"
 import PageNotFound from "./pages/PageNotFound"
 import { ThemeProvider, createTheme } from "@mui/material/styles"
 import Navbar from "./components/Navbar"
+import { padding } from "@mui/system"
 
 const App = () => {
 	const THEME = createTheme({
@@ -35,10 +36,24 @@ const App = () => {
 			MuiCardMedia: {
 				variants: [
 					{
-						props: { variant: "gradientOverlayWhite" },
+						props: { variant: "gradientOverlay" },
 						style: {
 							maskImage:
 								"linear-gradient(to top, rgba(0,0,0,0.45) 15%, rgba(0,0,0,1) 70%)",
+						},
+					},
+				],
+			},
+			MuiTypography: {
+				variants: [
+					{
+						props: { variant: "overlay" },
+						style: {
+							position: "absolute",
+							bottom: "5%",
+							left: "2.5%",
+							color: "white",
+							fontWeight: "bold"
 						},
 					},
 				],
