@@ -23,7 +23,7 @@ const Featured = () => {
 
 			<Typography
 				variant="overlay"
-				sx={{ fontSize: {xs: "5vw", sm: "3.5vw"}}}
+				sx={{ fontSize: {xs: "5vw", sm: "3vw"}}}
 			>
 				Restaurant Name
 			</Typography>
