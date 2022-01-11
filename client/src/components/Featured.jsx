@@ -9,6 +9,7 @@ const Featured = () => {
 				borderRadius: "15px",
 				backgroundColor: "black",
 				position: "relative",
+				mb: "5%"
 				
 			}}
 		>

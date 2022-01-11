@@ -35,6 +35,13 @@ const THEME = createTheme({
 							"linear-gradient(to top, rgba(0,0,0,0.45) 15%, rgba(0,0,0,1) 70%)",
 					},
 				},
+				{
+					props: { variant: "gradientBlend" },
+					style: {
+						maskImage:
+							"linear-gradient(to top, hsla(0, 0%, 100%, 0) 0%, hsla(0, 0%, 100%, 0.35) 30% ,hsla(0, 0%, 100%, 1) 100%)",
+					},
+				},
 			],
 		},
 		MuiTypography: {
