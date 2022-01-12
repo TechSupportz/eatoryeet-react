@@ -9,8 +9,11 @@ const Featured = () => {
 				borderRadius: "15px",
 				backgroundColor: "black",
 				position: "relative",
-				mb: "5%"
-				
+				mb: "5%",
+				boxShadow: "0px 8px 24px hsla(0, 0%, 0%, 0.15)",
+				":hover": {
+					boxShadow: "0px 8px 32px hsla(0, 0%, 0%, 0.45)",
+				}
 			}}
 		>
 			<CardMedia
