@@ -4,6 +4,9 @@ import "./index.css"
 import App from "./App.jsx"
 import { BrowserRouter } from "react-router-dom"
 import { ThemeProvider, createTheme } from "@mui/material/styles"
+import CircleIcon from "@mui/icons-material/Circle"
+import CircleOutlinedIcon from "@mui/icons-material/CircleOutlined"
+
 
 const THEME = createTheme({
 	typography: {
@@ -58,16 +61,22 @@ const THEME = createTheme({
 				},
 			],
 		},
+		MuiRating: {
+			defaultProps: {
+				icon: <CircleIcon fontSize="inherit" sx={{ color: "#7EFA88" }} />,
+				emptyIcon: <CircleOutlinedIcon fontSize="inherit" sx={{ color: "#7EFA88" }} />,
+			},
+		},
 	},
 })
 
 ReactDOM.render(
 	<BrowserRouter>
-       <React.StrictMode>
-         <ThemeProvider theme={THEME}>
-           <App />
-         </ThemeProvider>
-       </React.StrictMode>
-  </BrowserRouter>,
+		<React.StrictMode>
+			<ThemeProvider theme={THEME}>
+				<App />
+			</ThemeProvider>
+		</React.StrictMode>
+	</BrowserRouter>,
 	document.getElementById("root")
 )

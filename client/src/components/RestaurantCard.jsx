@@ -1,9 +1,8 @@
 import { Box, Card, CardContent, CardMedia, Rating, Stack, Typography } from "@mui/material"
 import React from "react"
 
+
 const RestaurantCard = () => {
-
-
 	return (
 		<Card
 			sx={{
@@ -19,7 +18,7 @@ const RestaurantCard = () => {
 			<CardMedia
 				variant="gradientBlend"
 				component="img"
-				image="https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg"
+				image="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8M3x8fGVufDB8fHx8&w=1000&q=80"
 				height="60%"
 			/>
 
@@ -28,12 +27,7 @@ const RestaurantCard = () => {
 					<Typography fontWeight="medium" fontSize="1.5em">
 						Restaurant Name
 					</Typography>
-					<Rating
-						name="avg-rating"
-						defaultValue={2}
-						size="md"
-						readOnly
-					/>
+					<Rating name="avg-rating" defaultValue={2} size="md" readOnly />
 					<Typography fontWeight="medium" fontSize="1.15em">
 						{`Category • $$`}
 					</Typography>
