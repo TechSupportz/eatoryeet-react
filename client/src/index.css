@@ -8,3 +8,7 @@ body{
 	max-width: 1400px;
 	margin: auto;
 }
+
+html{
+	overflow-y: scroll;
+}

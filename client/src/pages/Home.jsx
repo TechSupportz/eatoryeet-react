@@ -1,12 +1,13 @@
 import { Box } from "@mui/material"
 import Featured from "../components/Featured"
+import RestaurantList from "../components/RestaurantList"
 import RestaurantCard from "../components/RestaurantCard"
 
 const Home = () => {
 	return (
 		<Box mx={{xs: "2.5%", md: "5%"}}>
 			<Featured />
-			<RestaurantCard />
+			<RestaurantList />
 			<br />
 			<br />
 			<br />

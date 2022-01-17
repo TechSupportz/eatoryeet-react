@@ -1,4 +1,4 @@
-import { Box, Card, CardContent, CardMedia, Rating, Stack, Typography } from "@mui/material"
+import { Card, CardContent, CardMedia, Rating, Stack, Typography } from "@mui/material"
 import React from "react"
 
 
