@@ -6,7 +6,7 @@ import { BrowserRouter } from "react-router-dom"
 import { ThemeProvider, createTheme } from "@mui/material/styles"
 import CircleIcon from "@mui/icons-material/Circle"
 import CircleOutlinedIcon from "@mui/icons-material/CircleOutlined"
-import { store } from "./app/store"
+import { store } from "./redux/store/store"
 import { Provider } from "react-redux"
 
 const THEME = createTheme({

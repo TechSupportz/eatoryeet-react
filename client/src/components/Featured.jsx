@@ -1,9 +1,6 @@
 import { Card, CardMedia, Typography } from "@mui/material"
-import React from "react"
 
 const Featured = () => {
-
-	
 	return (
 		<Card
 			sx={{
@@ -27,7 +24,7 @@ const Featured = () => {
 			/>
 
 			<Typography variant="overlay" sx={{ fontSize: { xs: "5vw", md: "3.5vw" } }}>
-				Restaurant Name
+				idk man
 			</Typography>
 		</Card>
 	)
