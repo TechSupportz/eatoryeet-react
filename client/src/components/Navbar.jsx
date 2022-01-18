@@ -11,11 +11,14 @@ import {
 	Button,
 	Tooltip,
 	MenuItem,
-	Stack
+	Stack,
 } from "@mui/material"
 import MenuIcon from "@mui/icons-material/Menu"
 import { useNavigate, useLocation } from "react-router-dom"
 import { useState } from "react"
+import { useSelector, useDispatch } from "react-redux"
+import { display } from "@mui/system"
+import { setIsLoggedIn } from "../redux/slices/userSlice"
 
 const pages = [
 	{
@@ -36,8 +39,11 @@ const settings = ["Profile", "Logout"]
 const Navbar = () => {
 	const [anchorElNav, setAnchorElNav] = useState(null)
 	const [anchorElUser, setAnchorElUser] = useState(null)
+	let isLoggedIn = useSelector((state) => state.user.isLoggedIn)
 	const navigate = useNavigate()
 	const location = useLocation()
+	const dispatch = useDispatch()
+
 	let currentPath = location.pathname.split("/")[1]
 
 	const handleOpenNavMenu = (event) => {
@@ -150,11 +156,26 @@ const Navbar = () => {
 					</Stack>
 
 					<Box sx={{ flexGrow: 0 }}>
-						<Tooltip title="Open settings">
+						{isLoggedIn ? (
 							<IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-								<Avatar alt="Remy Sharp" src="http://localhost:8080/static/Default.png" />
+								<Avatar
+									alt="Remy Sharp"
+									src="http://localhost:8080/static/Default.png"
+								/>
 							</IconButton>
-						</Tooltip>
+						) : (
+							<Button
+								variant="contained"
+								size="large"
+								// Replace this onclick
+								onClick={() => {
+									dispatch(setIsLoggedIn(true))
+								}}
+							>
+								Login
+							</Button>
+						)}
+
 						<Menu
 							sx={{ mt: "45px" }}
 							id="menu-appbar"
