@@ -68,6 +68,20 @@ const THEME = createTheme({
 				emptyIcon: <CircleOutlinedIcon fontSize="inherit" sx={{ color: "#7EFA88" }} />,
 			},
 		},
+		MuiOutlinedInput: {
+			styleOverrides: {
+				root: {
+					borderRadius: "10px",
+					backgroundColor: "hsl(0, 0%, 100%)",
+					//border: "1px solid hsla(0, 0%, 45%, 0.3)",
+					boxShadow: "0px 8px 24px hsla(0, 0%, 0%, 0.15)",
+				},
+			},
+			defaultProps: {
+				disableUnderline: true,
+				label: 'margin="none"',
+			},
+		},
 	},
 })
 
