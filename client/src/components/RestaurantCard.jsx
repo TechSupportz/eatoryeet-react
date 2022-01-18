@@ -26,9 +26,9 @@ const RestaurantCard = ({ restaurantInfo }) => {
 					<Typography fontWeight="medium" fontSize="1.3em" noWrap>
 						{restaurantInfo.name}
 					</Typography>
-					<Rating name="avg-rating" defaultValue={2} size="" readOnly />
+					<Rating name="avg-rating" defaultValue={restaurantInfo.avg_rating} size="md" precision={0.5} readOnly />
 					<Typography fontWeight="medium" fontSize="1.15em">
-						{`Category • ${restaurantInfo.cost}`}
+						{`${restaurantInfo.category} • ${restaurantInfo.cost}`}
 					</Typography>
 				</Stack>
 			</CardContent>
