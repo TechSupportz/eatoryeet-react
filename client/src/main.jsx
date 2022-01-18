@@ -72,14 +72,14 @@ const THEME = createTheme({
 })
 
 ReactDOM.render(
-	<Provider store={store}>
-		<BrowserRouter>
-			<React.StrictMode>
-				<ThemeProvider theme={THEME}>
+	<React.StrictMode>
+		<Provider store={store}>
+			<ThemeProvider theme={THEME}>
+				<BrowserRouter>
 					<App />
-				</ThemeProvider>
-			</React.StrictMode>
-		</BrowserRouter>
-	</Provider>,
+				</BrowserRouter>
+			</ThemeProvider>
+		</Provider>
+	</React.StrictMode>,
 	document.getElementById("root")
 )

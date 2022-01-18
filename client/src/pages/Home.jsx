@@ -1,29 +1,19 @@
 import { Box } from "@mui/material"
 import Featured from "../components/Featured"
 import RestaurantGrid from "../components/RestaurantGrid"
-import RestaurantCard from "../components/RestaurantCard"
 import { useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
-import { setRestaurants } from "../redux/slices/restaurantSlice"
-import axios from "axios"
+import { getRestaurants } from "../redux/slices/restaurantSlice"
 
 const Home = () => {
-	const restaurantList = useSelector((state) => state.restaurant.restaurants)
 	const dispatch = useDispatch()
 
 	useEffect(() => {
-		axios
-			.get("http://localhost:8080/restaurant")
-			.then((res) => {
-				dispatch(setRestaurants(res.data))
-			})
-			.catch((err) => {
-				console.log(err)
-			})
+		dispatch(getRestaurants())
 	}, [])
 
 	return (
-		<Box mx={{xs: "2.5%", md: "5%"}}>
+		<Box mx={{ xs: "2.5%", md: "5%" }}>
 			<Featured />
 			<RestaurantGrid />
 			<br />

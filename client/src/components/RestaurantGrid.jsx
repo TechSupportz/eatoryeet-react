@@ -8,11 +8,12 @@ const RestaurantGrid = () => {
 
 	return (
 		<Grid container spacing={5} justifyContent="center">
-			{restaurantList.map((restaurant) => (
-				<Grid item key={restaurant.id}>
-					<RestaurantCard restaurantInfo={restaurant} />
-				</Grid>
-			))}
+			{restaurantList &&
+				restaurantList.map((restaurant) => (
+					<Grid item key={restaurant.id}>
+						<RestaurantCard restaurantInfo={restaurant} />
+					</Grid>
+				))}
 		</Grid>
 	)
 }

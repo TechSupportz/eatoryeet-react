@@ -1,6 +1,11 @@
 import { Card, CardMedia, Typography } from "@mui/material"
+import { useSelector } from "react-redux"
 
 const Featured = () => {
+	const restaurantList = useSelector((state) => state.restaurant.restaurants)
+	let random = Math.floor(Math.random() * restaurantList.length)
+	let featuredRestaurant = restaurantList[random]
+
 	return (
 		<Card
 			sx={{
@@ -18,13 +23,13 @@ const Featured = () => {
 			<CardMedia
 				variant="gradientOverlay"
 				component="img"
-				image="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8M3x8fGVufDB8fHx8&w=1000&q=80"
+				image={featuredRestaurant && featuredRestaurant.image_url}
 				alt=""
-				sx={{ maxHeight: 500, minHeight: 304 }}
+				sx={{maxHeight: 500, minHeight: {xs: 300, md: 500}}}
 			/>
 
 			<Typography variant="overlay" sx={{ fontSize: { xs: "5vw", md: "3.5vw" } }}>
-				idk man
+				{featuredRestaurant && featuredRestaurant.name}
 			</Typography>
 		</Card>
 	)
