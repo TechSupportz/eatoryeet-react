@@ -20,6 +20,15 @@ const THEME = createTheme({
 	},
 	components: {
 		MuiButton: {
+			styleOverrides: {
+				contained: {
+					backgroundColor: "hsl(0, 0%, 0%)",
+					borderRadius: "45px",
+					"&:hover": {
+						backgroundColor: "hsl(0, 0%, 15%)",
+					},
+				},
+			},
 			variants: [
 				{
 					props: { variant: "textBold" },
@@ -73,7 +82,6 @@ const THEME = createTheme({
 				root: {
 					borderRadius: "10px",
 					backgroundColor: "hsl(0, 0%, 100%)",
-					//border: "1px solid hsla(0, 0%, 45%, 0.3)",
 					boxShadow: "0px 8px 24px hsla(0, 0%, 0%, 0.15)",
 				},
 			},

@@ -34,7 +34,16 @@ const pages = [
 		pageUrl: "favourite",
 	},
 ]
-const settings = ["Profile", "Logout"]
+const settings = [
+	{
+		settingTitle: "Profile",
+		settingUrl: "profile",
+	},
+	{
+		settingTitle: "Logout",
+		settingUrl: "about",
+	},
+]
 
 const Navbar = () => {
 	const [anchorElNav, setAnchorElNav] = useState(null)
@@ -54,6 +63,11 @@ const Navbar = () => {
 	}
 
 	const handleCloseNavMenu = (pageUrl) => {
+		navigate(`/${pageUrl}`)
+		setAnchorElNav(null)
+	}
+
+	const handleCloseSettingMenu = (pageUrl) => {
 		navigate(`/${pageUrl}`)
 		setAnchorElNav(null)
 	}
@@ -192,11 +206,18 @@ const Navbar = () => {
 							open={Boolean(anchorElUser)}
 							onClose={handleCloseUserMenu}
 						>
-							{settings.map((setting) => (
-								<MenuItem key={setting} onClick={handleCloseNavMenu}>
-									<Typography textAlign="center">{setting}</Typography>
-								</MenuItem>
-							))}
+							{settings.map((setting) => {
+								const { settingTitle, settingUrl } = setting
+
+								return (
+									<MenuItem
+										key={settingTitle}
+										onClick={() => handleCloseSettingMenu(settingUrl)}
+									>
+										<Typography textAlign="center">{settingTitle}</Typography>
+									</MenuItem>
+								)
+							})}
 						</Menu>
 					</Box>
 				</Toolbar>
