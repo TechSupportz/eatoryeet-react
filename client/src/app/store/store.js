@@ -1,12 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit"
-import restaurantReducer from "../slices/restaurantSlice"
 import userReducer from "../slices/userSlice"
+import { mainApi } from "../services/mainApi"
 
 export const store = configureStore({
 	reducer: {
-		restaurant: restaurantReducer,
-		user: userReducer
+		[mainApi.reducerPath]: mainApi.reducer,
+		user: userReducer,
 	},
+
+	middleware: (gdm) => gdm().concat(mainApi.middleware),
 })
 
 export default store

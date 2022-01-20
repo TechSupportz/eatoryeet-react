@@ -1,10 +1,10 @@
 import { Grid } from "@mui/material"
 import { useEffect } from "react"
 import RestaurantCard from "./RestaurantCard"
-import { useSelector } from "react-redux"
+import { useGetAllRestaurantsQuery } from "../app/services/restaurantAPI"
 
 const RestaurantGrid = () => {
-	const restaurantList = useSelector((state) => state.restaurant.restaurants)
+	const { isError, data: restaurantList = [], isLoading } = useGetAllRestaurantsQuery()
 
 	return (
 		<Grid container spacing={5} justifyContent="center">

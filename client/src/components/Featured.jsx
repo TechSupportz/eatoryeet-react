@@ -1,8 +1,9 @@
 import { Card, CardMedia, Typography } from "@mui/material"
-import { useSelector } from "react-redux"
+import { useGetAllRestaurantsQuery } from "../app/services/restaurantAPI"
+
 
 const Featured = () => {
-	const restaurantList = useSelector((state) => state.restaurant.restaurants)
+	const { isError, data: restaurantList = [], isLoading } = useGetAllRestaurantsQuery()
 	let random = Math.floor(Math.random() * restaurantList.length)
 	let featuredRestaurant = restaurantList[random]
 
