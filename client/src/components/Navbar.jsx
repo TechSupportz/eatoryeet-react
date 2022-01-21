@@ -16,9 +16,10 @@ import {
 import MenuIcon from "@mui/icons-material/Menu"
 import { useNavigate, useLocation } from "react-router-dom"
 import { useState } from "react"
-import { useSelector, useDispatch } from "react-redux"
 import { display } from "@mui/system"
-import { setIsLoggedIn } from "../app/slices/userSlice"
+
+import { useSelector, useDispatch } from "react-redux"
+import { setShowLoginDialog } from "../app/slices/userSlice"
 
 const pages = [
 	{
@@ -48,10 +49,12 @@ const settings = [
 const Navbar = () => {
 	const [anchorElNav, setAnchorElNav] = useState(null)
 	const [anchorElUser, setAnchorElUser] = useState(null)
-	let isLoggedIn = useSelector((state) => state.user.isLoggedIn)
-	const navigate = useNavigate()
 	const location = useLocation()
+	const navigate = useNavigate()
+	
 	const dispatch = useDispatch()
+	const isLoggedIn = useSelector((state) => state.user.isLoggedIn)
+	const showLoginDialog = useSelector((state) => state.user.showLoginDialog)
 
 	let currentPath = location.pathname.split("/")[1]
 
@@ -181,9 +184,8 @@ const Navbar = () => {
 							<Button
 								variant="contained"
 								size="large"
-								// Replace this onclick
 								onClick={() => {
-									dispatch(setIsLoggedIn(true))
+									dispatch(setShowLoginDialog(true))
 								}}
 							>
 								Login

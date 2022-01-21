@@ -4,7 +4,7 @@ export const restaurantApi = mainApi.injectEndpoints({
 	endpoints: (builder) => ({
 		getAllRestaurants: builder.query({
 			query: () => ({
-				url: "restaurant",
+				url: "/restaurant",
 				method: "get",
 			}),
 		}),
