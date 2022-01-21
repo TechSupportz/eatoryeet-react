@@ -39,6 +39,20 @@ const THEME = createTheme({
 				},
 			],
 		},
+		MuiCard: {
+			variants: [
+				{
+					props: { variant: "clean" },
+					style: {
+						borderRadius: "15px",
+						boxShadow: "0px 8px 24px hsla(0, 0%, 0%, 0.15)",
+						":hover": {
+							boxShadow: "0px 8px 32px hsla(0, 0%, 0%, 0.45)",
+						},
+					},
+				},
+			],
+		},
 		MuiCardMedia: {
 			variants: [
 				{

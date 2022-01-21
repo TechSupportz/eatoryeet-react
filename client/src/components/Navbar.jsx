@@ -176,7 +176,7 @@ const Navbar = () => {
 						{isLoggedIn ? (
 							<IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
 								<Avatar
-									alt="Remy Sharp"
+									alt="Profile Picture"
 									src="http://localhost:8080/static/Default.png"
 								/>
 							</IconButton>
