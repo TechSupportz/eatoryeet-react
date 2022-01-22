@@ -51,6 +51,13 @@ const THEME = createTheme({
 						},
 					},
 				},
+				{
+					props: { variant: "cleanNoHover" },
+					style: {
+						borderRadius: "15px",
+						boxShadow: "0px 8px 24px hsla(0, 0%, 0%, 0.15)",
+					},
+				},
 			],
 		},
 		MuiCardMedia: {
@@ -106,9 +113,9 @@ const THEME = createTheme({
 		},
 		MuiSkeleton: {
 			defaultProps: {
-				animation: "wave"
-			}
-		}
+				animation: "wave",
+			},
+		},
 	},
 })
 
