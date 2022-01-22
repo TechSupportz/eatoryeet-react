@@ -104,6 +104,11 @@ const THEME = createTheme({
 				label: 'margin="none"',
 			},
 		},
+		MuiSkeleton: {
+			defaultProps: {
+				animation: "wave"
+			}
+		}
 	},
 })
 

@@ -8,8 +8,14 @@ export const restaurantApi = mainApi.injectEndpoints({
 				method: "get",
 			}),
 		}),
+		getRestaurantById: builder.query({
+			query: (id) => ({
+				url: `/restaurant/${id}`,
+				method: "get",
+			}),
+		}),
 	}),
 	overrideExisting: false,
 })
 
-export const { useGetAllRestaurantsQuery } = restaurantApi
+export const { useGetAllRestaurantsQuery, useGetRestaurantByIdQuery } = restaurantApi

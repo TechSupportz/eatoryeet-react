@@ -20,7 +20,9 @@ const RestaurantGrid = () => {
 								borderRadius: "15px",
 							}}
 							onClick={() => {
-								navigate(`/restaurant/${restaurant.id}`)
+								setTimeout(() => {
+									navigate(`/restaurant/${restaurant.id}`)
+								}, 175)
 							}}
 						>
 							<RestaurantCard restaurantInfo={restaurant} />
