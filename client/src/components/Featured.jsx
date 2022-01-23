@@ -20,7 +20,7 @@ const Featured = () => {
 			onClick={() => {
 				setTimeout(() => {
 					navigate(`/restaurant/${featuredRestaurant.id}`)
-				}, 75)
+				}, 35)
 			}}
 		>
 			<Card variant="clean" sx={{backgroundColor: "black"}} key={featuredRestaurant && featuredRestaurant.id}>
