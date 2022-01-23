@@ -7,7 +7,7 @@ class ReviewDB {
 	}
 
 	getReviewsByRestaurant(restaurantId, callback) {
-		const query = "SELECT * FROM eatoryeet.reviews WHERE restaurant_id = ?"
+		const query = "SELECT reviews.*, users.username, users.profile_pic FROM eatoryeet.reviews LEFT JOIN users on users.id = reviews.user_id WHERE restaurant_id = ?"
 		db.query(query, [restaurantId], callback)
 	}
 
