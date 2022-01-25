@@ -1,5 +1,4 @@
 import { CardActionArea, Grid } from "@mui/material"
-import { useEffect } from "react"
 import RestaurantCard from "./RestaurantCard"
 import { useNavigate } from "react-router-dom"
 

@@ -1,7 +1,6 @@
 const db = require("../dbConnections")
 
 class UserDB {
-
 	getUserById(userId, callback) {
 		const query = "SELECT * FROM eatoryeet.users WHERE id = ?"
 		db.query(query, [userId], callback)
@@ -22,14 +21,14 @@ class UserDB {
 				user.gender,
 				user.phoneNumber,
 				user.address,
-				user.profilePic
+				user.profilePic,
 			],
 			callback
 		)
 	}
 
 	userLogin(username, callback) {
-		const query = "SELECT username, password FROM eatoryeet.users WHERE username = ?"
+		const query = "SELECT id, username, password FROM eatoryeet.users WHERE username = ?"
 		db.query(query, [username], callback)
 	}
 
@@ -48,7 +47,7 @@ class UserDB {
 				user.phoneNumber,
 				user.address,
 				user.profilePic,
-				user.id
+				user.id,
 			],
 			callback
 		)
@@ -58,7 +57,6 @@ class UserDB {
 		const query = "DELETE FROM eatoryeet.users WHERE id = ?"
 		db.query(query, [userId], callback)
 	}
-
 }
 
 module.exports = UserDB

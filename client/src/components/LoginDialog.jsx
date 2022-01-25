@@ -17,14 +17,22 @@ import {
 import VisibilityRoundedIcon from "@mui/icons-material/VisibilityRounded"
 import VisibilityOffRoundedIcon from "@mui/icons-material/VisibilityOffRounded"
 import React from "react"
+import { useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
+
 import { setShowLoginDialog } from "../app/slices/userSlice"
+import { useLazyLoginQuery } from "../app/services/userApi"
 
 const LoginDialog = () => {
 	const dispatch = useDispatch()
 	const showLoginDialog = useSelector((state) => state.user.showLoginDialog)
 
-	const [showPassword, setShowPassword] = React.useState(false)
+	const [username, setUsername] = useState("")
+	const [password, setPassword] = useState("")
+
+	const [showPassword, setShowPassword] = useState(false)
+
+	const [trigger, result, lastPromiseInfo] = useLazyLoginQuery()
 
 	const handleClickOpen = () => {
 		dispatch(setShowLoginDialog(true))
@@ -32,6 +40,10 @@ const LoginDialog = () => {
 
 	const handleClose = () => {
 		dispatch(setShowLoginDialog(false))
+	}
+
+	const handleLogin = () => {
+		trigger({ username, password })	
 	}
 
 	return (
@@ -57,6 +69,7 @@ const LoginDialog = () => {
 						type="text"
 						fullWidth
 						sx={{ mb: "1em" }}
+						onChange={(e) => setUsername(e.target.value)}
 					/>
 
 					<InputLabel
@@ -81,15 +94,18 @@ const LoginDialog = () => {
 								</IconButton>
 							</InputAdornment>
 						}
+						onChange={(e) => setPassword(e.target.value)}
 					/>
 				</DialogContent>
-				<DialogActions
-					sx={{ display: "flex", justifyContent: "center", my: 1.5}}
-					
-				>
-					
-						<Button variant="contained" size="large" sx={{width: "40%"}} >Login</Button>
-					
+				<DialogActions sx={{ display: "flex", justifyContent: "center", my: 1.5 }}>
+					<Button
+						variant="contained"
+						size="large"
+						sx={{ width: "40%" }}
+						onClick={handleLogin}
+					>
+						Login
+					</Button>
 				</DialogActions>
 			</Dialog>
 		</Box>

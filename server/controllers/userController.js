@@ -46,10 +46,13 @@ function userLogin(req, res) {
 		} else {
 			if (result.length > 0) {
 				bcrypt.compareSync(password, result[0].password)
-					? res.json({ message: `Welcome ${result[0].username}` })
-					: res.json({ message: "Incorrect Password" })
+					? res.json({
+							message: "Login Success",
+							userId: result[0].id,
+					  })
+					: res.json({ message: "Incorrect Password", userId: null })
 			} else {
-				res.json({ message: "Incorrect Username or Password" })
+				res.json({ message: "Incorrect Username or Password", userId: null })
 			}
 		}
 	})
@@ -113,7 +116,9 @@ function deleteUser(req, res) {
 
 	fs.access(filePath, fs.constants.F_OK | fs.constants.W_OK, (err) => {
 		if (err) {
-			console.error(`${filePath} ${err.code === "ENOENT" ? "does not exist" : "is read-only"}`)
+			console.error(
+				`${filePath} ${err.code === "ENOENT" ? "does not exist" : "is read-only"}`
+			)
 		} else {
 			fs.unlink(filePath, (err) => {
 				if (err) {
