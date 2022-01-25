@@ -109,6 +109,7 @@ const THEME = createTheme({
 					":hover": {
 						backgroundColor: "hsl(0, 0%, 95%)",
 					},
+					height: "50px"
 
 				},
 			},

@@ -33,7 +33,6 @@ const LoginDialog = () => {
 	const handleClose = () => {
 		dispatch(setShowLoginDialog(false))
 	}
-	
 
 	return (
 		<Box>
@@ -52,12 +51,11 @@ const LoginDialog = () => {
 						Username:
 					</InputLabel>
 					<FilledInput
-						id="username"
 						autoFocus
+						id="username"
 						margin="dense"
 						type="text"
 						fullWidth
-						size="small"
 						sx={{ mb: "1em" }}
 					/>
 
@@ -72,19 +70,26 @@ const LoginDialog = () => {
 						margin="dense"
 						type={showPassword ? "text" : "password"}
 						fullWidth
-						size="small"
 						endAdornment={
 							<InputAdornment position="end">
 								<IconButton onClick={() => setShowPassword(!showPassword)}>
-									{showPassword ? <VisibilityRoundedIcon /> : <VisibilityOffRoundedIcon />} 
+									{showPassword ? (
+										<VisibilityRoundedIcon />
+									) : (
+										<VisibilityOffRoundedIcon />
+									)}
 								</IconButton>
 							</InputAdornment>
 						}
 					/>
 				</DialogContent>
-				<DialogActions>
-					<Button onClick={handleClose}>Cancel</Button>
-					<Button onClick={handleClose}>Login</Button>
+				<DialogActions
+					sx={{ display: "flex", justifyContent: "center", my: 1.5}}
+					
+				>
+					
+						<Button variant="contained" size="large" sx={{width: "40%"}} >Login</Button>
+					
 				</DialogActions>
 			</Dialog>
 		</Box>
