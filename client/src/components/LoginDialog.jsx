@@ -43,7 +43,9 @@ const LoginDialog = () => {
 	}
 
 	const handleLogin = () => {
-		trigger({ username, password })	
+		trigger({ username, password })
+
+		console.log(result.data)
 	}
 
 	return (
