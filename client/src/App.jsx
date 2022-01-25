@@ -8,11 +8,13 @@ import Profile from "./pages/Profile"
 import Register from "./pages/Register"
 import PageNotFound from "./pages/PageNotFound"
 import Navbar from "./components/Navbar"
+import LoginDialog from "./components/LoginDialog"
 
 const App = () => {
 	return (
 		<>
 			<Navbar />
+			<LoginDialog />
 			<Routes>
 				<Route path="/" element={<Home />} />
 				<Route path="/about" element={<About />} />

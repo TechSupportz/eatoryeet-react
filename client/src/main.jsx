@@ -98,17 +98,24 @@ const THEME = createTheme({
 				emptyIcon: <CircleOutlinedIcon fontSize="inherit" sx={{ color: "#7EFA88" }} />,
 			},
 		},
-		MuiOutlinedInput: {
+		MuiFilledInput: {
 			styleOverrides: {
 				root: {
 					borderRadius: "10px",
 					backgroundColor: "hsl(0, 0%, 100%)",
 					boxShadow: "0px 8px 24px hsla(0, 0%, 0%, 0.15)",
+					border: "2px solid hsl(0, 0%, 85%)",
+					transition: "background-color 0.2s linear",
+					":hover": {
+						backgroundColor: "hsl(0, 0%, 95%)",
+					},
+
 				},
 			},
 			defaultProps: {
 				disableUnderline: true,
 				label: 'margin="none"',
+				hiddenLabel: true,
 			},
 		},
 		MuiSkeleton: {

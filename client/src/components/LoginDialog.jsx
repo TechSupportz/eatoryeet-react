@@ -1,13 +1,21 @@
 import {
+	Box,
 	Button,
 	Dialog,
 	DialogActions,
 	DialogContent,
 	DialogContentText,
 	DialogTitle,
+	FilledInput,
+	FormControlLabel,
+	FormLabel,
+	IconButton,
+	InputAdornment,
+	InputLabel,
 	TextField,
 } from "@mui/material"
-import { Box } from "@mui/system"
+import VisibilityRoundedIcon from "@mui/icons-material/VisibilityRounded"
+import VisibilityOffRoundedIcon from "@mui/icons-material/VisibilityOffRounded"
 import React from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { setShowLoginDialog } from "../app/slices/userSlice"
@@ -16,6 +24,8 @@ const LoginDialog = () => {
 	const dispatch = useDispatch()
 	const showLoginDialog = useSelector((state) => state.user.showLoginDialog)
 
+	const [showPassword, setShowPassword] = React.useState(false)
+
 	const handleClickOpen = () => {
 		dispatch(setShowLoginDialog(true))
 	}
@@ -23,28 +33,58 @@ const LoginDialog = () => {
 	const handleClose = () => {
 		dispatch(setShowLoginDialog(false))
 	}
+	
 
 	return (
 		<Box>
-			<Dialog open={showLoginDialog} onClose={handleClose}>
-				<DialogTitle>EatOrYeet</DialogTitle>
+			<Dialog open={showLoginDialog} onClose={handleClose} fullWidth maxWidth="xs">
+				<DialogTitle>
+					<Box my={1.5} sx={{ display: "flex", justifyContent: "center" }}>
+						<img src="/assets/EatOrYeet.svg" alt="" />
+					</Box>
+				</DialogTitle>
+
 				<DialogContent>
-					<DialogContentText>
-						Log your ass in here to get started!
-					</DialogContentText>
-					<TextField
+					<InputLabel
+						sx={{ color: "black", fontSize: "1.15em", ml: "1%", mb: "2%" }}
+						htmlFor="username"
+					>
+						Username:
+					</InputLabel>
+					<FilledInput
+						id="username"
 						autoFocus
 						margin="dense"
-						id="name"
-						label="Username"
-						type="email"
+						type="text"
 						fullWidth
-						variant="outlined"
+						size="small"
+						sx={{ mb: "1em" }}
+					/>
+
+					<InputLabel
+						sx={{ color: "black", fontSize: "1.15em", ml: "1%", mb: "2%" }}
+						htmlFor="password"
+					>
+						Password:
+					</InputLabel>
+					<FilledInput
+						id="password"
+						margin="dense"
+						type={showPassword ? "text" : "password"}
+						fullWidth
+						size="small"
+						endAdornment={
+							<InputAdornment position="end">
+								<IconButton onClick={() => setShowPassword(!showPassword)}>
+									{showPassword ? <VisibilityRoundedIcon /> : <VisibilityOffRoundedIcon />} 
+								</IconButton>
+							</InputAdornment>
+						}
 					/>
 				</DialogContent>
 				<DialogActions>
 					<Button onClick={handleClose}>Cancel</Button>
-					<Button onClick={handleClose}>Subscribe</Button>
+					<Button onClick={handleClose}>Login</Button>
 				</DialogActions>
 			</Dialog>
 		</Box>

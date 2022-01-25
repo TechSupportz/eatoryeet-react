@@ -4,11 +4,13 @@
 	font-family: Quicksand, sans-serif;
 }
 
+html{
+	scroll-behavior: smooth;
+	overflow-y: scroll;
+}
+
 body{
 	max-width: 1400px;
 	margin: auto;
 }
 
-html{
-	overflow-y: scroll;
-}
