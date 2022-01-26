@@ -5,12 +5,19 @@ import {
 	CardContent,
 	Container,
 	Divider,
+	IconButton,
 	Rating,
 	Stack,
 	Typography,
 } from "@mui/material"
+import EditRoundedIcon from "@mui/icons-material/EditRounded"
+import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded"
+
+import { useSelector } from "react-redux"
 
 const ReviewCard = ({ reviewInfo }) => {
+	const userId = useSelector((state) => state.user.userId)
+
 	return (
 		<Box>
 			<Card
@@ -51,7 +58,7 @@ const ReviewCard = ({ reviewInfo }) => {
 								</Typography>
 							</Stack>
 						</Stack>
-						<Stack>
+						<Stack direction="column" justifyContent="space-between">
 							<Typography
 								fontSize="0.9em"
 								fontWeight="medium"
@@ -61,6 +68,17 @@ const ReviewCard = ({ reviewInfo }) => {
 									? `Date Updated: ${reviewInfo.date_posted}`
 									: `Date Posted: ${reviewInfo.date_posted}`}
 							</Typography>
+
+							{reviewInfo.user_id === userId && (
+								<Stack direction="row" justifyContent="flex-end">
+									<IconButton>
+										<EditRoundedIcon></EditRoundedIcon>
+									</IconButton>
+									<IconButton>
+										<DeleteRoundedIcon></DeleteRoundedIcon>
+									</IconButton>
+								</Stack>
+							)}
 						</Stack>
 					</Stack>
 				</CardContent>
