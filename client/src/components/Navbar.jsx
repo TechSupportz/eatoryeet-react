@@ -19,8 +19,12 @@ import { useState } from "react"
 import { display } from "@mui/system"
 
 import { useSelector, useDispatch } from "react-redux"
-import { setShowLoginDialog } from "../app/slices/userSlice"
-
+import {
+	setIsLoggedIn,
+	setShowLoginDialog,
+	setUserId,
+	setUserDetail,
+} from "../app/slices/userSlice"
 
 const pages = [
 	{
@@ -43,7 +47,7 @@ const settings = [
 	},
 	{
 		settingTitle: "Logout",
-		settingUrl: "about",
+		settingUrl: "logout",
 	},
 ]
 
@@ -52,10 +56,11 @@ const Navbar = () => {
 	const [anchorElUser, setAnchorElUser] = useState(null)
 	const location = useLocation()
 	const navigate = useNavigate()
-	
+
 	const dispatch = useDispatch()
 	const isLoggedIn = useSelector((state) => state.user.isLoggedIn)
 	const showLoginDialog = useSelector((state) => state.user.showLoginDialog)
+	
 	const userDetail = useSelector((state) => state.user.userDetail)
 
 	let currentPath = location.pathname.split("/")[1]
@@ -73,8 +78,19 @@ const Navbar = () => {
 	}
 
 	const handleCloseSettingMenu = (pageUrl) => {
-		navigate(`/${pageUrl}`)
-		setAnchorElNav(null)
+		switch (pageUrl) {
+			case "profile":
+				navigate(`/${pageUrl}`)
+				setAnchorElUser(null)
+				break
+			case "logout":
+				dispatch(setUserId(null))
+				dispatch(setUserDetail({}))
+				dispatch(setIsLoggedIn(false))
+				setAnchorElUser(null)
+				break
+		}
+			
 	}
 
 	const handleCloseUserMenu = () => {
