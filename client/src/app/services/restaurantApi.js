@@ -1,14 +1,14 @@
 import { mainApi } from "./mainApi"
 
 export const restaurantApi = mainApi.injectEndpoints({
-	endpoints: (builder) => ({
-		getAllRestaurants: builder.query({
+	endpoints: (build) => ({
+		getAllRestaurants: build.query({
 			query: () => ({
 				url: "/restaurant",
 				method: "get",
 			}),
 		}),
-		getRestaurantById: builder.query({
+		getRestaurantById: build.query({
 			query: (id) => ({
 				url: `/restaurant/${id}`,
 				method: "get",

@@ -52,7 +52,7 @@ function userLogin(req, res) {
 					  })
 					: res.json({ message: "Incorrect Password", userId: null })
 			} else {
-				res.json({ message: "Incorrect Username or Password", userId: null })
+				res.json({ message: "User not found", userId: null })
 			}
 		}
 	})

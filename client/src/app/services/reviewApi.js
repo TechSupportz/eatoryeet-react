@@ -1,8 +1,8 @@
 import { mainApi } from "./mainApi";
 
 export const reviewApi = mainApi.injectEndpoints({
-	endpoints: (builder) => ({
-		getReviewsByRestaurantId: builder.query({
+	endpoints: (build) => ({
+		getReviewsByRestaurantId: build.query({
 			query: (id) => ({
 				url: `/review/restaurant/${id}`,
 				method: "get",

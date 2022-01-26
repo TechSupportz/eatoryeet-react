@@ -1,8 +1,8 @@
 import { mainApi } from "./mainApi"
 
 export const userApi = mainApi.injectEndpoints({
-	endpoints: (builder) => ({
-		login: builder.query({
+	endpoints: (build) => ({
+		login: build.mutation({
 			query: ({ username, password }) => ({
 				url: "/user/login",
 				method: "post",
@@ -20,4 +20,4 @@ export const userApi = mainApi.injectEndpoints({
 	overrideExisting: false,
 })
 
-export const { useLazyLoginQuery } = userApi
+export const { useLoginMutation } = userApi

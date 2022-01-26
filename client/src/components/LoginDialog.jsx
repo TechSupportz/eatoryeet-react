@@ -21,18 +21,20 @@ import { useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
 
 import { setShowLoginDialog } from "../app/slices/userSlice"
-import { useLazyLoginQuery } from "../app/services/userApi"
+import { useLoginMutation } from "../app/services/userApi"
+import { setUserId } from "../app/slices/userSlice"
 
 const LoginDialog = () => {
 	const dispatch = useDispatch()
 	const showLoginDialog = useSelector((state) => state.user.showLoginDialog)
+	const userId = useSelector((state) => state.user.userId)
 
 	const [username, setUsername] = useState("")
 	const [password, setPassword] = useState("")
 
 	const [showPassword, setShowPassword] = useState(false)
 
-	const [trigger, result, lastPromiseInfo] = useLazyLoginQuery()
+	const [login, result] = useLoginMutation()
 
 	const handleClickOpen = () => {
 		dispatch(setShowLoginDialog(true))
@@ -43,9 +45,11 @@ const LoginDialog = () => {
 	}
 
 	const handleLogin = () => {
-		trigger({ username, password })
+		login({ username, password })
+			.unwrap()
+			.then((response) => console.log(response))
 
-		console.log(result.data)
+		
 	}
 
 	return (
