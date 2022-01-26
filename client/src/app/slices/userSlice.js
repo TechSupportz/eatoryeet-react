@@ -1,12 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit"
+import { useDispatch } from "react-redux"
+
+
 
 export const userSlice = createSlice({
 	name: "user",
 	initialState: {
 		userId: null,
-		userDetail: [],
+		userDetail: {},
 		isLoggedIn: false,
-		showLoginDialog: true,
+		showLoginDialog: false,
 		status: null,
 	},
 	reducers: {
@@ -18,6 +21,9 @@ export const userSlice = createSlice({
 		},
 		setUserId: (state, action) => {
 			state.userId = action.payload
+		},
+		setUserDetail: (state, action) => {
+			state.userDetail = action.payload
 		}
 	},
 	extraReducers: {
@@ -25,6 +31,6 @@ export const userSlice = createSlice({
 	}
 })
 
-export const { setIsLoggedIn, setShowLoginDialog, setUserId } = userSlice.actions
+export const { setIsLoggedIn, setShowLoginDialog, setUserId, setUserDetail } = userSlice.actions
 
 export default userSlice.reducer

@@ -21,6 +21,7 @@ import { display } from "@mui/system"
 import { useSelector, useDispatch } from "react-redux"
 import { setShowLoginDialog } from "../app/slices/userSlice"
 
+
 const pages = [
 	{
 		pageTitle: "Home",
@@ -55,6 +56,7 @@ const Navbar = () => {
 	const dispatch = useDispatch()
 	const isLoggedIn = useSelector((state) => state.user.isLoggedIn)
 	const showLoginDialog = useSelector((state) => state.user.showLoginDialog)
+	const userDetail = useSelector((state) => state.user.userDetail)
 
 	let currentPath = location.pathname.split("/")[1]
 
@@ -174,12 +176,15 @@ const Navbar = () => {
 
 					<Box sx={{ flexGrow: 0 }}>
 						{isLoggedIn ? (
-							<IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-								<Avatar
-									alt="Profile Picture"
-									src="http://localhost:8080/static/Default.png"
-								/>
-							</IconButton>
+							<Stack direction="column-reverse" alignItems="center">
+								<Typography> {`Welcome ${userDetail.username}`} </Typography>
+								<IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+									<Avatar
+										alt="Profile Picture"
+										src="http://localhost:8080/static/Default.png"
+									/>
+								</IconButton>
+							</Stack>
 						) : (
 							<Button
 								variant="contained"

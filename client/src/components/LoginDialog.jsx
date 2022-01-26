@@ -13,6 +13,7 @@ import {
 	InputAdornment,
 	InputLabel,
 	TextField,
+	Tooltip,
 } from "@mui/material"
 import VisibilityRoundedIcon from "@mui/icons-material/VisibilityRounded"
 import VisibilityOffRoundedIcon from "@mui/icons-material/VisibilityOffRounded"
@@ -22,7 +23,8 @@ import { useSelector, useDispatch } from "react-redux"
 
 import { setShowLoginDialog } from "../app/slices/userSlice"
 import { useLoginMutation } from "../app/services/userApi"
-import { setUserId } from "../app/slices/userSlice"
+import { useLazyGetUserByIdQuery } from "../app/services/userApi"
+import { setUserId, setUserDetail, setIsLoggedIn } from "../app/slices/userSlice"
 
 const LoginDialog = () => {
 	const dispatch = useDispatch()
@@ -34,7 +36,8 @@ const LoginDialog = () => {
 
 	const [showPassword, setShowPassword] = useState(false)
 
-	const [login, result] = useLoginMutation()
+	const [login] = useLoginMutation()
+	const [getUserById] = useLazyGetUserByIdQuery()
 
 	const handleClickOpen = () => {
 		dispatch(setShowLoginDialog(true))
@@ -47,9 +50,20 @@ const LoginDialog = () => {
 	const handleLogin = () => {
 		login({ username, password })
 			.unwrap()
-			.then((response) => console.log(response))
+			.then((response) => {
+				console.log(response)
+				if (response.userId !== null) {
+					dispatch(setUserId(response.userId))
+					getUserById({ id: response.userId })
+						.unwrap()
+						.then((data) => {
+							dispatch(setUserDetail(data))
+							dispatch(setIsLoggedIn(true))
+							handleClose()
+						})
+				}
+			})
 
-		
 	}
 
 	return (
@@ -91,13 +105,15 @@ const LoginDialog = () => {
 						fullWidth
 						endAdornment={
 							<InputAdornment position="end">
-								<IconButton onClick={() => setShowPassword(!showPassword)}>
-									{showPassword ? (
-										<VisibilityRoundedIcon />
-									) : (
-										<VisibilityOffRoundedIcon />
-									)}
-								</IconButton>
+								<Tooltip title={showPassword ? "Hide password" : "Show password"}>
+									<IconButton onClick={() => setShowPassword(!showPassword)}>
+										{showPassword ? (
+											<VisibilityRoundedIcon />
+										) : (
+											<VisibilityOffRoundedIcon />
+										)}
+									</IconButton>
+								</Tooltip>
 							</InputAdornment>
 						}
 						onChange={(e) => setPassword(e.target.value)}

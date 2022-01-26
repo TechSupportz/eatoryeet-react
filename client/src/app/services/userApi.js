@@ -16,8 +16,15 @@ export const userApi = mainApi.injectEndpoints({
 			}),
 			keepUnusedDataFor: 0,
 		}),
+		getUserById: build.query({
+			query: ({id}) => ({
+				url: `/user/${id}`,
+				method: "get",
+			}),
+			keepUnusedDataFor: 0,
+		}),
 	}),
 	overrideExisting: false,
 })
 
-export const { useLoginMutation } = userApi
+export const { useLoginMutation,useLazyGetUserByIdQuery } = userApi
