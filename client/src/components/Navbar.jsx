@@ -138,7 +138,7 @@ const Navbar = () => {
 								horizontal: "left",
 							}}
 							open={Boolean(anchorElNav)}
-							onClose={handleCloseNavMenu}
+							onClose={() => handleCloseNavMenu(currentPath)}
 							sx={{
 								display: { xs: "block", md: "none" },
 							}}
@@ -160,7 +160,7 @@ const Navbar = () => {
 					<Box
 						noWrap
 						component="div"
-						sx={{ flexGrow: 1, display: { xs: "flex", md: "none" }}}
+						sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}
 					>
 						<img width={150} height={80} src="/assets/Logo.svg" alt="logo" />
 					</Box>
@@ -201,17 +201,14 @@ const Navbar = () => {
 
 					<Box sx={{ flexGrow: 0 }}>
 						{isLoggedIn ? (
-							<Stack direction="column-reverse" alignItems="center">
-								<Typography> {`Welcome ${userDetail.username}`} </Typography>
-								<Tooltip title="">
-									<IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-										<Avatar
-											alt="Profile Picture"
-											src={`http://localhost:8080${userDetail.profile_pic}`}
-										/>
-									</IconButton>
-								</Tooltip>
-							</Stack>
+							<Tooltip title="Profile" sx={{m: -1}}>
+								<IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+									<Avatar
+										alt="Profile Picture"
+										src={`http://localhost:8080${userDetail.profile_pic}`}
+									/>
+								</IconButton>
+							</Tooltip>
 						) : (
 							<Button
 								variant="contained"

@@ -13,22 +13,27 @@ import {
 	IconButton,
 	InputAdornment,
 	InputLabel,
+	Link,
+	Stack,
 	TextField,
 	Tooltip,
+	Typography,
 } from "@mui/material"
 import VisibilityRoundedIcon from "@mui/icons-material/VisibilityRounded"
 import VisibilityOffRoundedIcon from "@mui/icons-material/VisibilityOffRounded"
-import React from "react"
 import { useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
+import { useNavigate } from "react-router-dom"
 
 import { setShowLoginDialog } from "../app/slices/userSlice"
 import { useLoginMutation } from "../app/services/userApi"
 import { useLazyGetUserByIdQuery } from "../app/services/userApi"
 import { setUserId, setUserDetail, setIsLoggedIn } from "../app/slices/userSlice"
+import Register from "../pages/Register"
 
 const LoginDialog = () => {
 	const dispatch = useDispatch()
+	const navigate = useNavigate()
 	const showLoginDialog = useSelector((state) => state.user.showLoginDialog)
 	const userId = useSelector((state) => state.user.userId)
 
@@ -141,15 +146,37 @@ const LoginDialog = () => {
 						{alert}
 					</Alert>
 				)}
-				<DialogActions sx={{ display: "flex", justifyContent: "center", my: 1.5 }}>
+				<DialogActions
+					sx={{
+						display: "flex",
+						justifyContent: "center",
+						flexDirection: "column",
+						my: 1.5,
+					}}
+				>
 					<Button
 						variant="contained"
 						size="large"
-						sx={{ width: "40%" }}
+						sx={{ width: "50%", mb: "1em" }}
 						onClick={handleLogin}
 					>
 						Login
 					</Button>
+
+					<Typography fontSize="0.9em">
+						Dont have an account?{" "}
+						<Link
+							component="button"
+							fontSize="1em"
+							sx={{ mb: "5px" }}
+							onClick={() => {
+								navigate("/register")
+								handleClose()
+							}}
+						>
+							Sign Up!
+						</Link>
+					</Typography>
 				</DialogActions>
 			</Dialog>
 		</Box>

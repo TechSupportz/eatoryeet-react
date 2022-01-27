@@ -1,10 +1,12 @@
-import { Box } from '@mui/material'
-import React from 'react'
+import { Box } from "@mui/material"
+import RegisterForm from "../components/RegisterForm"
+import RegisterHeader from "../components/RegisterHeader"
 
 const Register = () => {
 	return (
 		<Box ml={5} mr={5}>
-			<h1>Register</h1>
+			<RegisterHeader />
+			<RegisterForm />
 		</Box>
 	)
 }
