@@ -15,7 +15,7 @@ import {
 } from "@mui/material"
 import MenuIcon from "@mui/icons-material/Menu"
 import { useNavigate, useLocation } from "react-router-dom"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { display } from "@mui/system"
 
 import { useSelector, useDispatch } from "react-redux"
@@ -60,10 +60,19 @@ const Navbar = () => {
 	const dispatch = useDispatch()
 	const isLoggedIn = useSelector((state) => state.user.isLoggedIn)
 	const showLoginDialog = useSelector((state) => state.user.showLoginDialog)
-	
+
 	const userDetail = useSelector((state) => state.user.userDetail)
 
 	let currentPath = location.pathname.split("/")[1]
+
+	//check if user was previously logged in
+	useEffect(() => {
+		if (localStorage.getItem("user")) {
+			dispatch(setUserDetail(JSON.parse(localStorage.getItem("user"))))
+			dispatch(setUserId(JSON.parse(localStorage.getItem("user")).id))
+			dispatch(setIsLoggedIn(true))
+		}
+	}, [])
 
 	const handleOpenNavMenu = (event) => {
 		setAnchorElNav(event.currentTarget)
@@ -87,10 +96,10 @@ const Navbar = () => {
 				dispatch(setUserId(null))
 				dispatch(setUserDetail({}))
 				dispatch(setIsLoggedIn(false))
+				localStorage.clear()
 				setAnchorElUser(null)
 				break
 		}
-			
 	}
 
 	const handleCloseUserMenu = () => {

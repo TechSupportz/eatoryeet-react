@@ -101,16 +101,19 @@ const THEME = createTheme({
 		MuiFilledInput: {
 			styleOverrides: {
 				root: {
+					height: "50px",
 					borderRadius: "10px",
 					backgroundColor: "hsl(0, 0%, 100%)",
 					boxShadow: "0px 8px 24px hsla(0, 0%, 0%, 0.15)",
 					border: "2px solid hsl(0, 0%, 85%)",
 					transition: "background-color 0.2s linear",
+					transition: "border-color 0.15s ease-in",
 					":hover": {
 						backgroundColor: "hsl(0, 0%, 95%)",
 					},
-					height: "50px"
-
+					"&.Mui-error": {
+						borderColor: "hsl(0, 100%, 75%)",
+					},
 				},
 			},
 			defaultProps: {

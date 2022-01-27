@@ -59,11 +59,11 @@ const LoginDialog = () => {
 						.then((data) => {
 							dispatch(setUserDetail(data))
 							dispatch(setIsLoggedIn(true))
+							localStorage.setItem("user", JSON.stringify(data))
 							handleClose()
 						})
 				}
 			})
-
 	}
 
 	return (
@@ -84,9 +84,10 @@ const LoginDialog = () => {
 					</InputLabel>
 					<FilledInput
 						autoFocus
+						variant="login"
 						id="username"
-						margin="dense"
 						type="text"
+						margin="dense"
 						fullWidth
 						sx={{ mb: "1em" }}
 						onChange={(e) => setUsername(e.target.value)}
@@ -99,10 +100,11 @@ const LoginDialog = () => {
 						Password:
 					</InputLabel>
 					<FilledInput
+						variant="login"
 						id="password"
 						margin="dense"
-						type={showPassword ? "text" : "password"}
 						fullWidth
+						type={showPassword ? "text" : "password"}
 						endAdornment={
 							<InputAdornment position="end">
 								<Tooltip title={showPassword ? "Hide password" : "Show password"}>
