@@ -160,7 +160,7 @@ const Navbar = () => {
 					<Box
 						noWrap
 						component="div"
-						sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}
+						sx={{ flexGrow: 1, display: { xs: "flex", md: "none" }}}
 					>
 						<img width={150} height={80} src="/assets/Logo.svg" alt="logo" />
 					</Box>
@@ -203,12 +203,14 @@ const Navbar = () => {
 						{isLoggedIn ? (
 							<Stack direction="column-reverse" alignItems="center">
 								<Typography> {`Welcome ${userDetail.username}`} </Typography>
-								<IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-									<Avatar
-										alt="Profile Picture"
-										src="http://localhost:8080/static/Default.png"
-									/>
-								</IconButton>
+								<Tooltip title="">
+									<IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+										<Avatar
+											alt="Profile Picture"
+											src={`http://localhost:8080${userDetail.profile_pic}`}
+										/>
+									</IconButton>
+								</Tooltip>
 							</Stack>
 						) : (
 							<Button
