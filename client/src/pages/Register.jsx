@@ -1,6 +1,6 @@
 import { Box } from "@mui/material"
-import RegisterForm from "../components/RegisterForm"
-import RegisterHeader from "../components/RegisterHeader"
+import RegisterForm from "../components/Register/RegisterForm"
+import RegisterHeader from "../components/Register/RegisterHeader"
 
 const Register = () => {
 	return (

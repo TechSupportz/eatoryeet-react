@@ -1,5 +1,5 @@
 import { Card, CardActionArea, CardMedia, Typography } from "@mui/material"
-import { useGetAllRestaurantsQuery } from "../app/services/restaurantAPI"
+import { useGetAllRestaurantsQuery } from "../../app/services/restaurantAPI"
 import { useNavigate } from "react-router-dom"
 
 const Featured = () => {

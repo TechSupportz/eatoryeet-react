@@ -1,8 +1,8 @@
 import { CardActionArea, Grid } from "@mui/material"
-import RestaurantCard from "./RestaurantCard"
+import RestaurantCard from "../RestaurantCard"
 import { useNavigate } from "react-router-dom"
 
-import { useGetAllRestaurantsQuery } from "../app/services/restaurantAPI"
+import { useGetAllRestaurantsQuery } from "../../app/services/restaurantAPI"
 
 const RestaurantGrid = () => {
 	const { isError, data: restaurantList = [], isLoading } = useGetAllRestaurantsQuery()

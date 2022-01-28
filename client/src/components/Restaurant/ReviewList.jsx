@@ -1,7 +1,7 @@
 import { Box, Stack } from "@mui/material"
 import ReviewCard from "./ReviewCard"
 
-import { useGetReviewsByRestaurantIdQuery } from "../app/services/reviewApi"
+import { useGetReviewsByRestaurantIdQuery } from "../../app/services/reviewAPI"
 
 const ReviewList = ({ restaurantId }) => {
 	const {

@@ -1,7 +1,8 @@
 import { Box } from "@mui/material"
-import RestaurantInfo from "../components/RestaurantInfo"
+
 import { useParams } from "react-router-dom"
-import ReviewList from "../components/ReviewList"
+import RestaurantInfo from "../components/Restaurant/RestaurantInfo"
+import ReviewList from "../components/Restaurant/ReviewList"
 
 const Restaurant = () => {
 

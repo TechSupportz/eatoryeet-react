@@ -1,7 +1,7 @@
 
 import { Card, CardMedia, Rating, Skeleton, Stack, Typography } from "@mui/material"
 import Tilt from "react-parallax-tilt"
-import { useGetRestaurantByIdQuery } from "../app/services/restaurantApi"
+import { useGetRestaurantByIdQuery } from "../../app/services/restaurantApi"
 
 const RestaurantInfo = ({restaurantId}) => {
 
