@@ -1,4 +1,6 @@
 import {
+	Alert,
+	AlertTitle,
 	Box,
 	Button,
 	FilledInput,
@@ -10,11 +12,17 @@ import {
 	MenuItem,
 	Select,
 	Stack,
+	Snackbar,
 	Tooltip,
 } from "@mui/material"
 import VisibilityRoundedIcon from "@mui/icons-material/VisibilityRounded"
 import VisibilityOffRoundedIcon from "@mui/icons-material/VisibilityOffRounded"
 import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
+import { useDispatch } from "react-redux"
+
+import { setShowLoginDialog } from "../../app/slices/userSlice"
+import { useRegisterMutation } from "../../app/services/userApi"
 
 const RegisterForm = () => {
 	const [username, setUsername] = useState("")
@@ -27,12 +35,17 @@ const RegisterForm = () => {
 	const [address, setAddress] = useState("")
 
 	const [allFilled, setAllFilled] = useState(false)
-	const [duplicate, setDuplicate] = useState("")
+	const [duplicate, setDuplicate] = useState(false)
 
 	const [showPassword, setShowPassword] = useState(false)
+	const [registerStatus, setRegisterStatus] = useState(null)
 
 	const emailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
 	const phoneNumFormat = /[6|8|9]\d{7}|\+65[6|8|9]\d{7}|\+65\s[6|8|9]\d{7}/
+
+	const navigate = useNavigate()
+	const [register, result] = useRegisterMutation()
+	const dispatch = useDispatch()
 
 	useEffect(() => {
 		if (
@@ -63,13 +76,41 @@ const RegisterForm = () => {
 	}, [username, password, email, firstName, lastName, gender, phoneNum, address])
 
 	const handleSubmit = () => {
-		console.log({ username, password, email, firstName, lastName, gender, phoneNum, address })
-		console.log(allFilled)
+		console.log({
+			username,
+			password,
+			email,
+			firstName,
+			lastName,
+			gender,
+			phoneNum,
+			address,
+		})
+		register({ username, password, email, firstName, lastName, gender, phoneNum, address })
+			.unwrap()
+			.then((response) => {
+				console.log(response.errno)
+				switch (response.errno) {
+					case undefined:
+						setRegisterStatus(true)
+						navigate("/")
+						dispatch(setShowLoginDialog(true))
+						break
+					case 1062:
+						setRegisterStatus(false)
+						setDuplicate(true)
+						console.log(registerStatus)
+						break
+					default:
+						console.log("some other error")
+						break
+				}
+			})
 	}
 
 	return (
 		<Box mt="2%" mx="5%">
-			<Grid container item spacing={{xs: 0.5, md:1.5}}>
+			<Grid container item spacing={{ xs: 0.5, md: 1.5 }}>
 				<Grid item md={5} xs={12}>
 					<InputLabel
 						sx={{ color: "black", fontSize: "1.15em", ml: "3px", mb: "5px" }}
@@ -83,7 +124,7 @@ const RegisterForm = () => {
 						type="text"
 						margin="dense"
 						fullWidth
-						error={duplicate.includes("username") || username.length > 30}
+						error={duplicate || username.length > 30}
 						sx={{ mb: "1em" }}
 						onChange={(e) => setUsername(e.target.value)}
 					/>
@@ -132,7 +173,7 @@ const RegisterForm = () => {
 						type="email"
 						margin="dense"
 						fullWidth
-						error={duplicate.includes("email") || !email.match(emailFormat)}
+						error={duplicate || !email.match(emailFormat)}
 						sx={{ mb: "1em" }}
 						onChange={(e) => setEmail(e.target.value)}
 					/>
@@ -171,7 +212,7 @@ const RegisterForm = () => {
 						type="tel"
 						margin="dense"
 						fullWidth
-						error={duplicate.includes("phoneNum") || !phoneNum.match(phoneNumFormat)}
+						error={duplicate || !phoneNum.match(phoneNumFormat)}
 						sx={{ mb: "1em" }}
 						onChange={(e) => setPhoneNum(e.target.value)}
 					/>
@@ -248,6 +289,16 @@ const RegisterForm = () => {
 					</Button>
 				</Grid>
 			</Grid>
+			<Snackbar open={registerStatus === true || registerStatus === false ? true : false}>
+				<Alert severity={registerStatus ? "success" : "error"}>
+					<AlertTitle>
+						{registerStatus ? "Registration Successful" : "Registration Failed"}
+					</AlertTitle>
+					{registerStatus
+						? "You can now login"
+						: "One or more highlighted field(s) are duplicates - please change them"}
+				</Alert>
+			</Snackbar>
 		</Box>
 	)
 }

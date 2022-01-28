@@ -16,8 +16,37 @@ export const userApi = mainApi.injectEndpoints({
 			}),
 			keepUnusedDataFor: 0,
 		}),
+		register: build.mutation({
+			query: ({
+				username,
+				password,
+				email,
+				firstName,
+				lastName,
+				gender,
+				phoneNum,
+				address,
+			}) => ({
+				url: "/user/register",
+				method: "post",
+				body: {
+					username: username,
+					password: password,
+					email: email,
+					first_name: firstName,
+					last_name: lastName,
+					gender: gender,
+					phone_number: phoneNum,
+					address: address,
+				},
+				headers: {
+					"Content-type": "application/json; charset=UTF-8",
+				},
+			}),
+			keepUnusedDataFor: 0,
+		}),
 		getUserById: build.query({
-			query: ({id}) => ({
+			query: ({ id }) => ({
 				url: `/user/${id}`,
 				method: "get",
 			}),
@@ -27,4 +56,4 @@ export const userApi = mainApi.injectEndpoints({
 	overrideExisting: false,
 })
 
-export const { useLoginMutation,useLazyGetUserByIdQuery } = userApi
+export const { useLoginMutation, useRegisterMutation ,useLazyGetUserByIdQuery } = userApi
