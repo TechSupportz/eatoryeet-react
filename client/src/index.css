@@ -2,7 +2,7 @@
 
 @font-face {
 	font-family: "Tumbly";
-	src: local("Tumbly"), url("/fonts/Tumbly.woff2") format("woff2");
+	src: local("Tumbly"), url("src/fonts/Tumbly.woff") format("woff");
 }
 
 * {
