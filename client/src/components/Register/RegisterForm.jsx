@@ -1,6 +1,8 @@
 import {
 	Box,
+	Button,
 	FilledInput,
+	FormControl,
 	Grid,
 	IconButton,
 	InputAdornment,
@@ -12,23 +14,62 @@ import {
 } from "@mui/material"
 import VisibilityRoundedIcon from "@mui/icons-material/VisibilityRounded"
 import VisibilityOffRoundedIcon from "@mui/icons-material/VisibilityOffRounded"
-
-import { useState } from "react"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 
 const RegisterForm = () => {
 	const [username, setUsername] = useState("")
 	const [password, setPassword] = useState("")
+	const [email, setEmail] = useState("")
 	const [firstName, setFirstName] = useState("")
 	const [lastName, setLastName] = useState("")
-	const [email, setEmail] = useState("")
 	const [gender, setGender] = useState("")
-	const [phoneNum, setPhoneNum] = useState()
+	const [phoneNum, setPhoneNum] = useState("")
+	const [address, setAddress] = useState("")
+
+	const [allFilled, setAllFilled] = useState(false)
+	const [duplicate, setDuplicate] = useState("")
+
 	const [showPassword, setShowPassword] = useState(false)
 
+	const emailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+	const phoneNumFormat = /[6|8|9]\d{7}|\+65[6|8|9]\d{7}|\+65\s[6|8|9]\d{7}/
+
+	useEffect(() => {
+		if (
+			(username ||
+				password ||
+				email ||
+				firstName ||
+				lastName ||
+				gender ||
+				phoneNum ||
+				address) !== "" &&
+			(
+				username ||
+				password ||
+				email ||
+				firstName ||
+				lastName ||
+				gender ||
+				phoneNum ||
+				address
+			).trim()
+		) {
+			setAllFilled(true)
+		} else {
+			setAllFilled(false)
+		}
+		console.log(allFilled)
+	}, [username, password, email, firstName, lastName, gender, phoneNum, address])
+
+	const handleSubmit = () => {
+		console.log({ username, password, email, firstName, lastName, gender, phoneNum, address })
+		console.log(allFilled)
+	}
+
 	return (
-		<Box mt="5%" mx="5%">
-			<Grid container item spacing={1.5}>
+		<Box mt="2%" mx="5%">
+			<Grid container item spacing={{xs: 0.5, md:1.5}}>
 				<Grid item md={5} xs={12}>
 					<InputLabel
 						sx={{ color: "black", fontSize: "1.15em", ml: "3px", mb: "5px" }}
@@ -42,7 +83,7 @@ const RegisterForm = () => {
 						type="text"
 						margin="dense"
 						fullWidth
-						error={alert === "User not found"}
+						error={duplicate.includes("username") || username.length > 30}
 						sx={{ mb: "1em" }}
 						onChange={(e) => setUsername(e.target.value)}
 					/>
@@ -50,7 +91,7 @@ const RegisterForm = () => {
 				<Grid item md={3.5} xs={12}>
 					<InputLabel
 						sx={{ color: "black", fontSize: "1.15em", ml: "3px", mb: "5px" }}
-						htmlFor="username"
+						htmlFor="firstName"
 					>
 						First Name:
 					</InputLabel>
@@ -59,15 +100,14 @@ const RegisterForm = () => {
 						type="text"
 						margin="dense"
 						fullWidth
-						error={alert === "User not found"}
 						sx={{ mb: "1em" }}
-						onChange={(e) => setUsername(e.target.value)}
+						onChange={(e) => setFirstName(e.target.value)}
 					/>
 				</Grid>
 				<Grid item md={3.5} xs={12}>
 					<InputLabel
 						sx={{ color: "black", fontSize: "1.15em", ml: "3px", mb: "5px" }}
-						htmlFor="username"
+						htmlFor="lastName"
 					>
 						Last Name:
 					</InputLabel>
@@ -76,15 +116,14 @@ const RegisterForm = () => {
 						type="text"
 						margin="dense"
 						fullWidth
-						error={alert === "User not found"}
 						sx={{ mb: "1em" }}
-						onChange={(e) => setUsername(e.target.value)}
+						onChange={(e) => setLastName(e.target.value)}
 					/>
 				</Grid>
 				<Grid item md={5} xs={12}>
 					<InputLabel
 						sx={{ color: "black", fontSize: "1.15em", ml: "3px", mb: "5px" }}
-						htmlFor="username"
+						htmlFor="email"
 					>
 						Email:
 					</InputLabel>
@@ -93,15 +132,15 @@ const RegisterForm = () => {
 						type="email"
 						margin="dense"
 						fullWidth
-						error={alert === "User not found"}
+						error={duplicate.includes("email") || !email.match(emailFormat)}
 						sx={{ mb: "1em" }}
-						onChange={(e) => setUsername(e.target.value)}
+						onChange={(e) => setEmail(e.target.value)}
 					/>
 				</Grid>
 				<Grid item md={3.5} xs={12}>
 					<InputLabel
 						sx={{ color: "black", fontSize: "1.15em", ml: "3px", mb: "5px" }}
-						htmlFor="username"
+						htmlFor="gender"
 					>
 						Gender:
 					</InputLabel>
@@ -123,16 +162,16 @@ const RegisterForm = () => {
 				<Grid item md={3.5} xs={12}>
 					<InputLabel
 						sx={{ color: "black", fontSize: "1.15em", ml: "3px", mb: "5px" }}
-						htmlFor="username"
+						htmlFor="phoneNum"
 					>
 						Phone Number:
 					</InputLabel>
 					<FilledInput
-						id="email"
-						type="number"
+						id="phoneNum"
+						type="tel"
 						margin="dense"
 						fullWidth
-						error={alert === "User not found"}
+						error={duplicate.includes("phoneNum") || !phoneNum.match(phoneNumFormat)}
 						sx={{ mb: "1em" }}
 						onChange={(e) => setPhoneNum(e.target.value)}
 					/>
@@ -149,7 +188,7 @@ const RegisterForm = () => {
 						id="password"
 						margin="dense"
 						fullWidth
-						error={alert === "User not found" || alert === "Incorrect Password"}
+						error={password.length < 8}
 						type={showPassword ? "text" : "password"}
 						endAdornment={
 							<InputAdornment position="end">
@@ -171,7 +210,7 @@ const RegisterForm = () => {
 				<Grid item md={7} xs={12}>
 					<InputLabel
 						sx={{ color: "black", fontSize: "1.15em", ml: "3px", mb: "5px" }}
-						htmlFor="username"
+						htmlFor="address"
 					>
 						Address:
 					</InputLabel>
@@ -181,10 +220,32 @@ const RegisterForm = () => {
 						margin="dense"
 						fullWidth
 						multiline
+						rows={2.5}
 						error={alert === "User not found"}
 						sx={{ mb: "1em" }}
-						onChange={(e) => setUsername(e.target.value)}
+						onChange={(e) => setAddress(e.target.value)}
 					/>
+				</Grid>
+				<Grid
+					item
+					md={3}
+					xs={12}
+					ml="auto"
+					mt={2}
+					mb={5}
+					display={
+						!phoneNum.match(phoneNumFormat) ||
+						username.length > 30 ||
+						!email.match(emailFormat) ||
+						password.length < 8 ||
+						!allFilled
+							? "none"
+							: "flex"
+					}
+				>
+					<Button fullWidth size="large" variant="contained" onClick={handleSubmit}>
+						Register
+					</Button>
 				</Grid>
 			</Grid>
 		</Box>

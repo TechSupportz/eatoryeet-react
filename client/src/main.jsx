@@ -101,7 +101,7 @@ const THEME = createTheme({
 		MuiFilledInput: {
 			styleOverrides: {
 				root: {
-					height: "50px",
+					
 					borderRadius: "10px",
 					backgroundColor: "hsl(0, 0%, 100%)",
 					boxShadow: "0px 8px 24px hsla(0, 0%, 0%, 0.15)",
@@ -119,6 +119,7 @@ const THEME = createTheme({
 			defaultProps: {
 				disableUnderline: true,
 				label: 'margin="none"',
+				size: "small",
 				hiddenLabel: true,
 			},
 		},
