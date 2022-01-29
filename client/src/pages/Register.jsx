@@ -16,10 +16,15 @@ const Register = () => {
 				</>
 			) : (
 				<>
-					<Typography fontWeight="medium" fontSize="4em">
+					<Typography fontWeight="medium" variant="h1">
+						Woah, woah, woah
+					</Typography>
+					<br />
+					<Typography fontWeight="medium" variant="h2">
 						How did you end up here?
 					</Typography>
-					<Typography fontWeight="medium" fontSize="3em">
+					<br />
+					<Typography fontWeight="medium" variant="h3">
 						You are already logged in
 					</Typography>
 					<br />
@@ -27,6 +32,7 @@ const Register = () => {
 					<Link fontSize="1.5em" href="/">
 						Click this or use the navbar to go to home page
 					</Link>
+					<br />
 				</>
 			)}
 		</Box>

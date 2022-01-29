@@ -21,11 +21,16 @@ import Tilt from "react-parallax-tilt"
 
 import { useState, useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
+
 import { setShowReviewDialog } from "../../app/slices/reviewSlice"
+import { useAddReviewMutation } from "../../app/services/reviewApi"
 
 const ReviewDialog = ({ restaurant }) => {
 	const dispatch = useDispatch()
 	const showReviewDialog = useSelector((state) => state.review.showReviewDialog)
+	const userId = useSelector((state) => state.user.userId)
+	const [addReview, result] = useAddReviewMutation()
+	let restaurantId = restaurant.id
 
 	const [rating, setRating] = useState(0)
 	const [title, setTitle] = useState("")
@@ -34,19 +39,23 @@ const ReviewDialog = ({ restaurant }) => {
 	const [isBtnDisabled, setIsBtnDisabled] = useState(true)
 
 	useEffect(() => {
-	  	console.table({rating, title, detail})
+		//console.table({ rating, title, detail })
 
 		if (rating > 0 && title.length > 0 && detail.length > 0) {
-		setIsBtnDisabled(false)
+			setIsBtnDisabled(false)
 		} else {
-		setIsBtnDisabled(true)
+			setIsBtnDisabled(true)
 		}
-	  
-	}, [rating, title, detail]);
-	
+	}, [rating, title, detail])
 
 	const handleClose = () => {
 		dispatch(setShowReviewDialog(false))
+	}
+
+	const handleSubmit = () => {
+		console.log({ userId, restaurantId, rating, title, detail })
+		addReview({ userId, restaurantId, rating, title, detail })
+		handleClose()
 	}
 
 	return (
@@ -141,7 +150,7 @@ const ReviewDialog = ({ restaurant }) => {
 						variant="contained"
 						size="large"
 						sx={{ width: "40%" }}
-						onClick={handleClose}
+						onClick={handleSubmit}
 						disabled={isBtnDisabled}
 					>
 						Submit your review
