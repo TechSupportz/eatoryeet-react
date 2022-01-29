@@ -21,7 +21,7 @@ import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { useDispatch } from "react-redux"
 
-import { setShowLoginDialog } from "../../app/slices/userSlice"
+import { setShowLoginDialog, setRegistrationStatus } from "../../app/slices/userSlice"
 import { useRegisterMutation } from "../../app/services/userApi"
 
 const RegisterForm = () => {
@@ -38,7 +38,7 @@ const RegisterForm = () => {
 	const [duplicate, setDuplicate] = useState(false)
 
 	const [showPassword, setShowPassword] = useState(false)
-	const [registerStatus, setRegisterStatus] = useState(null)
+
 
 	const emailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
 	const phoneNumFormat = /[6|8|9]\d{7}|\+65[6|8|9]\d{7}|\+65\s[6|8|9]\d{7}/
@@ -89,17 +89,15 @@ const RegisterForm = () => {
 		register({ username, password, email, firstName, lastName, gender, phoneNum, address })
 			.unwrap()
 			.then((response) => {
-				console.log(response.errno)
 				switch (response.errno) {
 					case undefined:
-						setRegisterStatus(true)
+						dispatch(setRegistrationStatus(true))
 						navigate("/")
 						dispatch(setShowLoginDialog(true))
 						break
 					case 1062:
-						setRegisterStatus(false)
+						dispatch(setRegistrationStatus(false))
 						setDuplicate(true)
-						console.log(registerStatus)
 						break
 					default:
 						console.log("some other error")
@@ -289,16 +287,7 @@ const RegisterForm = () => {
 					</Button>
 				</Grid>
 			</Grid>
-			<Snackbar open={registerStatus === true || registerStatus === false ? true : false}>
-				<Alert severity={registerStatus ? "success" : "error"}>
-					<AlertTitle>
-						{registerStatus ? "Registration Successful" : "Registration Failed"}
-					</AlertTitle>
-					{registerStatus
-						? "You can now login"
-						: "One or more highlighted field(s) are duplicates - please change them"}
-				</Alert>
-			</Snackbar>
+			
 		</Box>
 	)
 }

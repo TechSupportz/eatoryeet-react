@@ -4,5 +4,3 @@ export const mainApi = createApi({
 	baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:8080" }),
 	endpoints: () => ({}),
 })
-
-

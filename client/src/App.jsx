@@ -9,12 +9,14 @@ import Register from "./pages/Register"
 import PageNotFound from "./pages/PageNotFound"
 import Navbar from "./components/Navbar"
 import LoginDialog from "./components/LoginDialog"
+import RegisterSnackbar from "./components/Register/RegisterSnackbar"
 
 const App = () => {
 	return (
 		<>
 			<Navbar />
 			<LoginDialog />
+			<RegisterSnackbar />
 			<Routes>
 				<Route path="/" element={<Home />} />
 				<Route path="/about" element={<About />} />
