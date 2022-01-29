@@ -1,22 +1,19 @@
 
 import { Card, CardMedia, Rating, Skeleton, Stack, Typography } from "@mui/material"
 import Tilt from "react-parallax-tilt"
-import { useGetRestaurantByIdQuery } from "../../app/services/restaurantApi"
 
-const RestaurantInfo = ({restaurantId}) => {
-
-	const { isError, data: restaurant = {}, isLoading } = useGetRestaurantByIdQuery(restaurantId)
+const RestaurantInfo = ({restaurant, isLoading}) => {
 
 	return (
 		<>
-			<Stack direction="row" spacing={4}>
+			<Stack direction="row" spacing={4} >
 				<Tilt
-					style={{ width: "40%" }}
+					style={{ width: "30%" }}
 					tiltMaxAngleX={3}
 					tiltMaxAngleY={3}
 					transitionSpeed={5000}
 				>
-					<Card variant="clean" sx={{ width: "100%", height: 500 }}>
+					<Card variant="clean" sx={{ width: "100%", height: "100%" }}>
 						<CardMedia
 							component="img"
 							image={restaurant && restaurant.image_url}

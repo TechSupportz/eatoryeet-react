@@ -47,10 +47,6 @@ const LoginDialog = () => {
 	const [login] = useLoginMutation()
 	const [getUserById] = useLazyGetUserByIdQuery()
 
-	const handleClickOpen = () => {
-		dispatch(setShowLoginDialog(true))
-	}
-
 	const handleClose = () => {
 		dispatch(setShowLoginDialog(false))
 	}
@@ -85,11 +81,11 @@ const LoginDialog = () => {
 	}
 
 	return (
-		<Box>
+		<>
 			<Dialog open={showLoginDialog} onClose={handleClose} fullWidth maxWidth="xs">
 				<DialogTitle>
 					<Box my={1.5} sx={{ display: "flex", justifyContent: "center" }}>
-						<img src="/assets/EatOrYeet.svg" alt="" />
+						<Typography fontFamily="Tumbly" fontSize="2.25em" variant="h5">EatOrYeet</Typography>
 					</Box>
 				</DialogTitle>
 
@@ -179,7 +175,7 @@ const LoginDialog = () => {
 					</Typography>
 				</DialogActions>
 			</Dialog>
-		</Box>
+		</>
 	)
 }
 

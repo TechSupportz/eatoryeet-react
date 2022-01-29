@@ -19,7 +19,7 @@ const ReviewCard = ({ reviewInfo }) => {
 	const userId = useSelector((state) => state.user.userId)
 
 	return (
-		<Box>
+		<Box display="flex" justifyContent="center" >
 			<Card
 				variant="cleanNoHover"
 				sx={{ width: "100%", height: "20%", px: "20px", py: "15px" }}

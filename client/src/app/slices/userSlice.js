@@ -1,7 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { useDispatch } from "react-redux"
-
-
 
 export const userSlice = createSlice({
 	name: "user",

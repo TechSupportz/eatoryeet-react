@@ -27,6 +27,8 @@ const THEME = createTheme({
 					"&:hover": {
 						backgroundColor: "hsl(0, 0%, 15%)",
 					},
+					textTransform: "none",
+					fontSize: "1em",
 				},
 			},
 			variants: [
