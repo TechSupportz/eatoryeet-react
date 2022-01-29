@@ -1,11 +1,12 @@
 import { Box, Button, Typography } from "@mui/material"
 import React from "react"
 
-import { useDispatch } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 import { setShowReviewDialog } from "../../app/slices/reviewSlice"
 
 const ReviewSeparator = () => {
 	const dispatch = useDispatch()
+	const IsLoggedIn = useSelector((state) => state.user.isLoggedIn)
 
 	return (
 		<Box my={2} display="flex" justifyContent="space-between">
@@ -14,12 +15,13 @@ const ReviewSeparator = () => {
 			</Typography>
 			<Button
 				variant="contained"
+				disabled = {!IsLoggedIn}
 				mr={0}
 				ml="auto"
 				sx={{ px: 5 }}
 				onClick={() => dispatch(setShowReviewDialog(true))}
 			>
-				Write a Review
+				{IsLoggedIn ? "Write a Review" : "Login to write a review"}
 			</Button>
 		</Box>
 	)

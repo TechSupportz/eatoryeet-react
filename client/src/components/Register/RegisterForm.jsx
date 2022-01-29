@@ -261,7 +261,7 @@ const RegisterForm = () => {
 						multiline
 						rows={2.5}
 						error={alert === "User not found"}
-						sx={{ mb: "1em" }}
+						sx={{ mb: "1em", py: 0.5 }}
 						onChange={(e) => setAddress(e.target.value)}
 					/>
 				</Grid>
@@ -287,7 +287,6 @@ const RegisterForm = () => {
 					</Button>
 				</Grid>
 			</Grid>
-			
 		</Box>
 	)
 }

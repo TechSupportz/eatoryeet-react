@@ -24,6 +24,15 @@ const THEME = createTheme({
 				contained: {
 					backgroundColor: "hsl(0, 0%, 0%)",
 					borderRadius: "45px",
+					"&:disabled": {
+						backgroundColor: "hsl(0, 0%, 70%)",
+						color: "white",
+						cursor: "not-allowed",
+						pointerEvents: "all !important",
+						"&:hover": {
+							backgroundColor: "hsl(0, 0%, 75%)",
+						},
+					},
 					"&:hover": {
 						backgroundColor: "hsl(0, 0%, 15%)",
 					},
@@ -126,6 +135,13 @@ const THEME = createTheme({
 		MuiSkeleton: {
 			defaultProps: {
 				animation: "wave",
+			},
+		},
+		MuiDialog: {
+			styleOverrides: {
+				paper: {
+					borderRadius: "10px",
+				},
 			},
 		},
 	},
