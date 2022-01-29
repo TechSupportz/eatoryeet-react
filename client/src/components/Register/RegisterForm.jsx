@@ -30,7 +30,7 @@ const RegisterForm = () => {
 	const [email, setEmail] = useState("")
 	const [firstName, setFirstName] = useState("")
 	const [lastName, setLastName] = useState("")
-	const [gender, setGender] = useState("")
+	const [gender, setGender] = useState("X")
 	const [phoneNum, setPhoneNum] = useState("")
 	const [address, setAddress] = useState("")
 
@@ -192,10 +192,11 @@ const RegisterForm = () => {
 						sx={{ mb: "1em" }}
 						value={gender}
 						onChange={(e) => setGender(e.target.value)}
-					>
+					>	
 						<MenuItem value="M">Male</MenuItem>
 						<MenuItem value="F">Female</MenuItem>
 						<MenuItem value="O">Others</MenuItem>
+						<MenuItem value="X">Prefer not to say</MenuItem>
 					</Select>
 				</Grid>
 				<Grid item md={3.5} xs={12}>
@@ -265,24 +266,22 @@ const RegisterForm = () => {
 						onChange={(e) => setAddress(e.target.value)}
 					/>
 				</Grid>
-				<Grid
-					item
-					md={3}
-					xs={12}
-					ml="auto"
-					mt={2}
-					mb={5}
-					display={
-						!phoneNum.match(phoneNumFormat) ||
-						username.length > 30 ||
-						!email.match(emailFormat) ||
-						password.length < 8 ||
-						!allFilled
-							? "none"
-							: "flex"
-					}
-				>
-					<Button fullWidth size="large" variant="contained" onClick={handleSubmit}>
+				<Grid item md={3} xs={12} ml="auto" mt={2} mb={5}>
+					<Button
+						fullWidth
+						size="large"
+						variant="contained"
+						disabled={
+							!phoneNum.match(phoneNumFormat) ||
+							username.length > 30 ||
+							!email.match(emailFormat) ||
+							password.length < 8 ||
+							!allFilled
+								? true
+								: false
+						}
+						onClick={handleSubmit}
+					>
 						Register
 					</Button>
 				</Grid>
