@@ -101,7 +101,6 @@ const THEME = createTheme({
 		MuiFilledInput: {
 			styleOverrides: {
 				root: {
-					
 					borderRadius: "10px",
 					backgroundColor: "hsl(0, 0%, 100%)",
 					boxShadow: "0px 8px 24px hsla(0, 0%, 0%, 0.15)",
@@ -114,7 +113,6 @@ const THEME = createTheme({
 						borderColor: "hsl(0, 100%, 75%)",
 					},
 				},
-				
 			},
 			defaultProps: {
 				disableUnderline: true,
@@ -126,13 +124,6 @@ const THEME = createTheme({
 		MuiSkeleton: {
 			defaultProps: {
 				animation: "wave",
-			},
-		},
-		MuiAvatar: {
-			styleOverrides: {
-				root: {
-					border: "1.5px solid hsl(0, 0%, 90%)",
-				},
 			},
 		},
 	},

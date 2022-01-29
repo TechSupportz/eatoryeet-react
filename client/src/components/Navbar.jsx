@@ -201,14 +201,28 @@ const Navbar = () => {
 
 					<Box sx={{ flexGrow: 0 }}>
 						{isLoggedIn ? (
-							<Tooltip title="Profile" sx={{m: -1}}>
-								<IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+							<>
+								<Button
+									variant="contained"
+									size="large"
+									onClick={handleOpenUserMenu}
+									sx={{
+										display: { xs: "none", md: "block" },
+									}}
+								>
+									{`Hello, ${userDetail.username}!`}
+								</Button>
+								<IconButton
+									onClick={handleOpenUserMenu}
+									sx={{ p: 0, display: { xs: "block", md: "none" } }}
+								>
 									<Avatar
 										alt="Profile Picture"
 										src={`http://localhost:8080${userDetail.profile_pic}`}
+										sx={{ width: 36, height: 36 }}
 									/>
 								</IconButton>
-							</Tooltip>
+							</>
 						) : (
 							<Button
 								variant="contained"
