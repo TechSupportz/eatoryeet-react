@@ -13,10 +13,18 @@ import {
 import EditRoundedIcon from "@mui/icons-material/EditRounded"
 import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded"
 
+import { useDeleteReviewMutation } from "../../app/services/reviewApi"
 import { useSelector } from "react-redux"
 
 const ReviewCard = ({ reviewInfo }) => {
 	const userId = useSelector((state) => state.user.userId)
+
+	const [deleteReview, result] = useDeleteReviewMutation()
+
+	const handleDelete = () => {
+		console.log(`deleted ${reviewInfo.id}`)
+		deleteReview({id: reviewInfo.id})
+	}
 
 	return (
 		<Box display="flex" justifyContent="center" >
@@ -74,7 +82,7 @@ const ReviewCard = ({ reviewInfo }) => {
 									<IconButton>
 										<EditRoundedIcon></EditRoundedIcon>
 									</IconButton>
-									<IconButton>
+									<IconButton onClick={handleDelete}>
 										<DeleteRoundedIcon></DeleteRoundedIcon>
 									</IconButton>
 								</Stack>

@@ -26,8 +26,16 @@ export const reviewApi = mainApi.injectEndpoints({
 			}),
 			invalidatesTags: ["Review", "Restaurant"],
 		}),
+		deleteReview: build.mutation({
+			query: ({ id }) => ({
+				url: `/review/delete/${id}`,
+				method: "delete",
+			}),
+			invalidatesTags: ["Review", "Restaurant"],
+		}),
 	}),
 	overrideExisting: false,
 })
 
-export const { useGetReviewsByRestaurantIdQuery, useAddReviewMutation } = reviewApi
+export const { useGetReviewsByRestaurantIdQuery, useAddReviewMutation, useDeleteReviewMutation } =
+	reviewApi

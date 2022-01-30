@@ -14,7 +14,7 @@ export const userApi = mainApi.injectEndpoints({
 					"Content-type": "application/json; charset=UTF-8",
 				},
 			}),
-			keepUnusedDataFor: 0,
+			keepUnusedDataFor: 1,
 		}),
 		register: build.mutation({
 			query: ({
@@ -43,14 +43,14 @@ export const userApi = mainApi.injectEndpoints({
 					"Content-type": "application/json; charset=UTF-8",
 				},
 			}),
-			keepUnusedDataFor: 0,
+			keepUnusedDataFor: 1,
 		}),
 		getUserById: build.query({
 			query: ({ id }) => ({
 				url: `/user/${id}`,
 				method: "get",
 			}),
-			keepUnusedDataFor: 0,
+			keepUnusedDataFor: 1,
 		}),
 	}),
 	overrideExisting: false,
