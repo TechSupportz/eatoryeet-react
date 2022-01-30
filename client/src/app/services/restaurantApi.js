@@ -7,12 +7,14 @@ export const restaurantApi = mainApi.injectEndpoints({
 				url: "/restaurant",
 				method: "get",
 			}),
+			providesTags: ["Restaurant"],
 		}),
 		getRestaurantById: build.query({
 			query: (id) => ({
 				url: `/restaurant/${id}`,
 				method: "get",
 			}),
+			providesTags: ["Restaurant"],
 		}),
 	}),
 	overrideExisting: false,

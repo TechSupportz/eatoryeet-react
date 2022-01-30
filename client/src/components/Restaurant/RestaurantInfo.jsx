@@ -1,12 +1,19 @@
-
 import { Card, CardMedia, Rating, Skeleton, Stack, Typography } from "@mui/material"
 import Tilt from "react-parallax-tilt"
 
-const RestaurantInfo = ({restaurant, isLoading}) => {
+import { useState } from "react"
+import { useEffect } from "react"
+
+const RestaurantInfo = ({ restaurant, isLoading }) => {
+	const [rating, setRating] = useState(0)
+
+	useEffect(() => {
+		!isLoading && setRating(restaurant && restaurant.avg_rating)
+	}, [restaurant])
 
 	return (
 		<>
-			<Stack direction="row" spacing={4} >
+			<Stack direction="row" spacing={4}>
 				<Tilt
 					style={{ width: "30%" }}
 					tiltMaxAngleX={3}
@@ -31,7 +38,7 @@ const RestaurantInfo = ({restaurant, isLoading}) => {
 					) : (
 						<Rating
 							name="avg-rating"
-							defaultValue={restaurant && restaurant.avg_rating}
+							value={rating}
 							size="lg"
 							precision={0.5}
 							readOnly

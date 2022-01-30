@@ -1,7 +1,6 @@
 import { mainApi } from "./mainApi"
 
 export const reviewApi = mainApi.injectEndpoints({
-	tagTypes: ["Review"],
 	endpoints: (build) => ({
 		getReviewsByRestaurantId: build.query({
 			query: (id) => ({
@@ -25,7 +24,7 @@ export const reviewApi = mainApi.injectEndpoints({
 					"Content-type": "application/json; charset=UTF-8",
 				},
 			}),
-			invalidatesTags: ["Review"],
+			invalidatesTags: ["Review", "Restaurant"],
 		}),
 	}),
 	overrideExisting: false,
