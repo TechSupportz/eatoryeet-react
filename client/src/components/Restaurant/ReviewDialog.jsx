@@ -23,23 +23,46 @@ import { useState, useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 
 import { setShowReviewDialog } from "../../app/slices/reviewSlice"
-import { useAddReviewMutation } from "../../app/services/reviewApi"
+import { useLazyGetReviewByIdQuery, useAddReviewMutation } from "../../app/services/reviewApi"
 
 const ReviewDialog = ({ restaurant }) => {
 	const dispatch = useDispatch()
 	const showReviewDialog = useSelector((state) => state.review.showReviewDialog)
+	const editId = useSelector((state) => state.review.editId)
 	const userId = useSelector((state) => state.user.userId)
-	const [addReview, result] = useAddReviewMutation()
 	let restaurantId = restaurant.id
+
+	const [addReview, result] = useAddReviewMutation()
+	const [getReviewDetails] = useLazyGetReviewByIdQuery()
 
 	const [rating, setRating] = useState(0)
 	const [title, setTitle] = useState("")
 	const [detail, setDetail] = useState("")
+	const [isEdit, setIsEdit] = useState(false)
 
 	const [isBtnDisabled, setIsBtnDisabled] = useState(true)
 
 	useEffect(() => {
-		//console.table({ rating, title, detail })
+		console.log(editId)
+		if (editId !== null) {
+			setIsEdit(true)
+			getReviewDetails(editId)
+				.unwrap()
+				.then((review) => {
+					setRating(review.rating)
+					setTitle(review.title)
+					setDetail(review.detail)
+				})
+		} else {
+			setIsEdit(false)
+			setRating("")
+			setTitle("")
+			setDetail("")
+		}
+	}, [showReviewDialog])
+
+	useEffect(() => {
+		console.table({ rating, title, detail })
 
 		if (rating > 0 && title.length > 0 && detail.length > 0) {
 			setIsBtnDisabled(false)
@@ -117,9 +140,10 @@ const ReviewDialog = ({ restaurant }) => {
 							</InputLabel>
 							<FilledInput
 								placeholder="A short and simple summary"
-								sx={{ width: "80%" }}
+								value={title}
 								onChange={(e) => setTitle(e.target.value)}
 								error={title.length <= 0}
+								sx={{ width: "80%" }}
 							></FilledInput>
 						</Stack>
 						<Stack direction="column" mt={4.5}>
@@ -127,12 +151,13 @@ const ReviewDialog = ({ restaurant }) => {
 								Your Review:
 							</InputLabel>
 							<FilledInput
-								multiline
 								placeholder="Tell people about your experience at the restaurant!"
-								minRows={5}
-								sx={{ py: 0.5 }}
+								value={detail}
 								onChange={(e) => setDetail(e.target.value)}
 								error={detail.length <= 0}
+								multiline
+								minRows={5}
+								sx={{ py: 0.5 }}
 							></FilledInput>
 						</Stack>
 					</Stack>
@@ -155,7 +180,7 @@ const ReviewDialog = ({ restaurant }) => {
 					>
 						Submit your review
 					</Button>
-					<Tooltip title="Discard review" placement="left">
+					<Tooltip title={isEdit ? "Discard Changes" : "Discard review"} placement="left">
 						<IconButton size="large" onClick={handleClose}>
 							<DeleteRoundedIcon fontSize="inherit"></DeleteRoundedIcon>
 						</IconButton>

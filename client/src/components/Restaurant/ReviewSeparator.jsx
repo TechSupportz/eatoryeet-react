@@ -1,12 +1,36 @@
 import { Box, Button, Typography } from "@mui/material"
-import React from "react"
+import { useState, useEffect } from "react"
 
 import { useSelector, useDispatch } from "react-redux"
-import { setShowReviewDialog } from "../../app/slices/reviewSlice"
+import { setShowReviewDialog, setEditId } from "../../app/slices/reviewSlice"
 
-const ReviewSeparator = () => {
+const ReviewSeparator = ({ reviewList }) => {
 	const dispatch = useDispatch()
 	const IsLoggedIn = useSelector((state) => state.user.isLoggedIn)
+	const userId = useSelector((state) => state.user.userId)
+	const [userHasReview, setUserHasReview] = useState(false)
+
+	useEffect(() => {
+		if (IsLoggedIn) {
+			reviewList.forEach((review) => {
+				if (review.user_id === userId) {
+					setUserHasReview(true)
+				}
+			})
+		} else {
+			setUserHasReview(false)
+		}
+	}, [reviewList, userId, IsLoggedIn])
+
+	const handleAddReview = () => {
+		if (userHasReview) {
+			dispatch(setEditId())
+		} else {
+			dispatch(setEditId(null))
+		}
+
+		dispatch(setShowReviewDialog(true))
+	}
 
 	return (
 		<Box my={2} display="flex" justifyContent="space-between">
@@ -15,13 +39,17 @@ const ReviewSeparator = () => {
 			</Typography>
 			<Button
 				variant="contained"
-				disabled = {!IsLoggedIn}
+				disabled={!IsLoggedIn}
 				mr={0}
 				ml="auto"
 				sx={{ px: 5 }}
-				onClick={() => dispatch(setShowReviewDialog(true))}
+				onClick={handleAddReview}
 			>
-				{IsLoggedIn ? "Write a Review" : "Login to write a review"}
+				{IsLoggedIn
+					? userHasReview
+						? "Edit your review"
+						: "Write a review"
+					: "Login to write a review"}
 			</Button>
 		</Box>
 	)

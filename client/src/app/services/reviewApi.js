@@ -9,6 +9,13 @@ export const reviewApi = mainApi.injectEndpoints({
 			}),
 			providesTags: ["Review"],
 		}),
+		getReviewById: build.query({
+			query: (id) => ({
+				url: `/review/${id}`,
+				method: "get",
+			}),
+			providesTags: ["Review"],
+		}),
 		addReview: build.mutation({
 			query: ({ restaurantId, userId, title, detail, rating }) => ({
 				url: "review/add",
@@ -37,5 +44,5 @@ export const reviewApi = mainApi.injectEndpoints({
 	overrideExisting: false,
 })
 
-export const { useGetReviewsByRestaurantIdQuery, useAddReviewMutation, useDeleteReviewMutation } =
+export const { useGetReviewsByRestaurantIdQuery,useLazyGetReviewByIdQuery, useAddReviewMutation, useDeleteReviewMutation } =
 	reviewApi

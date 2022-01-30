@@ -14,12 +14,21 @@ import EditRoundedIcon from "@mui/icons-material/EditRounded"
 import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded"
 
 import { useDeleteReviewMutation } from "../../app/services/reviewApi"
-import { useSelector } from "react-redux"
+import { setShowReviewDialog, setEditId } from "../../app/slices/reviewSlice"
+import { useSelector, useDispatch } from "react-redux"
 
 const ReviewCard = ({ reviewInfo }) => {
 	const userId = useSelector((state) => state.user.userId)
+	const editId = useSelector((state) => state.review.editId)
+
+	const dispatch = useDispatch()
 
 	const [deleteReview, result] = useDeleteReviewMutation()
+
+	const handleEdit = () => {
+		dispatch(setEditId(reviewInfo.id))
+		dispatch(setShowReviewDialog(true))
+	}
 
 	const handleDelete = () => {
 		console.log(`deleted ${reviewInfo.id}`)
@@ -61,7 +70,7 @@ const ReviewCard = ({ reviewInfo }) => {
 									{reviewInfo.title}
 								</Typography>
 
-								<Typography fontSize="1.15em" fontWeight="regular" width="100%">
+								<Typography fontSize="1.15em" fontWeight="regular" maxWidth="100%">
 									{reviewInfo.detail}
 								</Typography>
 							</Stack>
@@ -71,6 +80,7 @@ const ReviewCard = ({ reviewInfo }) => {
 								fontSize="0.9em"
 								fontWeight="medium"
 								color="hsl(0, 0%, 50%)"
+								noWrap
 							>
 								{reviewInfo.is_edited
 									? `Date Updated: ${reviewInfo.date_posted}`
@@ -79,7 +89,7 @@ const ReviewCard = ({ reviewInfo }) => {
 
 							{reviewInfo.user_id === userId && (
 								<Stack direction="row" justifyContent="flex-end">
-									<IconButton>
+									<IconButton onClick={handleEdit}>
 										<EditRoundedIcon></EditRoundedIcon>
 									</IconButton>
 									<IconButton onClick={handleDelete}>

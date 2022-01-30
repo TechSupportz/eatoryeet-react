@@ -24,7 +24,7 @@ const Restaurant = () => {
 		<Box ml={5} mr={5}>
 			<RestaurantInfo restaurant={restaurant} isLoading={isLoadingRestaurant} />
 			<br />
-			<ReviewSeparator />
+			<ReviewSeparator reviewList={reviewList}/>
 			<ReviewDialog restaurant={restaurant} />
 			<br />
 			<ReviewList reviewList={reviewList} />
