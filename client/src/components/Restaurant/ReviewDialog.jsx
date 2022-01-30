@@ -66,7 +66,7 @@ const ReviewDialog = ({ restaurant }) => {
 	}, [showReviewDialog])
 
 	useEffect(() => {
-		console.log({ rating, title, detail })
+		//console.log({ rating, title, detail })
 
 		if (rating > 0 && title.length > 0 && detail.length > 0) {
 			setIsBtnDisabled(false)
@@ -189,7 +189,7 @@ const ReviewDialog = ({ restaurant }) => {
 						onClick={handleSubmit}
 						disabled={isBtnDisabled}
 					>
-						Submit your review
+						{isEdit ? "Apply Changes" : "Submit your review"}
 					</Button>
 					<Tooltip title={isEdit ? "Discard Changes" : "Discard review"} placement="left">
 						<IconButton size="large" onClick={handleClose}>
