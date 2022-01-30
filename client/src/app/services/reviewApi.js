@@ -40,9 +40,26 @@ export const reviewApi = mainApi.injectEndpoints({
 			}),
 			invalidatesTags: ["Review", "Restaurant"],
 		}),
+		updateReview: build.mutation({
+			query: ({ editId, restaurantId, userId, title, detail, rating }) => ({
+				url: `/review/update/${editId}`,
+				method: "put",
+				body: {
+					restaurant_id: restaurantId,
+					user_id: userId,
+					title: title,
+					detail: detail,
+					rating: rating,
+				},
+				headers: {
+					"Content-type": "application/json; charset=UTF-8",
+				},
+			}),
+			invalidatesTags: ["Review", "Restaurant"],
+		}),
 	}),
 	overrideExisting: false,
 })
 
-export const { useGetReviewsByRestaurantIdQuery,useLazyGetReviewByIdQuery, useAddReviewMutation, useDeleteReviewMutation } =
+export const { useGetReviewsByRestaurantIdQuery,useLazyGetReviewByIdQuery, useAddReviewMutation, useDeleteReviewMutation, useUpdateReviewMutation } =
 	reviewApi

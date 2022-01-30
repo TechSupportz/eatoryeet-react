@@ -10,11 +10,14 @@ const ReviewSeparator = ({ reviewList }) => {
 	const userId = useSelector((state) => state.user.userId)
 	const [userHasReview, setUserHasReview] = useState(false)
 
+	const [reviewId, setReviewId] = useState(null)
+
 	useEffect(() => {
 		if (IsLoggedIn) {
 			reviewList.forEach((review) => {
 				if (review.user_id === userId) {
 					setUserHasReview(true)
+					setReviewId(review.id)
 				}
 			})
 		} else {
@@ -24,7 +27,7 @@ const ReviewSeparator = ({ reviewList }) => {
 
 	const handleAddReview = () => {
 		if (userHasReview) {
-			dispatch(setEditId())
+			dispatch(setEditId(reviewId))
 		} else {
 			dispatch(setEditId(null))
 		}

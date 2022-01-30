@@ -23,7 +23,11 @@ import { useState, useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 
 import { setShowReviewDialog } from "../../app/slices/reviewSlice"
-import { useLazyGetReviewByIdQuery, useAddReviewMutation } from "../../app/services/reviewApi"
+import {
+	useLazyGetReviewByIdQuery,
+	useAddReviewMutation,
+	useUpdateReviewMutation,
+} from "../../app/services/reviewApi"
 
 const ReviewDialog = ({ restaurant }) => {
 	const dispatch = useDispatch()
@@ -32,14 +36,14 @@ const ReviewDialog = ({ restaurant }) => {
 	const userId = useSelector((state) => state.user.userId)
 	let restaurantId = restaurant.id
 
-	const [addReview, result] = useAddReviewMutation()
+	const [addReview] = useAddReviewMutation()
 	const [getReviewDetails] = useLazyGetReviewByIdQuery()
+	const [updateReview, result] = useUpdateReviewMutation()
 
 	const [rating, setRating] = useState(0)
 	const [title, setTitle] = useState("")
 	const [detail, setDetail] = useState("")
 	const [isEdit, setIsEdit] = useState(false)
-
 	const [isBtnDisabled, setIsBtnDisabled] = useState(true)
 
 	useEffect(() => {
@@ -62,7 +66,7 @@ const ReviewDialog = ({ restaurant }) => {
 	}, [showReviewDialog])
 
 	useEffect(() => {
-		console.table({ rating, title, detail })
+		console.log({ rating, title, detail })
 
 		if (rating > 0 && title.length > 0 && detail.length > 0) {
 			setIsBtnDisabled(false)
@@ -76,8 +80,15 @@ const ReviewDialog = ({ restaurant }) => {
 	}
 
 	const handleSubmit = () => {
-		console.log({ userId, restaurantId, rating, title, detail })
-		addReview({ userId, restaurantId, rating, title, detail })
+		if (isEdit) {
+			updateReview({ editId, restaurantId, userId, rating, title, detail })
+				.unwrap()
+				.then((output) => {
+					console.log(output)
+				})
+		} else {
+			addReview({ userId, restaurantId, rating, title, detail })
+		}
 		handleClose()
 	}
 

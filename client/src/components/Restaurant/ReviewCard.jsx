@@ -12,6 +12,7 @@ import {
 } from "@mui/material"
 import EditRoundedIcon from "@mui/icons-material/EditRounded"
 import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded"
+import {useState, useEffect} from 'react'
 
 import { useDeleteReviewMutation } from "../../app/services/reviewApi"
 import { setShowReviewDialog, setEditId } from "../../app/slices/reviewSlice"
@@ -21,9 +22,15 @@ const ReviewCard = ({ reviewInfo }) => {
 	const userId = useSelector((state) => state.user.userId)
 	const editId = useSelector((state) => state.review.editId)
 
+	const [review, setReview] = useState(0)
+
 	const dispatch = useDispatch()
 
 	const [deleteReview, result] = useDeleteReviewMutation()
+
+	useEffect(() => {
+		setReview(reviewInfo.rating)
+	},[reviewInfo])
 
 	const handleEdit = () => {
 		dispatch(setEditId(reviewInfo.id))
@@ -60,7 +67,7 @@ const ReviewCard = ({ reviewInfo }) => {
 							<Stack direction="column" spacing={0.5}>
 								<Rating
 									name="rating"
-									defaultValue={reviewInfo.rating}
+									value={review}
 									size="small"
 									precision={0.5}
 									readOnly
