@@ -66,6 +66,7 @@ const LoginDialog = () => {
 								dispatch(setUserDetail(data))
 								dispatch(setIsLoggedIn(true))
 								localStorage.setItem("user", JSON.stringify(data))
+								localStorage.setItem("Upass", password)
 								handleClose()
 							})
 
@@ -82,10 +83,17 @@ const LoginDialog = () => {
 
 	return (
 		<>
-			<Dialog open={showLoginDialog} onClose={handleClose} fullWidth maxWidth="xs">
+			<Dialog
+				open={showLoginDialog}
+				onClose={handleClose}
+				fullWidth
+				maxWidth="xs"
+			>
 				<DialogTitle>
 					<Box my={1.5} sx={{ display: "flex", justifyContent: "center" }}>
-						<Typography fontFamily="Tumbly" fontSize="2.25em" variant="h5">EatOrYeet</Typography>
+						<Typography fontFamily="Tumbly" fontSize="2.25em" variant="h5">
+							EatOrYeet
+						</Typography>
 					</Box>
 				</DialogTitle>
 

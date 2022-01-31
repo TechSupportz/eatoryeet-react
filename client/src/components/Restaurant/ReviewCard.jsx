@@ -29,7 +29,7 @@ const ReviewCard = ({ reviewInfo }) => {
 	const [deleteReview, result] = useDeleteReviewMutation()
 
 	useEffect(() => {
-		setReview(reviewInfo.rating)
+		setReview(parseInt(reviewInfo.rating))
 	},[reviewInfo])
 
 	const handleEdit = () => {

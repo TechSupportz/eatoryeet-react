@@ -8,7 +8,7 @@ const RestaurantInfo = ({ restaurant, isLoading }) => {
 	const [rating, setRating] = useState(0)
 
 	useEffect(() => {
-		!isLoading && setRating(restaurant.avg_rating)
+		!isLoading && setRating(parseFloat(restaurant.avg_rating))
 	}, [restaurant])
 
 	return (
