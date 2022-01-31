@@ -25,7 +25,7 @@ const Profile = () => {
 					<br />
 					<br />
 					<Typography fontWeight="medium" variant="h3">
-						You need a account to access this page
+						You need an account to access this page
 					</Typography>
 					<br />
 					<br />

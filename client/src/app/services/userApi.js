@@ -14,6 +14,7 @@ export const userApi = mainApi.injectEndpoints({
 					"Content-type": "application/json; charset=UTF-8",
 				},
 			}),
+			providesTags: ["User"],
 			keepUnusedDataFor: 0,
 		}),
 		register: build.mutation({
@@ -43,6 +44,7 @@ export const userApi = mainApi.injectEndpoints({
 					"Content-type": "application/json; charset=UTF-8",
 				},
 			}),
+			providesTags: ["User"],
 			keepUnusedDataFor: 0,
 		}),
 		getUserById: build.query({
@@ -50,6 +52,7 @@ export const userApi = mainApi.injectEndpoints({
 				url: `/user/${id}`,
 				method: "get",
 			}),
+			providesTags: ["User"],
 			keepUnusedDataFor: 0,
 		}),
 		deleteUser: build.mutation({
@@ -59,7 +62,34 @@ export const userApi = mainApi.injectEndpoints({
 					method: "delete",
 				}
 			},
-			invalidatesTags: ["Review"],
+			invalidatesTags: ["Review", "Restaurant"],
+		}),
+		updateUser: build.mutation({
+			query: ({
+				userId,
+				username,
+				password,
+				email,
+				firstName,
+				lastName,
+				gender,
+				phoneNum,
+				address,
+			}) => ({
+				url: `/user/update/${userId}`,
+				method: "put",
+				body: {
+					username: username,
+					password: password,
+					email: email,
+					first_name: firstName,
+					last_name: lastName,
+					gender: gender,
+					phone_number: phoneNum,
+					address: address,
+				},
+			}),
+			invalidatesTags: ["Review", "Restaurant", "User"],
 		}),
 	}),
 	overrideExisting: false,
@@ -70,4 +100,5 @@ export const {
 	useRegisterMutation,
 	useLazyGetUserByIdQuery,
 	useDeleteUserMutation,
+	useUpdateUserMutation,
 } = userApi
