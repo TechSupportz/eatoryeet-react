@@ -23,11 +23,18 @@ import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
 
-import { setShowLoginDialog, setRegistrationStatus } from "../../app/slices/userSlice"
-import { useRegisterMutation } from "../../app/services/userApi"
+import {
+	setIsLoggedIn,
+	setShowLoginDialog,
+	setUserId,
+	setUserDetail,
+	setDeleteStatus,
+} from "../../app/slices/userSlice"
+import { useRegisterMutation, useDeleteUserMutation } from "../../app/services/userApi"
 
 const EditProfileForm = () => {
 	const userDetail = useSelector((state) => state.user.userDetail)
+	const userId = useSelector((state) => state.user.userId)
 	const [username, setUsername] = useState("")
 	const [password, setPassword] = useState("")
 	const [email, setEmail] = useState("")
@@ -44,15 +51,18 @@ const EditProfileForm = () => {
 	const [duplicate, setDuplicate] = useState(false)
 
 	const [showPassword, setShowPassword] = useState(false)
+	const [confirmDelete, setConfirmDelete] = useState(false)
 
 	const emailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
 	const phoneNumFormat = /[6|8|9]\d{7}|\+65[6|8|9]\d{7}|\+65\s[6|8|9]\d{7}/
 
 	const navigate = useNavigate()
 	const [register, result] = useRegisterMutation()
+	const [deleteUser] = useDeleteUserMutation()
 	const dispatch = useDispatch()
 
 	useEffect(() => {
+		setConfirmDelete(false)
 		setUsername(userDetail.username)
 		setEmail(userDetail.email)
 		setFirstName(userDetail.first_name)
@@ -105,24 +115,29 @@ const EditProfileForm = () => {
 			phoneNum,
 			address,
 		})
-		register({ username, password, email, firstName, lastName, gender, phoneNum, address })
-			.unwrap()
-			.then((response) => {
-				switch (response.errno) {
-					case undefined:
-						dispatch(setRegistrationStatus(true))
-						navigate("/")
-						dispatch(setShowLoginDialog(true))
-						break
-					case 1062:
-						dispatch(setRegistrationStatus(false))
-						setDuplicate(true)
-						break
-					default:
-						console.log("some other error")
-						break
-				}
-			})
+		
+	}
+
+	const handleDeleteConfirmation = () => {
+		if (!confirmDelete) {
+			setConfirmDelete(true)
+		} else {
+			deleteUser({ id: userId })
+				.unwrap()
+				.then((response) => {
+					console.log(response)
+					dispatch(setUserId(null))
+					dispatch(setUserDetail({}))
+					dispatch(setIsLoggedIn(false))
+					localStorage.clear()
+					dispatch(setDeleteStatus(true))
+					navigate("/")					
+				})
+				.catch((error) => {
+					console.log(error)
+					dispatch(setDeleteStatus(false))
+				})
+		}
 	}
 
 	return (
@@ -252,7 +267,7 @@ const EditProfileForm = () => {
 							margin="dense"
 							fullWidth
 							sx={{ mb: "1em" }}
-							value={gender}							
+							value={gender}
 							onChange={(e) => setGender(e.target.value)}
 						>
 							<MenuItem value="M">Male</MenuItem>
@@ -333,24 +348,39 @@ const EditProfileForm = () => {
 							onChange={(e) => setAddress(e.target.value)}
 						/>
 					</Grid>
-					<Grid item md={3} xs={12} ml="auto" mt={2} mb={5}>
-						<Button
-							fullWidth
-							size="large"
-							variant="contained"
-							disabled={
-								!phoneNum.match(phoneNumFormat) ||
-								username.length > 30 ||
-								!email.match(emailFormat) ||
-								password.length < 8 ||
-								!allFilled
-									? true
-									: false
-							}
-							onClick={handleSubmit}
-						>
-							Save changes
-						</Button>
+					<Grid item md={8} xs={12} ml="auto" mt={2} mb={5}>
+						<Stack direction="row-reverse" spacing={5}>
+							<Button
+								fullWidth
+								size="large"
+								variant="contained"
+								disabled={
+									!phoneNum.match(phoneNumFormat) ||
+									username.length > 30 ||
+									!email.match(emailFormat) ||
+									password.length < 8 ||
+									!allFilled
+										? true
+										: false
+								}
+								onClick={handleSubmit}
+							>
+								Save changes
+							</Button>
+							<Button
+								fullWidth
+								size="large"
+								variant="contained"
+								sx={{
+									":hover": {
+										backgroundColor: "hsl(0, 100%, 40%)",
+									},
+								}}
+								onClick={handleDeleteConfirmation}
+							>
+								{confirmDelete ? "CLICK AGAIN TO CONFIRM" : "DELETE ACCOUNT"}
+							</Button>
+						</Stack>
 					</Grid>
 				</Grid>
 			</Grid>

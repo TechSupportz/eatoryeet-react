@@ -8,6 +8,7 @@ export const userSlice = createSlice({
 		isLoggedIn: false,
 		showLoginDialog: false,
 		registrationStatus: null,
+		deleteStatus: null,
 		status: null,
 	},
 	reducers: {
@@ -25,6 +26,9 @@ export const userSlice = createSlice({
 		},
 		setRegistrationStatus: (state, action) => {
 			state.registrationStatus = action.payload
+		},
+		setDeleteStatus: (state, action) => {
+			state.deleteStatus = action.payload
 		}
 	},
 	extraReducers: {
@@ -32,6 +36,6 @@ export const userSlice = createSlice({
 	}
 })
 
-export const { setIsLoggedIn, setShowLoginDialog, setUserId, setUserDetail, setRegistrationStatus } = userSlice.actions
+export const { setIsLoggedIn, setShowLoginDialog, setUserId, setUserDetail, setRegistrationStatus, setDeleteStatus } = userSlice.actions
 
 export default userSlice.reducer

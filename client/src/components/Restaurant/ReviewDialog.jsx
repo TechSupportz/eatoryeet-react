@@ -81,7 +81,7 @@ const ReviewDialog = ({ restaurant }) => {
 
 	const handleSubmit = () => {
 		if (isEdit) {
-			updateReview({ editId, restaurantId, userId, rating, title, detail })
+			updateReview({editId, restaurantId, userId, rating, title, detail })
 				.unwrap()
 				.then((output) => {
 					console.log(output)

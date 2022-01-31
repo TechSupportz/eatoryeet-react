@@ -10,6 +10,7 @@ import PageNotFound from "./pages/PageNotFound"
 import Navbar from "./components/Navbar"
 import LoginDialog from "./components/LoginDialog"
 import RegisterSnackbar from "./components/Register/RegisterSnackbar"
+import EditProfileSnackbar from "./components/profile/EditProfileSnackbar"
 
 const App = () => {
 	return (
@@ -17,6 +18,7 @@ const App = () => {
 			<Navbar />
 			<LoginDialog />
 			<RegisterSnackbar />
+			<EditProfileSnackbar />
 			<Routes>
 				<Route path="/" element={<Home />} />
 				<Route path="/about" element={<About />} />

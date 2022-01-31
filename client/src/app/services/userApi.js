@@ -14,7 +14,7 @@ export const userApi = mainApi.injectEndpoints({
 					"Content-type": "application/json; charset=UTF-8",
 				},
 			}),
-			keepUnusedDataFor: 1,
+			keepUnusedDataFor: 0,
 		}),
 		register: build.mutation({
 			query: ({
@@ -43,17 +43,31 @@ export const userApi = mainApi.injectEndpoints({
 					"Content-type": "application/json; charset=UTF-8",
 				},
 			}),
-			keepUnusedDataFor: 1,
+			keepUnusedDataFor: 0,
 		}),
 		getUserById: build.query({
 			query: ({ id }) => ({
 				url: `/user/${id}`,
 				method: "get",
 			}),
-			keepUnusedDataFor: 1,
+			keepUnusedDataFor: 0,
+		}),
+		deleteUser: build.mutation({
+			query({ id }) {
+				return {
+					url: `/user/delete/${id}`,
+					method: "delete",
+				}
+			},
+			invalidatesTags: ["Review"],
 		}),
 	}),
 	overrideExisting: false,
 })
 
-export const { useLoginMutation, useRegisterMutation ,useLazyGetUserByIdQuery } = userApi
+export const {
+	useLoginMutation,
+	useRegisterMutation,
+	useLazyGetUserByIdQuery,
+	useDeleteUserMutation,
+} = userApi

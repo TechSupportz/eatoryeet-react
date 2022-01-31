@@ -61,5 +61,10 @@ export const reviewApi = mainApi.injectEndpoints({
 	overrideExisting: false,
 })
 
-export const { useGetReviewsByRestaurantIdQuery,useLazyGetReviewByIdQuery, useAddReviewMutation, useDeleteReviewMutation, useUpdateReviewMutation } =
-	reviewApi
+export const {
+	useGetReviewsByRestaurantIdQuery,
+	useLazyGetReviewByIdQuery,
+	useAddReviewMutation,
+	useDeleteReviewMutation,
+	useUpdateReviewMutation,
+} = reviewApi
