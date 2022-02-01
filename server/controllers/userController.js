@@ -64,7 +64,7 @@ function updateUser(req, res) {
 	let staticPath
 
 	if (!req.files || Object.keys(req.files).length === 0) {
-		staticPath = req.body.profile_pic
+		staticPath = req.body.profile_pic ? req.body.profile_pic : "/static/Default.png"
 	} else {
 		profilePic = req.files.profile_pic
 		uploadPath = path.join(__dirname, "../uploads" + profilePic.name)

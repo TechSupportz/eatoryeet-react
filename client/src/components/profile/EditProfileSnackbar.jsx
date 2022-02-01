@@ -18,7 +18,7 @@ const EditProfileSnackbar = () => {
 				anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
 				TransitionComponent={SlideTransition}
 				autoHideDuration={4500}
-				onClose={() => dispatch(setEditSnack([null, null]))}
+				onClose={() => dispatch(setEditSnackbar([null, null]))}
 			>
 				<Alert severity={editSnackbar.status ? "success" : "error"}>
 					<AlertTitle>

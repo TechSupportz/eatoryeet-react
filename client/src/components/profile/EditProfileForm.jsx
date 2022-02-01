@@ -133,6 +133,8 @@ const EditProfileForm = () => {
 			})
 	}
 
+	
+
 	const handleDeleteConfirmation = () => {
 		if (!confirmDelete) {
 			setConfirmDelete(true)
