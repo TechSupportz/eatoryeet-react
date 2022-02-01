@@ -18,7 +18,7 @@ const EditProfileSnackbar = () => {
 				anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
 				TransitionComponent={SlideTransition}
 				autoHideDuration={4500}
-				onClose={() => dispatch(setEditSnackbar([null, null]))}
+				onClose={() => dispatch(setEditSnack([null, null]))}
 			>
 				<Alert severity={editSnackbar.status ? "success" : "error"}>
 					<AlertTitle>
@@ -26,7 +26,7 @@ const EditProfileSnackbar = () => {
 							? editSnackbar.type === "edit"
 								? "Profile Updated"
 								: "Account Deleted"
-							: editSnackbar.type === "delete"
+							: editSnackbar.type === "edit"
 							? "Profile Update Failed"
 							: "Account Delete Failed"}
 					</AlertTitle>
@@ -34,7 +34,7 @@ const EditProfileSnackbar = () => {
 						? editSnackbar.type === "edit"
 							? "Your profile has been updated. - Please login again"
 							: "Your account has been deleted. - Sorry to see you go😢"
-						: editSnackbar.type === "delete"
+						: editSnackbar.type === "edit"
 						? "Something went wrong. - Please try again later"
 						: "Something went wrong. - Please try again later"}
 				</Alert>
