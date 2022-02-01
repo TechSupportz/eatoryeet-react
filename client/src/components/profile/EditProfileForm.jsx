@@ -28,7 +28,7 @@ import {
 	setShowLoginDialog,
 	setUserId,
 	setUserDetail,
-	setDeleteStatus,
+	setEditSnackbar,
 } from "../../app/slices/userSlice"
 import {
 	useRegisterMutation,
@@ -123,9 +123,12 @@ const EditProfileForm = () => {
 				dispatch(setUserDetail({}))
 				dispatch(setIsLoggedIn(false))
 				localStorage.clear()
+				dispatch(setEditSnackbar({ status: true, type: "edit" }))
+				dispatch(setShowLoginDialog(true))
 				navigate("/")
 			})
 			.catch((error) => {
+				dispatch(setEditSnackbar({ status: false, type: "edit" }))
 				console.warn(error)
 			})
 	}
@@ -142,12 +145,12 @@ const EditProfileForm = () => {
 					dispatch(setUserDetail({}))
 					dispatch(setIsLoggedIn(false))
 					localStorage.clear()
-					dispatch(setDeleteStatus(true))
+					dispatch(setEditSnackbar({ status: true, type: "delete" }))
 					navigate("/")
 				})
 				.catch((error) => {
 					console.log(error)
-					dispatch(setDeleteStatus(false))
+					dispatch(setEditSnackbar({ status: false, type: "delete" }))
 				})
 		}
 	}

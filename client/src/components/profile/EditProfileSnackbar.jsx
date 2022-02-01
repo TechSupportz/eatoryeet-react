@@ -1,7 +1,7 @@
 import { Alert, AlertTitle, Slide, Snackbar } from "@mui/material"
 import { useSelector, useDispatch } from "react-redux"
 
-import { setDeleteStatus } from "../../app/slices/userSlice"
+import { setEditSnackbar } from "../../app/slices/userSlice"
 
 function SlideTransition(props) {
 	return <Slide {...props} direction="left" />
@@ -9,24 +9,34 @@ function SlideTransition(props) {
 
 const EditProfileSnackbar = () => {
 	const dispatch = useDispatch()
-	const deleteStatus = useSelector((state) => state.user.deleteStatus)
+	const editSnackbar = useSelector((state) => state.user.editSnackbar)
 
 	return (
 		<>
 			<Snackbar
-				open={deleteStatus === true || deleteStatus === false ? true : false}
+				open={editSnackbar.status === true || editSnackbar.status === false ? true : false}
 				anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
 				TransitionComponent={SlideTransition}
 				autoHideDuration={4500}
-				onClose={() => dispatch(setDeleteStatus(null))}
+				onClose={() => dispatch(setEditSnackbar([null, null]))}
 			>
-				<Alert severity={deleteStatus ? "success" : "error"}>
+				<Alert severity={editSnackbar.status ? "success" : "error"}>
 					<AlertTitle>
-						{deleteStatus ? "Account Deleted Successful" : "Account Deletion Failed"}
+						{editSnackbar.status
+							? editSnackbar.type === "edit"
+								? "Profile Updated"
+								: "Account Deleted"
+							: editSnackbar.type === "delete"
+							? "Profile Update Failed"
+							: "Account Delete Failed"}
 					</AlertTitle>
-					{deleteStatus
-						? "We are sad to see you go 😢"
-						: "Something went wrong - Try again later"}
+					{editSnackbar.status
+						? editSnackbar.type === "edit"
+							? "Your profile has been updated. - Please login again"
+							: "Your account has been deleted. - Sorry to see you go😢"
+						: editSnackbar.type === "delete"
+						? "Something went wrong. - Please try again later"
+						: "Something went wrong. - Please try again later"}
 				</Alert>
 			</Snackbar>
 		</>
