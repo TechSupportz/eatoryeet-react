@@ -24,7 +24,7 @@ function getReviewsByRestaurant(req, res) {
 }
 
 function addReview(req, res) {
-	const date = new Date().toLocaleString("en-US", { timeZone: "Asia/Singapore" })
+	const date = new Date()
 
 	const review = new Review(
 		null,

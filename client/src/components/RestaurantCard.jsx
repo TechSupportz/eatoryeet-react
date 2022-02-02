@@ -14,8 +14,10 @@ const RestaurantCard = ({ restaurantInfo }) => {
 		<Card
 			variant="clean"
 			sx={{
-				height: 280,
-				width: 270,
+				height: 270,
+				width: 280,
+				padding: 0,
+				margin: 0,
 			}}
 		>
 			<CardMedia
