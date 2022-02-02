@@ -18,3 +18,13 @@ body {
 	max-width: 1400px;
 	margin: auto;
 }
+
+.Tilt{
+	width: 40%;
+}
+
+@media only screen and (max-width: 900px) {
+	.Tilt{
+		width: 100%;
+	}
+}

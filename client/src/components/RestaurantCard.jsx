@@ -14,8 +14,8 @@ const RestaurantCard = ({ restaurantInfo }) => {
 		<Card
 			variant="clean"
 			sx={{
-				height: 330,
-				width: 340,
+				height: 280,
+				width: 270,
 			}}
 		>
 			<CardMedia
@@ -27,17 +27,17 @@ const RestaurantCard = ({ restaurantInfo }) => {
 
 			<CardContent>
 				<Stack spacing={0.5}>
-					<Typography fontWeight="medium" fontSize="1.3em" noWrap>
+					<Typography fontWeight="medium" fontSize="1.2em" noWrap>
 						{restaurantInfo.name}
 					</Typography>
 					<Rating
 						name="avg-rating"
 						defaultValue={restaurantInfo.avg_rating}
-						size="md"
+						size="small"
 						precision={0.5}
 						readOnly
 					/>
-					<Typography fontWeight="medium" fontSize="1.15em">
+					<Typography fontWeight="medium" fontSize="1.1em">
 						{`${restaurantInfo.category} • ${restaurantInfo.cost}`}
 					</Typography>
 				</Stack>

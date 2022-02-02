@@ -6,6 +6,8 @@ import { BrowserRouter } from "react-router-dom"
 import { ThemeProvider, createTheme } from "@mui/material/styles"
 import CircleIcon from "@mui/icons-material/Circle"
 import CircleOutlinedIcon from "@mui/icons-material/CircleOutlined"
+import CheckBoxOutlineBlankRoundedIcon from "@mui/icons-material/CheckBoxOutlineBlankRounded"
+import CheckBoxRoundedIcon from '@mui/icons-material/CheckBoxRounded';
 import { store } from "./app/store/store"
 import { Provider } from "react-redux"
 
@@ -142,6 +144,22 @@ const THEME = createTheme({
 				paper: {
 					borderRadius: "10px",
 				},
+			},
+		},
+		MuiCheckbox: {
+			styleOverrides: {
+				root: {
+					"&.Mui-checked": {
+						color: "hsl(0, 0%, 0%)",
+					},
+					":hover": {
+						backgroundColor: "hsla(0, 0%, 0%, 0)",
+					},
+				},
+			},
+			defaultProps: {
+				icon: <CheckBoxOutlineBlankRoundedIcon/>,
+				checkedIcon: <CheckBoxRoundedIcon/>
 			},
 		},
 	},

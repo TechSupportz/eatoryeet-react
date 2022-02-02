@@ -14,11 +14,16 @@ const RestaurantInfo = ({ restaurant, isLoading }) => {
 	}, [restaurant])
 
 	return (
-		<>
-			<Stack direction="row" justifyContent="space-between" alignItems="flex-end" spacing={6}>
-				<Stack direction="row" spacing={4}>
+		<Box>
+			<Stack
+				direction="row"
+				justifyContent="space-between"
+				alignItems={{ md: "flex-end" }}
+				spacing={6}
+			>
+				<Stack direction={{ xs: "column", md: "row" }} spacing={4}>
 					<Tilt
-						style={{ width: "40%" }}
+						className="Tilt"
 						tiltMaxAngleX={3}
 						tiltMaxAngleY={3}
 						transitionSpeed={5000}
@@ -49,7 +54,10 @@ const RestaurantInfo = ({ restaurant, isLoading }) => {
 								/>
 							)}
 
-							<Typography fontSize="1.5em" fontWeight="semiBold">
+							<Typography
+								fontSize={{ md: "1.2em", lg: "1.5em" }}
+								fontWeight="semiBold"
+							>
 								{restaurant && restaurant.category}
 							</Typography>
 							<br />
@@ -93,6 +101,7 @@ const RestaurantInfo = ({ restaurant, isLoading }) => {
 					<Card
 						variant="clean"
 						sx={{ width: "fit-content", height: "fit-content", padding: "0" }}
+						
 					>
 						{isLoading ? (
 							<Skeleton variant="rectangle" width="250px" height="250px" />
@@ -101,13 +110,16 @@ const RestaurantInfo = ({ restaurant, isLoading }) => {
 								width="250"
 								height="250"
 								frameBorder="0"
-								src={`https://www.google.com/maps/embed/v1/place?key=${config.google.mapsApi.key}&q=${(restaurant.location).replace(/ /g, "+")}`}
+								src={`https://www.google.com/maps/embed/v1/place?key=${
+									config.google.mapsApi.key
+								}&q=${restaurant.location.replace(/ /g, "+")}`}
+								style={{marginBottom: "-4px"}}
 							/>
 						)}
 					</Card>
 				</Box>
 			</Stack>
-		</>
+		</Box>
 	)
 }
 
