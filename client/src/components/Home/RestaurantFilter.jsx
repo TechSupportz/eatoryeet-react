@@ -63,6 +63,12 @@ const RestaurantFilter = () => {
 	const handleClear = () => {
 		setPriceValue([1, 3])
 		setRatingValue([1, 5])
+		setIsChecked({
+			chinese: false,
+			indian: false,
+			malay: false,
+			western: false,
+		})
 	}
 
 	return (
