@@ -41,16 +41,32 @@ const RestaurantGrid = () => {
 		console.log(restaurantList)
 	}, [isLoading])
 
-	useEffect(() => {
-		const filteredList = restaurantList.filter(
-			(restaurant) => 
-				restaurant.avg_rating >= ratingOnStop[0] && restaurant.avg_rating <= ratingOnStop[1]
-				&& restaurant.cost.length >= priceOnStop[0] && restaurant.cost.length <= priceOnStop[1]
-			 
-		)
-		console.log(filteredList)
-		setFilteredRestaurantList(filteredList)
-	}, [isChecked, ratingOnStop, priceOnStop])
+	// useEffect(() => {
+	// 	let filteredList = restaurantList.filter((restaurant) =>
+	// 		restaurant.avg_rating >= ratingOnStop[0] &&
+	// 		restaurant.avg_rating <= ratingOnStop[1] &&
+	// 		restaurant.cost.length >= priceOnStop[0] &&
+	// 		restaurant.cost.length <= priceOnStop[1] &&
+	// isChecked.chinese === true
+	// 	? restaurant.category.includes("Chinese")
+	// 	: true && isChecked.indian === true
+	// 	? restaurant.category.includes("Indian")
+	// 	: true && isChecked.malay === true
+	// 	? restaurant.category.includes("Malay")
+	// 	: true && isChecked.western === true
+	// 	? restaurant.category.includes("Western")
+	// 	: true
+	// 	)
+	// 	// filteredList = filteredList.filter(
+	// 	// 	(restaurant) =>
+	// 	// 		restaurant.avg_rating >= ratingOnStop[0] &&
+	// 	// 		restaurant.avg_rating <= ratingOnStop[1] &&
+	// 	// 		restaurant.cost.length >= priceOnStop[0] &&
+	// 	// 		restaurant.cost.length <= priceOnStop[1]
+	// 	// )
+	// 	console.log(filteredList)
+	// 	setFilteredRestaurantList(filteredList)
+	// }, [isChecked, ratingOnStop, priceOnStop])
 
 	const prices = [
 		{
@@ -190,23 +206,43 @@ const RestaurantGrid = () => {
 								/>
 							</Grid>
 					  ))
-					: filteredRestaurantList.map((restaurant) => (
-							<Grid item key={restaurant.id}>
-								<CardActionArea
-									sx={{
-										borderRadius: "15px",
-										padding: 0,
-									}}
-									onClick={() => {
-										setTimeout(() => {
-											navigate(`/restaurant/${restaurant.id}`)
-										}, 15)
-									}}
-								>
-									<RestaurantCard restaurantInfo={restaurant} />
-								</CardActionArea>
-							</Grid>
-					  ))}
+					: restaurantList
+							.filter(
+								(restaurant) =>
+									restaurant.avg_rating >= ratingOnStop[0] &&
+									restaurant.avg_rating <= ratingOnStop[1] &&
+									restaurant.cost.length >= priceOnStop[0] &&
+									restaurant.cost.length <= priceOnStop[1]
+							)
+							.filter((restaurant) =>
+								isChecked.chinese === true
+									? restaurant.category.includes("Chinese")
+									: true && isChecked.indian === true
+									? restaurant.category.includes("Indian")
+									: true && isChecked.malay === true
+									? restaurant.category.includes("Malay")
+									: true && isChecked.western === true
+									? restaurant.category.includes("Western")
+									: true
+									
+							)
+							.map((restaurant) => (
+								<Grid item key={restaurant.id}>
+									<CardActionArea
+										sx={{
+											borderRadius: "15px",
+											padding: 0,
+										}}
+										onClick={() => {
+											setTimeout(() => {
+												navigate(`/restaurant/${restaurant.id}`)
+											}, 15)
+										}}
+									>
+										<RestaurantCard restaurantInfo={restaurant} />
+									</CardActionArea>
+								</Grid>
+							))}
 			</Grid>
 		</Grid>
 	)

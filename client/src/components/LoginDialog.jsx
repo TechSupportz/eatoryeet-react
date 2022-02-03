@@ -83,12 +83,7 @@ const LoginDialog = () => {
 
 	return (
 		<>
-			<Dialog
-				open={showLoginDialog}
-				onClose={handleClose}
-				fullWidth
-				maxWidth="xs"
-			>
+			<Dialog open={showLoginDialog} onClose={handleClose} fullWidth maxWidth="xs">
 				<DialogTitle>
 					<Box my={1.5} sx={{ display: "flex", justifyContent: "center" }}>
 						<Typography fontFamily="Tumbly" fontSize="2.25em" variant="h5">

@@ -74,7 +74,8 @@ const RestaurantInfo = ({ restaurant, isLoading }) => {
 									Hours:
 								</Typography>
 								<Typography fontSize="1.2em" fontWeight="regular">
-									Open Now • 11:00 AM - 11:00 PM
+									{restaurant &&
+										`${restaurant.start_hour} - ${restaurant.end_hour}`}
 								</Typography>
 							</Stack>
 							<br />
@@ -101,7 +102,6 @@ const RestaurantInfo = ({ restaurant, isLoading }) => {
 					<Card
 						variant="clean"
 						sx={{ width: "fit-content", height: "fit-content", padding: "0" }}
-						
 					>
 						{isLoading ? (
 							<Skeleton variant="rectangle" width="250px" height="250px" />
@@ -113,7 +113,7 @@ const RestaurantInfo = ({ restaurant, isLoading }) => {
 								src={`https://www.google.com/maps/embed/v1/place?key=${
 									config.google.mapsApi.key
 								}&q=${restaurant.location.replace(/ /g, "+")}`}
-								style={{marginBottom: "-4px"}}
+								style={{ marginBottom: "-4px" }}
 							/>
 						)}
 					</Card>
