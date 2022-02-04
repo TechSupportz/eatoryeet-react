@@ -1,6 +1,7 @@
 import { Card, CardContent, CardMedia, Rating, Skeleton, Stack, Typography } from "@mui/material"
 import Tilt from "react-parallax-tilt"
 
+
 import { useState } from "react"
 import { useEffect } from "react"
 import config from "/config.json"
@@ -8,6 +9,7 @@ import { Box } from "@mui/system"
 
 const RestaurantInfo = ({ restaurant, isLoading }) => {
 	const [rating, setRating] = useState(0)
+
 
 	useEffect(() => {
 		!isLoading && setRating(parseFloat(restaurant.avg_rating))

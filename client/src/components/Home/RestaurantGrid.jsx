@@ -16,6 +16,7 @@ import RestaurantCard from "../RestaurantCard"
 import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 
+import { useSelector } from "react-redux"
 import { useGetAllRestaurantsQuery } from "../../app/services/restaurantAPI"
 import { Box } from "@mui/system"
 
@@ -32,10 +33,11 @@ const RestaurantGrid = () => {
 	const [filteredRestaurantList, setFilteredRestaurantList] = useState([])
 
 	const [category, setCategory] = useState("")
+	const sortBy = useSelector((state) => state.restaurant.sortBy)
 
 	useEffect(() => {
-		console.log(category)
-	}, [category])
+		console.log(sortBy)
+	}, [sortBy])
 
 	useEffect(() => {
 		restaurantList && setFilteredRestaurantList(restaurantList)
@@ -82,6 +84,16 @@ const RestaurantGrid = () => {
 
 	const handleUncheck = (e) => {
 		category === e.target.value && setCategory("")
+	}
+
+	const handleSort = (a, b) => {
+		if (sortBy === "Name") {
+			return a.name.localeCompare(b.name)
+		} else if (sortBy === "Rating") {
+			return b.avg_rating - a.avg_rating
+		} else if (sortBy === "Cost") {
+			return b.cost.length - a.cost.length
+		}
 	}
 
 	const handleClear = () => {
@@ -208,6 +220,7 @@ const RestaurantGrid = () => {
 									? restaurant.category.includes("Western")
 									: true
 							)
+							.sort(handleSort)
 							.map((restaurant) => (
 								<Grid item key={restaurant.id}>
 									<CardActionArea

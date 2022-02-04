@@ -158,8 +158,8 @@ const THEME = createTheme({
 				},
 			},
 			defaultProps: {
-				icon: <CheckBoxOutlineBlankRoundedIcon/>,
-				checkedIcon: <CheckBoxRoundedIcon/>
+				icon: <CheckBoxOutlineBlankRoundedIcon />,
+				checkedIcon: <CheckBoxRoundedIcon />,
 			},
 		},
 	},
