@@ -4,6 +4,8 @@ import {
 	Checkbox,
 	FormControlLabel,
 	Grid,
+	Radio,
+	RadioGroup,
 	Skeleton,
 	Slider,
 	Stack,
@@ -29,44 +31,16 @@ const RestaurantGrid = () => {
 
 	const [filteredRestaurantList, setFilteredRestaurantList] = useState([])
 
-	const [isChecked, setIsChecked] = useState({
-		chinese: false,
-		indian: false,
-		malay: false,
-		western: false,
-	})
+	const [category, setCategory] = useState("")
+
+	useEffect(() => {
+		console.log(category)
+	}, [category])
 
 	useEffect(() => {
 		restaurantList && setFilteredRestaurantList(restaurantList)
 		console.log(restaurantList)
 	}, [isLoading])
-
-	// useEffect(() => {
-	// 	let filteredList = restaurantList.filter((restaurant) =>
-	// 		restaurant.avg_rating >= ratingOnStop[0] &&
-	// 		restaurant.avg_rating <= ratingOnStop[1] &&
-	// 		restaurant.cost.length >= priceOnStop[0] &&
-	// 		restaurant.cost.length <= priceOnStop[1] &&
-	// isChecked.chinese === true
-	// 	? restaurant.category.includes("Chinese")
-	// 	: true && isChecked.indian === true
-	// 	? restaurant.category.includes("Indian")
-	// 	: true && isChecked.malay === true
-	// 	? restaurant.category.includes("Malay")
-	// 	: true && isChecked.western === true
-	// 	? restaurant.category.includes("Western")
-	// 	: true
-	// 	)
-	// 	// filteredList = filteredList.filter(
-	// 	// 	(restaurant) =>
-	// 	// 		restaurant.avg_rating >= ratingOnStop[0] &&
-	// 	// 		restaurant.avg_rating <= ratingOnStop[1] &&
-	// 	// 		restaurant.cost.length >= priceOnStop[0] &&
-	// 	// 		restaurant.cost.length <= priceOnStop[1]
-	// 	// )
-	// 	console.log(filteredList)
-	// 	setFilteredRestaurantList(filteredList)
-	// }, [isChecked, ratingOnStop, priceOnStop])
 
 	const prices = [
 		{
@@ -106,20 +80,18 @@ const RestaurantGrid = () => {
 		},
 	]
 
+	const handleUncheck = (e) => {
+		category === e.target.value && setCategory("")
+	}
+
 	const handleClear = () => {
 		setPriceValue([1, 3])
 		setRatingValue([1, 5])
-		setIsChecked({
-			chinese: false,
-			indian: false,
-			malay: false,
-			western: false,
-		})
 	}
 
 	return (
-		<Grid container justifyContent="space-between">
-			<Grid direction="column" item container justifyContent="flex-start" maxWidth="15%">
+		<Grid container justifyContent="space-between" sx={{ width: "100%" }}>
+			<Grid direction="column" item container md={2}>
 				<Typography fontSize="1.5em" fontWeight="bold">
 					Filters:
 				</Typography>
@@ -128,30 +100,32 @@ const RestaurantGrid = () => {
 					<Typography fontSize="1.2em" fontWeight="semiBold">
 						Category:
 					</Typography>
-					<FormControlLabel
-						control={<Checkbox />}
-						checked={isChecked.chinese}
-						onChange={() => setIsChecked({ ...isChecked, chinese: !isChecked.chinese })}
-						label="Chinese"
-					/>
-					<FormControlLabel
-						control={<Checkbox />}
-						checked={isChecked.indian}
-						onChange={() => setIsChecked({ ...isChecked, indian: !isChecked.indian })}
-						label="Indian"
-					/>
-					<FormControlLabel
-						control={<Checkbox />}
-						checked={isChecked.malay}
-						onChange={() => setIsChecked({ ...isChecked, malay: !isChecked.malay })}
-						label="Malay"
-					/>
-					<FormControlLabel
-						control={<Checkbox />}
-						checked={isChecked.western}
-						onChange={() => setIsChecked({ ...isChecked, western: !isChecked.western })}
-						label="Western"
-					/>
+					<RadioGroup onChange={(e, value) => setCategory(value)} value={category}>
+						<FormControlLabel
+							control={<Radio />}
+							value="Chinese"
+							label="Chinese"
+							onClick={handleUncheck}
+						/>
+						<FormControlLabel
+							control={<Radio />}
+							value="Indian"
+							label="Indian"
+							onClick={handleUncheck}
+						/>
+						<FormControlLabel
+							control={<Radio />}
+							value="Malay"
+							label="Malay"
+							onClick={handleUncheck}
+						/>
+						<FormControlLabel
+							control={<Radio />}
+							value="Western"
+							label="Western"
+							onClick={handleUncheck}
+						/>
+					</RadioGroup>
 					<br />
 					<Typography fontSize="1.2em" fontWeight="semiBold">
 						Ratings:
@@ -194,7 +168,14 @@ const RestaurantGrid = () => {
 					</Button>
 				</Box>
 			</Grid>
-			<Grid item container maxWidth="80%" spacing={5} justifyContent="flex-end">
+			<Grid
+				item
+				container
+				md={9}
+				spacing={3}
+				justifyContent="flex-end"
+				className="restaurant-grid"
+			>
 				{isLoading
 					? Array.from({ length: 6 }).map((_, i) => (
 							<Grid item key={i}>
@@ -215,16 +196,17 @@ const RestaurantGrid = () => {
 									restaurant.cost.length <= priceOnStop[1]
 							)
 							.filter((restaurant) =>
-								isChecked.chinese === true
+								category === ""
+									? restaurant
+									: true && category === "Chinese"
 									? restaurant.category.includes("Chinese")
-									: true && isChecked.indian === true
+									: true && category === "Indian"
 									? restaurant.category.includes("Indian")
-									: true && isChecked.malay === true
+									: true && category === "Malay"
 									? restaurant.category.includes("Malay")
-									: true && isChecked.western === true
+									: true && category === "Western"
 									? restaurant.category.includes("Western")
 									: true
-									
 							)
 							.map((restaurant) => (
 								<Grid item key={restaurant.id}>

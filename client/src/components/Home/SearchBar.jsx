@@ -14,7 +14,6 @@ const SearchBar = () => {
 			if (restaurant.name === value) {
 				navigate(`/restaurant/${restaurant.id}`)
 			}
-			
 		}
 	}
 
