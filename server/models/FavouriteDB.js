@@ -17,9 +17,9 @@ class FavouriteDB {
 		db.query(query, [favourite.userId, favourite.restaurantId], callback)
 	}
 
-	deleteFavourite(favouriteId, callback) {
-		const query = "DELETE FROM eatoryeet.favourites WHERE id = ?"
-		db.query(query, [favouriteId], callback)
+	deleteFavourite(userId, restaurantId, callback) {
+		const query = "DELETE FROM eatoryeet.favourites WHERE user_id = ? AND restaurant_id = ?"
+		db.query(query, [userId, restaurantId], callback)
 	}
 }
 

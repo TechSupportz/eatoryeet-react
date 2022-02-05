@@ -35,7 +35,7 @@ app.route("/category/:id").get(categoryController.getRestaurantCategories)
 app.route("/favourite/user/:id").get(favouriteController.getUserFavourites)
 app.route("/favourite/restaurant/:id").get(favouriteController.getTotalRestaurantFavourites)
 app.route("/favourite/add").post(favouriteController.addFavourite)
-app.route("/favourite/delete/:id").delete(favouriteController.deleteFavourite)
+app.route("/favourite/delete").delete(favouriteController.deleteFavourite)
 
 app.route("/review/:id").get(reviewController.getReviewById)
 app.route("/review/restaurant/:id").get(reviewController.getReviewsByRestaurant)

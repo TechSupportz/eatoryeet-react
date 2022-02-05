@@ -14,7 +14,7 @@ import StarRoundedIcon from "@mui/icons-material/StarRounded"
 import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 
-import { useAddFavouriteMutation } from "../app/services/favouriteApi"
+import { useAddFavouriteMutation, useDeleteFavouriteMutation } from "../app/services/favouriteApi"
 import { useSelector } from "react-redux"
 
 const RestaurantCard = ({ restaurantInfo, isFavorite }) => {
@@ -23,6 +23,7 @@ const RestaurantCard = ({ restaurantInfo, isFavorite }) => {
 	const [favourite, setFavourite] = useState(false)
 	const userId = useSelector((state) => state.user.userId)
 	const [addFavourite] = useAddFavouriteMutation()
+	const [deleteFavourite] = useDeleteFavouriteMutation()
 
 	useEffect(() => {
 		setFavourite(isFavorite)
@@ -31,7 +32,13 @@ const RestaurantCard = ({ restaurantInfo, isFavorite }) => {
 	function handleFavourite() {
 		console.log("click")
 		if (favourite) {
-			setFavourite(false)
+			deleteFavourite({userId, restaurantId: restaurantInfo.id})
+			.unwrap()
+			.then((res) => {
+				console.log(res)
+				setFavourite(false)
+			})
+			.catch((err) => {console.log(err)})
 		} else if (!favourite) {
 			addFavourite({userId, restaurantId: restaurantInfo.id})
 			.unwrap()

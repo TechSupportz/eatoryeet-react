@@ -32,9 +32,10 @@ function addFavourite(req, res) {
 }
 
 function deleteFavourite(req, res) {
-	const id = parseInt(req.params.id)
+	const userId = parseInt(req.body.user_id)
+	const restaurantId = parseInt(req.body.restaurant_id)
 
-	favouriteDB.deleteFavourite(id, (err, result) => {
+	favouriteDB.deleteFavourite(userId, restaurantId, (err, result) => {
 		err ? res.json(err) : res.json(result)
 	})
 }
