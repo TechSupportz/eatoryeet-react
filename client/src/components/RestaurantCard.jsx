@@ -22,6 +22,7 @@ const RestaurantCard = ({ restaurantInfo, isFavorite }) => {
 
 	const [favourite, setFavourite] = useState(false)
 	const userId = useSelector((state) => state.user.userId)
+	const isLoggedIn = useSelector((state) => state.user.isLoggedIn)
 	const [addFavourite] = useAddFavouriteMutation()
 	const [deleteFavourite] = useDeleteFavouriteMutation()
 
@@ -32,22 +33,25 @@ const RestaurantCard = ({ restaurantInfo, isFavorite }) => {
 	function handleFavourite() {
 		console.log("click")
 		if (favourite) {
-			deleteFavourite({userId, restaurantId: restaurantInfo.id})
-			.unwrap()
-			.then((res) => {
-				console.log(res)
-				setFavourite(false)
-			})
-			.catch((err) => {console.log(err)})
+			deleteFavourite({ userId, restaurantId: restaurantInfo.id })
+				.unwrap()
+				.then((res) => {
+					console.log(res)
+					setFavourite(false)
+				})
+				.catch((err) => {
+					console.log(err)
+				})
 		} else if (!favourite) {
-			addFavourite({userId, restaurantId: restaurantInfo.id})
-			.unwrap()
-			.then((res) => {
-				console.log(res)
-				setFavourite(true)
-			})
-			.catch((err) => {console.log(err)})
-			
+			addFavourite({ userId, restaurantId: restaurantInfo.id })
+				.unwrap()
+				.then((res) => {
+					console.log(res)
+					setFavourite(true)
+				})
+				.catch((err) => {
+					console.log(err)
+				})
 		}
 	}
 
@@ -109,8 +113,17 @@ const RestaurantCard = ({ restaurantInfo, isFavorite }) => {
 									e.preventDefault()
 									handleFavourite()
 								}}
+								disabled={!isLoggedIn}
 							>
-								{favourite ? <StarRoundedIcon /> : <StarOutlineRoundedIcon />}
+								{isLoggedIn ? (
+									favourite ? (
+										<StarRoundedIcon />
+									) : (
+										<StarOutlineRoundedIcon />
+									)
+								) : (
+									<StarOutlineRoundedIcon />
+								)}
 							</IconButton>
 						</Stack>
 					</CardContent>
