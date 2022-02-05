@@ -98,7 +98,10 @@ const RestaurantGrid = () => {
 
 	const handleClear = () => {
 		setPriceValue([1, 3])
-		setRatingValue([1, 5])
+		setRatingValue([0, 5])
+		setPriceOnStop([1, 3])
+		setRatingOnStop([1, 5])
+		setCategory("")
 	}
 
 	return (
@@ -183,8 +186,8 @@ const RestaurantGrid = () => {
 			<Grid
 				item
 				container
-				md={9}
-				spacing={3}
+				md={9.75}
+				spacing={4}
 				justifyContent="flex-end"
 				className="restaurant-grid"
 			>

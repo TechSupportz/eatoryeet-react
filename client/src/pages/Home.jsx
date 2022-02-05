@@ -8,7 +8,7 @@ import SearchBar from "../components/Home/SearchBar"
 
 const Home = () => {
 	return (
-		<Box mx={{ xs: "2.5%", md: "5%" }}>
+		<Box mx={{ xs: "5%", md: "5%" }}>
 			<Featured />
 			<SearchBar />
 			<RestaurantGrid />

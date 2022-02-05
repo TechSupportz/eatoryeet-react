@@ -4,6 +4,7 @@ import {
 	Button,
 	FilledInput,
 	FormControl,
+	InputAdornment,
 	InputLabel,
 	MenuItem,
 	Select,
@@ -35,7 +36,7 @@ const SearchBar = () => {
 
 	return (
 		<Box my={5} display="flex" justifyContent="space-between">
-			<Typography fontWeight="medium" fontSize="2em">
+			<Typography fontWeight="medium" fontSize="2em" display={{ xs: "none", md: "block" }}>
 				Restaurants
 			</Typography>
 			<Autocomplete
@@ -62,13 +63,15 @@ const SearchBar = () => {
 				variant="filled"
 				type="sort"
 				margin="dense"
+				startAdornment={<InputAdornment position="start">Sort by:</InputAdornment>}
 				value={sortBy}
-				onChange={(e) => dispatch(setSortBy(e.target.value))}
 				sx={{
 					mb: "1em",
-					width: "20%",
+					width: "25%",
 					borderRadius: "45px",
+					textWeight: "bold",
 				}}
+				onChange={(e) => dispatch(setSortBy(e.target.value))}
 			>
 				<MenuItem value="Name">Name</MenuItem>
 				<MenuItem value="Rating">Rating</MenuItem>
