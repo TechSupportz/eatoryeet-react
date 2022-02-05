@@ -1,6 +1,6 @@
-import { mainApi } from "./mainApi"
+import { api } from "./api"
 
-export const reviewApi = mainApi.injectEndpoints({
+export const reviewApi = api.injectEndpoints({
 	endpoints: (build) => ({
 		getReviewsByRestaurantId: build.query({
 			query: (id) => ({

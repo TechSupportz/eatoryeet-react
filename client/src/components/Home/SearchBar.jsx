@@ -18,9 +18,7 @@ import { useGetAllRestaurantsQuery } from "../../app/services/restaurantAPI"
 import { useNavigate } from "react-router-dom"
 import { setSortBy } from "../../app/slices/restaurantSlice"
 
-const SearchBar = () => {
-	const { isError, data: restaurantList = [], isLoading } = useGetAllRestaurantsQuery()
-
+const SearchBar = ({restaurantList, isLoading}) => {
 	const sortBy = useSelector((state) => state.restaurant.sortBy)
 
 	const navigate = useNavigate()

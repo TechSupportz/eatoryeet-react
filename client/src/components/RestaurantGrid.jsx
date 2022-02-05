@@ -11,19 +11,18 @@ import {
 	Stack,
 	Typography,
 } from "@mui/material"
-import RestaurantCard from "../RestaurantCard"
+import RestaurantCard from "./RestaurantCard"
 
 import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 
 import { useSelector } from "react-redux"
-import { useGetAllRestaurantsQuery } from "../../app/services/restaurantAPI"
+import { useGetAllRestaurantsQuery } from "../app/services/restaurantAPI"
 import { Box } from "@mui/system"
 
-const RestaurantGrid = () => {
-	const { isError, data: restaurantList = [], isLoading } = useGetAllRestaurantsQuery()
+const RestaurantGrid = ({ restaurantList, isLoading }) => {
 	const navigate = useNavigate()
-
+	
 	const [priceValue, setPriceValue] = useState([1, 3])
 	const [ratingValue, setRatingValue] = useState([0, 5])
 

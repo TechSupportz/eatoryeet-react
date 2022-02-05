@@ -2,7 +2,8 @@ const db = require("../dbConnections")
 
 class FavouriteDB {
 	getUserFavourites(userId, callback) {
-		const query = "SELECT * FROM eatoryeet.favourites WHERE user_id = ?"
+		const query =
+			"SELECT favourites.id AS favourite_id, favourites.user_id, favourites.restaurant_id AS id ,restaurants.name, restaurants.cost, restaurants.image_url, AVG(eatoryeet.reviews.rating) AS avg_rating, GROUP_CONCAT(DISTINCT categories.category) AS category FROM eatoryeet.favourites LEFT JOIN restaurants ON restaurants.id = eatoryeet.favourites.restaurant_id LEFT JOIN reviews ON reviews.restaurant_id = eatoryeet.favourites.restaurant_id LEFT JOIN categories ON categories.restaurant_id = eatoryeet.favourites.restaurant_id WHERE eatoryeet.favourites.user_id = ? GROUP BY eatoryeet.favourites.restaurant_id "
 		db.query(query, [userId], callback)
 	}
 
@@ -21,5 +22,7 @@ class FavouriteDB {
 		db.query(query, [favouriteId], callback)
 	}
 }
+
+
 
 module.exports = FavouriteDB

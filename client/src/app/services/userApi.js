@@ -1,6 +1,6 @@
-import { mainApi } from "./mainApi"
+import { api } from "./api"
 
-export const userApi = mainApi.injectEndpoints({
+export const userApi = api.injectEndpoints({
 	endpoints: (build) => ({
 		login: build.mutation({
 			query: ({ username, password }) => ({

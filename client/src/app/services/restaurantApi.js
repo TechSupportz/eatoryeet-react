@@ -1,6 +1,6 @@
-import { mainApi } from "./mainApi"
+import { api } from "./api"
 
-export const restaurantApi = mainApi.injectEndpoints({
+export const restaurantApi = api.injectEndpoints({
 	endpoints: (build) => ({
 		getAllRestaurants: build.query({
 			query: () => ({
