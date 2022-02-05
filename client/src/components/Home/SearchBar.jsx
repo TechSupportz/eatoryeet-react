@@ -58,15 +58,17 @@ const SearchBar = () => {
 			/>
 
 			<Select
-				autoWidth
 				id="sort-label"
 				variant="filled"
-				hiddenLabel={false}
 				type="sort"
 				margin="dense"
-				sx={{ mb: "1em" }}
 				value={sortBy}
 				onChange={(e) => dispatch(setSortBy(e.target.value))}
+				sx={{
+					mb: "1em",
+					width: "20%",
+					borderRadius: "45px",
+				}}
 			>
 				<MenuItem value="Name">Name</MenuItem>
 				<MenuItem value="Rating">Rating</MenuItem>

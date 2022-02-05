@@ -117,7 +117,7 @@ const THEME = createTheme({
 					borderRadius: "10px",
 					backgroundColor: "hsl(0, 0%, 100%)",
 					boxShadow: "0px 8px 24px hsla(0, 0%, 0%, 0.15)",
-					border: "2px solid hsl(0, 0%, 85%)",
+					border: "2px solid hsl(0, 0%, 90%)",
 					transition: "background-color 0.2s linear, border-color 0.15s ease-in",
 					":hover": {
 						backgroundColor: "hsl(0, 0%, 95%)",
@@ -162,6 +162,16 @@ const THEME = createTheme({
 				checkedIcon: <CheckBoxRoundedIcon />,
 			},
 		},
+		MuiSelect: {
+			variants: [
+				{
+					props: { variant: "sort" },
+					style: {
+						backgroundColor: "black",
+					}
+				}
+			]
+		}
 	},
 })
 
