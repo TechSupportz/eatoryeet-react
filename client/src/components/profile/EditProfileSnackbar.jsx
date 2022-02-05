@@ -25,15 +25,21 @@ const EditProfileSnackbar = () => {
 						{editSnackbar.status
 							? editSnackbar.type === "edit"
 								? "Profile Updated"
-								: "Account Deleted"
+								: editSnackbar.type === "delete"
+								? "Profile Deleted"
+								: "Password Changed"
 							: editSnackbar.type === "edit"
 							? "Profile Update Failed"
-							: "Account Delete Failed"}
+							: editSnackbar.type === "delete"
+							? "Account Delete Failed"
+							: "Password Change Failed"}
 					</AlertTitle>
 					{editSnackbar.status
 						? editSnackbar.type === "edit"
 							? "Your profile has been updated. - Please login again"
-							: "Your account has been deleted. - Sorry to see you go😢"
+							: editSnackbar.type === "delete"
+							? "Your account has been deleted. - Sorry to see you go😢"
+							: "Your password has been changed. - Please login again"
 						: editSnackbar.type === "edit"
 						? "Something went wrong. - Please try again later"
 						: "Something went wrong. - Please try again later"}

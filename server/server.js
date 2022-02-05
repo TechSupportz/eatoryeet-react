@@ -20,6 +20,7 @@ app.use("/static", express.static("uploads"))
 
 app.route("/user/:id").get(userController.getUserById)
 app.route("/user/update/:id").put(userController.updateUser)
+app.route("/user/update/password/:id").put(userController.updateUserPassword)
 app.route("/user/delete/:id").delete(userController.deleteUser)
 app.route("/user/register").post(userController.addUser)
 app.route("/user/login").post(userController.userLogin)

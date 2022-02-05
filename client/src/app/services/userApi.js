@@ -68,7 +68,6 @@ export const userApi = mainApi.injectEndpoints({
 			query: ({
 				userId,
 				username,
-				password,
 				email,
 				firstName,
 				lastName,
@@ -80,13 +79,22 @@ export const userApi = mainApi.injectEndpoints({
 				method: "put",
 				body: {
 					username: username,
-					password: password,
 					email: email,
 					first_name: firstName,
 					last_name: lastName,
 					gender: gender,
 					phone_number: phoneNum,
 					address: address,
+				},
+			}),
+			invalidatesTags: ["Review", "Restaurant", "User"],
+		}),
+		updateUserPassword: build.mutation({
+			query: ({ userId, password }) => ({
+				url: `/user/update/password/${userId}`,
+				method: "put",
+				body: {
+					password,
 				},
 			}),
 			invalidatesTags: ["Review", "Restaurant", "User"],
@@ -101,4 +109,5 @@ export const {
 	useLazyGetUserByIdQuery,
 	useDeleteUserMutation,
 	useUpdateUserMutation,
+	useUpdateUserPasswordMutation,
 } = userApi

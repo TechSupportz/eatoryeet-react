@@ -90,7 +90,7 @@ function updateUser(req, res) {
 	const user = new User(
 		parseInt(req.params.id),
 		req.body.username,
-		bcrypt.hashSync(req.body.password, 10),
+		null,
 		req.body.email,
 		req.body.first_name,
 		req.body.last_name,
@@ -101,6 +101,20 @@ function updateUser(req, res) {
 	)
 
 	userDB.updateUser(user, (err, result) => {
+		if (err) {
+			res.json(err)
+		} else {
+			res.json(result)
+		}
+	})
+}
+
+function updateUserPassword(req, res) {
+	const userId = parseInt(req.params.id)
+	const password = req.body.password
+	const hashPass = bcrypt.hashSync(password, 10)
+
+	userDB.updateUserPassword(userId, hashPass, (err, result) => {
 		if (err) {
 			res.json(err)
 		} else {
@@ -139,4 +153,4 @@ function deleteUser(req, res) {
 	})
 }
 
-module.exports = { getUserById, addUser, userLogin, updateUser, deleteUser }
+module.exports = { getUserById, addUser, userLogin, updateUser, updateUserPassword ,deleteUser }

@@ -66,7 +66,7 @@ const LoginDialog = () => {
 								dispatch(setUserDetail(data))
 								dispatch(setIsLoggedIn(true))
 								localStorage.setItem("user", JSON.stringify(data))
-								localStorage.setItem("Upass", password)
+								
 								handleClose()
 							})
 

@@ -34,12 +34,11 @@ class UserDB {
 
 	updateUser(user, callback) {
 		const query =
-			"UPDATE eatoryeet.users SET username = ?, password = ?, email = ?, first_name = ?, last_name = ?, gender = ?, phone_number = ?, address = ?, profile_pic = ? WHERE id = ?"
+			"UPDATE eatoryeet.users SET username = ?, email = ?, first_name = ?, last_name = ?, gender = ?, phone_number = ?, address = ?, profile_pic = ? WHERE id = ?"
 		return db.query(
 			query,
 			[
 				user.username,
-				user.password,
 				user.email,
 				user.firstName,
 				user.lastName,
@@ -51,6 +50,11 @@ class UserDB {
 			],
 			callback
 		)
+	}
+
+	updateUserPassword(userId, password, callback) {
+		const query = "UPDATE eatoryeet.users SET password = ? WHERE id = ?"
+		db.query(query, [password, userId], callback)
 	}
 
 	deleteUser(userId, callback) {
