@@ -14,7 +14,7 @@ export const userApi = api.injectEndpoints({
 					"Content-type": "application/json; charset=UTF-8",
 				},
 			}),
-			providesTags: ["User"],
+			invalidatesTags: ["Favorite"],
 			keepUnusedDataFor: 0,
 		}),
 		register: build.mutation({

@@ -1,4 +1,5 @@
 import {
+	Box,
 	Button,
 	CardActionArea,
 	Checkbox,
@@ -13,26 +14,29 @@ import {
 } from "@mui/material"
 import RestaurantCard from "./RestaurantCard"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useLayoutEffect } from "react"
 import { useNavigate } from "react-router-dom"
 
 import { useSelector } from "react-redux"
-import { useGetAllRestaurantsQuery } from "../app/services/restaurantAPI"
-import { Box } from "@mui/system"
+import { useLazyGetFavouritesByUserIdQuery } from "../app/services/favouriteApi"
 
 const RestaurantGrid = ({ restaurantList, isLoading }) => {
 	const navigate = useNavigate()
-	
+
+	const sortBy = useSelector((state) => state.restaurant.sortBy)
+	const userId = useSelector((state) => state.user.userId)
+
 	const [priceValue, setPriceValue] = useState([1, 3])
 	const [ratingValue, setRatingValue] = useState([0, 5])
 
 	const [priceOnStop, setPriceOnStop] = useState([1, 3])
 	const [ratingOnStop, setRatingOnStop] = useState([0, 5])
+	const [favouriteList, setFavouriteList] = useState([])
 
 	const [filteredRestaurantList, setFilteredRestaurantList] = useState([])
+	const [getFavouriteList] = useLazyGetFavouritesByUserIdQuery()
 
 	const [category, setCategory] = useState("")
-	const sortBy = useSelector((state) => state.restaurant.sortBy)
 
 	useEffect(() => {
 		console.log(sortBy)
@@ -42,6 +46,15 @@ const RestaurantGrid = ({ restaurantList, isLoading }) => {
 		restaurantList && setFilteredRestaurantList(restaurantList)
 		console.log(restaurantList)
 	}, [isLoading])
+
+	useLayoutEffect(() => {
+		getFavouriteList(userId)
+		 		.unwrap()
+		 		.then((res) => setFavouriteList(res))
+				 .catch((err) => {})
+	}, [userId])
+		
+
 
 	const prices = [
 		{
@@ -80,6 +93,17 @@ const RestaurantGrid = ({ restaurantList, isLoading }) => {
 			value: 5,
 		},
 	]
+
+	// function fetchFavourites() {
+	// 	if (userId !== null) {
+	// 		getFavouriteList(userId)
+	// 		.unwrap()
+	// 		.then((res) => setFavouriteList(res))
+	// 	} else {
+	// 		setTimeout(fetchFavourites, 250)
+	// 		clearTimeout()
+	// 	}
+	// }
 
 	const handleUncheck = (e) => {
 		category === e.target.value && setCategory("")
@@ -233,10 +257,19 @@ const RestaurantGrid = ({ restaurantList, isLoading }) => {
 										onClick={() => {
 											setTimeout(() => {
 												navigate(`/restaurant/${restaurant.id}`)
-											}, 15)
+											}, 30)
 										}}
 									>
-										<RestaurantCard restaurantInfo={restaurant} />
+										<RestaurantCard
+											restaurantInfo={restaurant}
+											isFavorite={
+												favouriteList.find(
+													(favourite) => favourite.id === restaurant.id
+												) !== undefined
+													? true
+													: false
+											}
+										/>
 									</CardActionArea>
 								</Grid>
 							))}

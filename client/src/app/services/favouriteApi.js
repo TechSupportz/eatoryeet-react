@@ -9,8 +9,24 @@ export const favouriteApi = api.injectEndpoints({
 			}),
 			providesTags: ["Favourite"],
 		}),
+		addFavourite: build.mutation({
+			query: ({userId, restaurantId}) => ({
+				url: `/favourite/add`,
+				method: "post",
+				body: {
+					user_id: userId,
+					restaurant_id: restaurantId,
+				}
+			}),
+			invalidatesTags: ["Favourite"],
+		}),
+		deleteFavourite: build.mutation({
+			query: ({userId, restaurantId}) => ({
+				
+			}),
+		}),
 	}),
 	overrideExisting: false,
 })
 
-export const { useGetFavouritesByUserIdQuery } = favouriteApi
+export const { useGetFavouritesByUserIdQuery, useLazyGetFavouritesByUserIdQuery, useAddFavouriteMutation } = favouriteApi
