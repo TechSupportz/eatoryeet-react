@@ -30,8 +30,6 @@ const Restaurant = () => {
 			<ReviewList reviewList={reviewList} />
 			<br />
 			<br />
-			<br />
-			<br />
 		</Box>
 	)
 }

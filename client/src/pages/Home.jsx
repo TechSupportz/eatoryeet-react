@@ -1,5 +1,5 @@
 import { Box } from "@mui/material"
-import { useEffect } from "react"
+import { useEffect, useLayoutEffect } from "react"
 import { useGetAllRestaurantsQuery } from "../app/services/restaurantAPI"
 
 import Featured from "../components/Home/Featured"
@@ -14,8 +14,6 @@ const Home = () => {
 			<Featured restaurantList={restaurantList} isLoading={isLoading} />
 			<SearchBar restaurantList={restaurantList} isLoading={isLoading} />
 			<RestaurantGrid restaurantList={restaurantList} isLoading={isLoading} />
-			<br />
-			<br />
 			<br />
 			<br />
 		</Box>
