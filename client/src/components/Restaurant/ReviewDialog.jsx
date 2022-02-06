@@ -68,7 +68,7 @@ const ReviewDialog = ({ restaurant }) => {
 	useEffect(() => {
 		//console.log({ rating, title, detail })
 
-		if (rating > 0 && title.length > 0 && detail.length > 0) {
+		if (rating > 0 && title.length > 0 && detail.length > 0 && title.length < 45) {
 			setIsBtnDisabled(false)
 		} else {
 			setIsBtnDisabled(true)
@@ -81,7 +81,7 @@ const ReviewDialog = ({ restaurant }) => {
 
 	const handleSubmit = () => {
 		if (isEdit) {
-			updateReview({editId, restaurantId, userId, rating, title, detail })
+			updateReview({ editId, restaurantId, userId, rating, title, detail })
 				.unwrap()
 				.then((output) => {
 					console.log(output)
@@ -153,7 +153,7 @@ const ReviewDialog = ({ restaurant }) => {
 								placeholder="A short and simple summary"
 								value={title}
 								onChange={(e) => setTitle(e.target.value)}
-								error={title.length <= 0}
+								error={title.length <= 0 || title.length > 45}
 								sx={{ width: "80%" }}
 							></FilledInput>
 						</Stack>
