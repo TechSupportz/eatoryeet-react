@@ -1,5 +1,5 @@
 ## EatOrYeet
 
-A restaurant review website made for my Coding and Development Project Module in Sem 2.2 at Temasek Polytechnic
+A restaurant review website built in Sem 1.2 at Temasek Polytechnic for CDEV module
 
 Built using React.js, Redux Toolkit, RTK Query & MUI
