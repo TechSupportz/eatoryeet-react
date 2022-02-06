@@ -49,12 +49,10 @@ const RestaurantGrid = ({ restaurantList, isLoading }) => {
 
 	useLayoutEffect(() => {
 		getFavouriteList(userId)
-		 		.unwrap()
-		 		.then((res) => setFavouriteList(res))
-				 .catch((err) => {})
+			.unwrap()
+			.then((res) => setFavouriteList(res))
+			.catch((err) => {})
 	}, [userId])
-		
-
 
 	const prices = [
 		{
@@ -128,7 +126,7 @@ const RestaurantGrid = ({ restaurantList, isLoading }) => {
 	}
 
 	return (
-		<Grid container justifyContent="space-between" sx={{ width: "100%" }}>
+		<Grid container justifyContent="center" sx={{ width: "100%" }}>
 			<Grid direction="column" item container md={2}>
 				<Typography fontSize="1.5em" fontWeight="bold">
 					Filters:
@@ -249,28 +247,16 @@ const RestaurantGrid = ({ restaurantList, isLoading }) => {
 							.sort(handleSort)
 							.map((restaurant) => (
 								<Grid item key={restaurant.id}>
-									<CardActionArea
-										sx={{
-											borderRadius: "15px",
-											padding: 0,
-										}}
-										onClick={() => {
-											setTimeout(() => {
-												navigate(`/restaurant/${restaurant.id}`)
-											}, 30)
-										}}
-									>
-										<RestaurantCard
-											restaurantInfo={restaurant}
-											isFavorite={
-												favouriteList.find(
-													(favourite) => favourite.id === restaurant.id
-												) !== undefined
-													? true
-													: false
-											}
-										/>
-									</CardActionArea>
+									<RestaurantCard
+										restaurantInfo={restaurant}
+										isFavorite={
+											favouriteList.find(
+												(favourite) => favourite.id === restaurant.id
+											) !== undefined
+												? true
+												: false
+										}
+									/>
 								</Grid>
 							))}
 			</Grid>
